@@ -1,26 +1,52 @@
 <!doctype html>
 <html lang="sv">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Treages samlade webbplatser och analyser.">
-    <title>Treage</title>
-    <style>
-      :root { color-scheme: light dark; font: 16px/1.5 system-ui, sans-serif; }
-      body { max-width: 52rem; margin: 4rem auto; padding: 0 1.25rem; }
-      h1 { line-height: 1.1; }
-      a { color: #3978d4; }
-      .project { margin-top: 2rem; padding: 1.25rem; border: 1px solid #8886; border-radius: .75rem; }
-    </style>
-  </head>
-  <body>
-    <main>
-      <h1>Treage</h1>
-      <p>Samlad webbpublicering för Treages projekt.</p>
-      <section class="project" aria-labelledby="blankdiss-title">
-        <h2 id="blankdiss-title">Blankdiss</h2>
-        <p><a href="./blankdiss/">Öppna Blankdiss</a></p>
-      </section>
-    </main>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Treage sammanväger analyser från Blankdiss, Reports och Insider.">
+  <title>Treage – samlad analys</title>
+  <link rel="stylesheet" href="../web/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Till innehållet</a>
+  <header class="hero"><div class="container">
+    <div class="brand">Treage<span class="brand-note">TVÄRKÄLLSANALYS</span></div>
+    <h1>Samlad analys av marknadens informationskällor</h1>
+    <p class="lead">Treage väger samman tidsstämplade resultat från Blankdiss, Reports och Insider och undersöker möjliga köp- och säljsignaler.</p>
+  </div></header>
+  <main id="main" class="container main-content">
+    <nav class="project-menu" aria-label="Öppna Treage och dess källprojekt">
+      <a class="card project-card featured" href="../dist/treage/index.html">
+        <span class="eyebrow">HUVUDSIDA</span><h2>Treage</h2>
+        <p>Sammanvägning och tvärkällsanalys av Blankdiss, Reports och Insider.</p>
+        <strong class="project-open">Öppna Treages analys →</strong>
+      </a>
+      <a class="card project-card" href="../dist/blankdiss/">
+        <span class="eyebrow">UNDERLAG</span><h2>Blankdiss</h2>
+        <p>Blankningsdata, händelser och blankningsbaserade analyser.</p>
+        <strong class="project-open">Öppna Blankdiss →</strong>
+      </a>
+      <a class="card project-card" href="../dist/reports/">
+        <span class="eyebrow">UNDERLAG</span><h2>Reports</h2>
+        <p>Rapporter, konsensus och kursreaktioner.</p>
+        <strong class="project-open">Öppna Reports →</strong>
+      </a>
+      <a class="card project-card" href="../dist/insider/">
+        <span class="eyebrow">UNDERLAG</span><h2>Insider</h2>
+        <p>Insynstransaktioner och insiderbaserade analyser.</p>
+        <strong class="project-open">Öppna Insider →</strong>
+      </a>
+    </nav>
+    <section class="cards" aria-label="Treages status">
+      <article class="card"><span class="label">Källor</span><strong>3</strong><p>Blankdiss, Reports och Insider</p></article>
+      <article class="card"><span class="label">Aktiva signaler</span><strong>0</strong><p>Inga sammanvägda regler är validerade</p></article>
+      <article class="card"><span class="label">Arbetssätt</span><strong>Point-in-time</strong><p>Beslut bygger bara på då tillgänglig information</p></article>
+      <article class="card"><span class="label">Status</span><strong>Research</strong><p>Regler följs innan de kan aktiveras</p></article>
+    </section>
+    <section class="panel"><div class="section-header">
+      <span class="eyebrow">SIGNALSTATUS</span><h2>Ingen validerad sammanvägd signal publiceras ännu</h2>
+      <p>Historiska samband och experiment är undersökningsunderlag. En signal kräver en tydlig regel, tillräcklig datatäckning och prospektiv validering.</p>
+    </div></section>
+  </main>
+</body>
 </html>
