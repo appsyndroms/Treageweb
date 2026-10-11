@@ -6,10 +6,10 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
-    <title>Blankdiss – Köpläge</title>
+    <title>Blankdiss – Köp &amp; sälj</title>
     <link
         rel="stylesheet"
-        href="./style.css?v=4"
+        href="./style.css?v=treage-ui-1"
     >
     <script
         src="./site.js?v=1"
@@ -18,20 +18,21 @@
 </head>
 
 <body>
+<a class="skip-link" href="#main">Till innehållet</a>
 
 <header class="hero">
     <div class="container">
 
         <div class="brand">
-            📉 BLANKDISS
+            Blankdiss<span class="brand-note">BLANKNING &amp; EVIDENS</span>
         </div>
 
         <h1>
-            Köpläge
+            Köp &amp; sälj
         </h1>
 
         <p class="lead">
-            Aktuella observationer och historisk evidens för möjliga köpsignaler.
+            Aktuella blankningsförändringar och uppföljning av frysta köp- och sälj/undvik-hypoteser.
         </p>
 
         <nav class="tabs" aria-label="Huvudnavigation">
@@ -44,10 +45,10 @@
             </a>
 
             <a
-                class="tab active"
+                class="tab active" aria-current="page"
                 href="./koplage.html"
             >
-                Köpläge
+                Köp &amp; sälj
             </a>
 
             <a
@@ -76,7 +77,7 @@
     </div>
 </header>
 
-<main class="container">
+<main id="main" class="container main-content">
 
     <section class="cards">
 
@@ -116,7 +117,7 @@
             </span>
 
             <strong class="timestamp">
-                2026-10-10 22:14:11
+                2026-10-11 22:20:06
             </strong>
         </div>
 
@@ -124,21 +125,59 @@
 
 
     <section class="panel">
+        <div class="section-header">
+            <span class="eyebrow">KÖP OCH SÄLJ/UNDVIK</span>
+            <h2>Frysta hypoteser och uppföljning</h2>
+            <p>Varje hypotes har egna regler, mål och uppföljning. Sälj/undvik avser möjlig nedgångsrisk.
+                Det är ingen rekommendation att öppna en blankningsposition.
+                Ingen köp- eller säljregel är ännu validerad och aktiverad.</p>
+            <p>Nya frysningar följs på data efter sin frystid. Historiska fynd och överlappande
+                uppföljningsfönster räknas inte som oberoende bekräftelser.
+                Se <a href="./bedomning.html">Bedömning</a> och <a href="./dataanalys.html">Dataanalys</a> för underlaget.</p>
+        </div>
+        <div class="table-wrapper"><table>
+            <thead><tr><th>Spår</th><th>Hypotes</th><th>Mål</th><th>Fryst</th><th>Senast följd</th><th>Status</th></tr></thead>
+            <tbody><tr><td>Köphypotes</td><td class="research-identity"><strong>Ger hög 60-dagars momentum kombinerat med positiv förändring i short interest en förändrad sannolikhet för framtida positiv prisrörelse över 20 dagar?
+</strong><span class="subtle">Köphypotes · v1</span></td>
+            <td>Positivt kursutfall över 20 handelsdagar</td>
+            <td>2026-07-15 02:00</td><td>2026-10-11 22:17</td>
+            <td>Se evaluation-historiken<span class="subtle">Ingen aktiverad signal</span></td></tr>
+<tr><td>Köphypotes</td><td class="research-identity"><strong>ALCUR FONDER AB × JM AB</strong><span class="subtle">SE0000806994 · Minskad blankning · 5 handelssessioner · Köphypotes</span><span class="subtle" title="d1b33b1e204d6bf4d4d95280ff5b1631db151a9bca0b118d8634240ee9d0feb4">short_holder_events_v1 · v1 · d1b33b1e204d</span></td>
+            <td>5 handelssessioner</td>
+            <td>2026-10-09 12:18</td><td>2026-10-11</td>
+            <td>Samlar underlag (minst 5 oberoende händelser) · ej validerad<span class="subtle">Ingen aktiverad signal</span></td></tr>
+<tr><td>Köphypotes</td><td class="research-identity"><strong>Sona Asset Management (UK) LLP × Scandic Hotels Group AB</strong><span class="subtle">SE0007640156 · Ökad blankning · 5 handelssessioner · Köphypotes</span><span class="subtle" title="e60f20f7719e9a5cbad3682b8092b4cf2edc0755eca6732d7a67b3d3a20c99dd">short_holder_events_v1 · v1 · e60f20f7719e</span></td>
+            <td>5 handelssessioner</td>
+            <td>2026-10-09 12:18</td><td>2026-10-11</td>
+            <td>Samlar underlag (minst 5 oberoende händelser) · ej validerad<span class="subtle">Ingen aktiverad signal</span></td></tr>
+<tr><td>Sälj/undvik-hypotes</td><td class="research-identity"><strong>Ger de 20 procent lägsta 5-dagars momentumobservationerna tillsammans med de 2,5 procent högsta blankningsförändringarna förhöjd risk för minst 10 procents kursfall över 5 handelsdagar?</strong><span class="subtle">Sälj/undvik-hypotes · v1</span></td>
+            <td>Minst 10 % kursfall över 5 handelsdagar</td>
+            <td>2026-10-11 10:06</td><td>—</td>
+            <td>Väntar på uppföljningsdata · ej validerad<span class="subtle">Ingen aktiverad signal</span></td></tr>
+<tr><td>Sälj/undvik-hypotes</td><td class="research-identity"><strong>Är extremt hög förändring i short interest kombinerat med extremt hög 20-dagars prisvolatilitet associerat med förhöjd risk för minst 10 procents nedgång inom 5 handelsdagar i en helt separat OOS-period?
+</strong><span class="subtle">Sälj/undvik-hypotes · v1</span></td>
+            <td>Minst 10 % kursfall över 5 handelsdagar</td>
+            <td>Frystid saknas</td><td>—</td>
+            <td>Fryst definition; uppföljning saknas här<span class="subtle">Ingen aktiverad signal</span></td></tr></tbody>
+        </table></div>
+    </section>
+
+    <section class="panel">
 
         <div class="section-header">
 
             <span class="eyebrow">
-                KÖPLÄGE
+                MINSKAD BLANKNING
             </span>
 
             <h2>
-                Topp 10
+                Största minskningarna – upp till 10
             </h2>
 
             <p>
                 Urvalet använder FI:s rapporterade totalnivåer och tar senaste observationen per instrument, högst 60 dagar
                 gammal, med angiven blankningsnivå och mätbar förändring. Topp 10 sorteras efter förändring i blankning:
-                störst minskning först. Blankningsnivån påverkar inte rankingen.
+                störst minskning först, endast negativa förändringar. Blankningsnivån påverkar inte rankingen. Minskad blankning är inte i sig en köpsignal.
             </p>
 
             <p>Senaste positionsdatum i urvalet: 2026-10-09.
@@ -201,7 +240,7 @@
                         </th>
 
                         <th>
-                            Köpsignal
+                            Signalstatus
                         </th>
                     </tr>
 
@@ -676,6 +715,559 @@
 
     </section>
 
+    <section class="panel">
+
+        <div class="section-header">
+
+            <span class="eyebrow">
+                ÖKAD BLANKNING
+            </span>
+
+            <h2>
+                Största ökningarna – upp till 10
+            </h2>
+
+            <p>
+                Urvalet använder FI:s rapporterade totalnivåer och tar senaste observationen per instrument, högst 60 dagar
+                gammal, med angiven blankningsnivå och mätbar förändring. Topp 10 sorteras efter förändring i blankning:
+                störst ökning först, endast positiva förändringar. Blankningsnivån påverkar inte rankingen. Ökad blankning är inte i sig en säljsignal.
+            </p>
+
+            <p>Senaste positionsdatum i urvalet: 2026-10-09.
+                Saknade värden i 1d–60d betyder att kursutfall saknas eller ännu inte har mognat;
+                blankningsnivån visas i kolumnen Blankning. Om prisserie saknas för observationen
+                anges orsaken under bolagsnamnet. 1d–60d avser utfallet efter radens positionsdatum,
+                inte genomsnittet för jämförbara historiska händelser.</p>
+
+            <p>
+                Ingen sälj/undvik-signal publiceras: Blankdiss har ännu ingen regel som validerats utanför tränings- och upptäcktsdata.
+                Historiska events visas också som — tills jämförbara events
+                räknas fram.
+            </p>
+
+        </div>
+
+        <div class="table-wrapper">
+
+            <table class="observation-table">
+
+                <thead>
+
+                    <tr>
+                        <th>
+                            Ranking
+                        </th>
+
+                        <th>
+                            Aktie
+                        </th>
+
+                        <th>Positionsdatum</th>
+
+                        <th>
+                            Blankning
+                        </th>
+
+                        <th>
+                            Förändring
+                        </th>
+
+                        <th>
+                            Historiska events
+                        </th>
+
+                        <th>
+                            1d
+                        </th>
+
+                        <th>
+                            5d
+                        </th>
+
+                        <th>
+                            20d
+                        </th>
+
+                        <th>
+                            60d
+                        </th>
+
+                        <th>
+                            Signalstatus
+                        </th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+                    
+            <tr>
+                <td data-sort-value="1">
+                    1
+                </td>
+
+                <td class="observation-issuer">
+                    <strong>Aktiebolaget Electrolux</strong>
+                    <span class="subtle observation-detail">SE0000103814</span>
+                </td>
+
+                <td>2026-10-08</td>
+
+                <td>
+                    10.44 %
+                </td>
+
+                <td>
+                    <span class="increase">+7.76 pp</span>
+                </td>
+
+                <td data-sort-value="">
+                    —
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="" data-signal-status="not_validated" title="Ingen sälj/undvik-signal publiceras: Blankdiss har ännu ingen regel som validerats utanför tränings- och upptäcktsdata.">
+                    —
+                </td>
+            </tr>
+            
+
+            <tr>
+                <td data-sort-value="2">
+                    2
+                </td>
+
+                <td class="observation-issuer">
+                    <strong>Embracer Group AB</strong>
+                    <span class="subtle observation-detail">SE0013121589</span>
+                </td>
+
+                <td>2026-10-08</td>
+
+                <td>
+                    8.67 %
+                </td>
+
+                <td>
+                    <span class="increase">+7.58 pp</span>
+                </td>
+
+                <td data-sort-value="">
+                    —
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="" data-signal-status="not_validated" title="Ingen sälj/undvik-signal publiceras: Blankdiss har ännu ingen regel som validerats utanför tränings- och upptäcktsdata.">
+                    —
+                </td>
+            </tr>
+            
+
+            <tr>
+                <td data-sort-value="3">
+                    3
+                </td>
+
+                <td class="observation-issuer">
+                    <strong>Hemnet Group AB (publ)</strong>
+                    <span class="subtle observation-detail">SE0015671995</span>
+                </td>
+
+                <td>2026-10-08</td>
+
+                <td>
+                    10.80 %
+                </td>
+
+                <td>
+                    <span class="increase">+7.56 pp</span>
+                </td>
+
+                <td data-sort-value="">
+                    —
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="" data-signal-status="not_validated" title="Ingen sälj/undvik-signal publiceras: Blankdiss har ännu ingen regel som validerats utanför tränings- och upptäcktsdata.">
+                    —
+                </td>
+            </tr>
+            
+
+            <tr>
+                <td data-sort-value="4">
+                    4
+                </td>
+
+                <td class="observation-issuer">
+                    <strong>Samhällsbyggnadsbolaget i Norden AB</strong>
+                    <span class="subtle observation-detail">SE0009554454</span>
+                </td>
+
+                <td>2026-10-08</td>
+
+                <td>
+                    16.54 %
+                </td>
+
+                <td>
+                    <span class="increase">+7.40 pp</span>
+                </td>
+
+                <td data-sort-value="">
+                    —
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="" data-signal-status="not_validated" title="Ingen sälj/undvik-signal publiceras: Blankdiss har ännu ingen regel som validerats utanför tränings- och upptäcktsdata.">
+                    —
+                </td>
+            </tr>
+            
+
+            <tr>
+                <td data-sort-value="5">
+                    5
+                </td>
+
+                <td class="observation-issuer">
+                    <strong>Beijer Ref AB (publ)</strong>
+                    <span class="subtle observation-detail">SE0015949748</span>
+                </td>
+
+                <td>2026-10-08</td>
+
+                <td>
+                    8.56 %
+                </td>
+
+                <td>
+                    <span class="increase">+6.90 pp</span>
+                </td>
+
+                <td data-sort-value="">
+                    —
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="" data-signal-status="not_validated" title="Ingen sälj/undvik-signal publiceras: Blankdiss har ännu ingen regel som validerats utanför tränings- och upptäcktsdata.">
+                    —
+                </td>
+            </tr>
+            
+
+            <tr>
+                <td data-sort-value="6">
+                    6
+                </td>
+
+                <td class="observation-issuer">
+                    <strong>Cibus Real Estate AB (publ)</strong>
+                    <span class="subtle observation-detail">SE0010832204</span>
+                </td>
+
+                <td>2026-10-08</td>
+
+                <td>
+                    9.85 %
+                </td>
+
+                <td>
+                    <span class="increase">+6.33 pp</span>
+                </td>
+
+                <td data-sort-value="">
+                    —
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="" data-signal-status="not_validated" title="Ingen sälj/undvik-signal publiceras: Blankdiss har ännu ingen regel som validerats utanför tränings- och upptäcktsdata.">
+                    —
+                </td>
+            </tr>
+            
+
+            <tr>
+                <td data-sort-value="7">
+                    7
+                </td>
+
+                <td class="observation-issuer">
+                    <strong>Mips AB</strong>
+                    <span class="subtle observation-detail">SE0009216278</span>
+                </td>
+
+                <td>2026-10-08</td>
+
+                <td>
+                    9.32 %
+                </td>
+
+                <td>
+                    <span class="increase">+6.18 pp</span>
+                </td>
+
+                <td data-sort-value="">
+                    —
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="" data-signal-status="not_validated" title="Ingen sälj/undvik-signal publiceras: Blankdiss har ännu ingen regel som validerats utanför tränings- och upptäcktsdata.">
+                    —
+                </td>
+            </tr>
+            
+
+            <tr>
+                <td data-sort-value="8">
+                    8
+                </td>
+
+                <td class="observation-issuer">
+                    <strong>RaySearch Laboratories AB (publ)</strong>
+                    <span class="subtle observation-detail">SE0000135485</span>
+                </td>
+
+                <td>2026-10-08</td>
+
+                <td>
+                    10.97 %
+                </td>
+
+                <td>
+                    <span class="increase">+6.08 pp</span>
+                </td>
+
+                <td data-sort-value="">
+                    —
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="" data-signal-status="not_validated" title="Ingen sälj/undvik-signal publiceras: Blankdiss har ännu ingen regel som validerats utanför tränings- och upptäcktsdata.">
+                    —
+                </td>
+            </tr>
+            
+
+            <tr>
+                <td data-sort-value="9">
+                    9
+                </td>
+
+                <td class="observation-issuer">
+                    <strong>INVISIO AB</strong>
+                    <span class="subtle observation-detail">SE0001200015</span>
+                </td>
+
+                <td>2026-10-08</td>
+
+                <td>
+                    6.87 %
+                </td>
+
+                <td>
+                    <span class="increase">+6.05 pp</span>
+                </td>
+
+                <td data-sort-value="">
+                    —
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="" data-signal-status="not_validated" title="Ingen sälj/undvik-signal publiceras: Blankdiss har ännu ingen regel som validerats utanför tränings- och upptäcktsdata.">
+                    —
+                </td>
+            </tr>
+            
+
+            <tr>
+                <td data-sort-value="10">
+                    10
+                </td>
+
+                <td class="observation-issuer">
+                    <strong>Dynavox Group AB</strong>
+                    <span class="subtle observation-detail">SE0017105620</span>
+                </td>
+
+                <td>2026-10-08</td>
+
+                <td>
+                    9.08 %
+                </td>
+
+                <td>
+                    <span class="increase">+5.79 pp</span>
+                </td>
+
+                <td data-sort-value="">
+                    —
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="">
+                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
+                </td>
+
+                <td data-sort-value="" data-signal-status="not_validated" title="Ingen sälj/undvik-signal publiceras: Blankdiss har ännu ingen regel som validerats utanför tränings- och upptäcktsdata.">
+                    —
+                </td>
+            </tr>
+            
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
 
     <section class="panel">
 
@@ -686,12 +1278,12 @@
             </span>
 
             <h2>
-                Övriga aktuella observationer (175)
+                Övriga aktuella observationer (165)
             </h2>
 
             <p>
                 Övriga instrument med angiven blankningsnivå och mätbar förändring.
-                Instrumenten i Topp 10 visas endast i tabellen ovan.
+                Instrumenten i de två tabellerna ovan visas inte igen här.
                 Klicka på valfri kolumn för att sortera.
             </p>
 
@@ -774,44 +1366,6 @@
                 
                 <td data-sort-value="2026-10-09">
                     2026-10-09
-                </td>
-            
-            </tr>
-            
-
-            <tr>
-                <td class="observation-issuer">
-                    <strong>INVISIO AB</strong>
-                    <span class="subtle observation-detail">SE0001200015</span>
-                </td>
-
-                <td>
-                    6.87 %
-                </td>
-
-                <td>
-                    <span class="increase">+6.05 pp</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                
-                <td data-sort-value="2026-10-08">
-                    2026-10-08
                 </td>
             
             </tr>
@@ -2111,44 +2665,6 @@
 
             <tr>
                 <td class="observation-issuer">
-                    <strong>Hemnet Group AB (publ)</strong>
-                    <span class="subtle observation-detail">SE0015671995</span>
-                </td>
-
-                <td>
-                    10.80 %
-                </td>
-
-                <td>
-                    <span class="increase">+7.56 pp</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                
-                <td data-sort-value="2026-10-08">
-                    2026-10-08
-                </td>
-            
-            </tr>
-            
-
-            <tr>
-                <td class="observation-issuer">
                     <strong>Avanza Bank Holding AB</strong>
                     <span class="subtle observation-detail">SE0000170110</span>
                 </td>
@@ -2643,44 +3159,6 @@
 
             <tr>
                 <td class="observation-issuer">
-                    <strong>Beijer Ref AB (publ)</strong>
-                    <span class="subtle observation-detail">SE0015949748</span>
-                </td>
-
-                <td>
-                    8.56 %
-                </td>
-
-                <td>
-                    <span class="increase">+6.90 pp</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                
-                <td data-sort-value="2026-10-08">
-                    2026-10-08
-                </td>
-            
-            </tr>
-            
-
-            <tr>
-                <td class="observation-issuer">
                     <strong>Sveafastigheter AB (publ)</strong>
                     <span class="subtle observation-detail">SE0022243812</span>
                 </td>
@@ -2805,82 +3283,6 @@
 
                 <td>
                     <span class="decrease">-0.06 pp</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                
-                <td data-sort-value="2026-10-08">
-                    2026-10-08
-                </td>
-            
-            </tr>
-            
-
-            <tr>
-                <td class="observation-issuer">
-                    <strong>Aktiebolaget Electrolux</strong>
-                    <span class="subtle observation-detail">SE0000103814</span>
-                </td>
-
-                <td>
-                    10.44 %
-                </td>
-
-                <td>
-                    <span class="increase">+7.76 pp</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                
-                <td data-sort-value="2026-10-08">
-                    2026-10-08
-                </td>
-            
-            </tr>
-            
-
-            <tr>
-                <td class="observation-issuer">
-                    <strong>RaySearch Laboratories AB (publ)</strong>
-                    <span class="subtle observation-detail">SE0000135485</span>
-                </td>
-
-                <td>
-                    10.97 %
-                </td>
-
-                <td>
-                    <span class="increase">+6.08 pp</span>
                 </td>
 
                 <td>
@@ -3213,82 +3615,6 @@
 
             <tr>
                 <td class="observation-issuer">
-                    <strong>Mips AB</strong>
-                    <span class="subtle observation-detail">SE0009216278</span>
-                </td>
-
-                <td>
-                    9.32 %
-                </td>
-
-                <td>
-                    <span class="increase">+6.18 pp</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                
-                <td data-sort-value="2026-10-08">
-                    2026-10-08
-                </td>
-            
-            </tr>
-            
-
-            <tr>
-                <td class="observation-issuer">
-                    <strong>Samhällsbyggnadsbolaget i Norden AB</strong>
-                    <span class="subtle observation-detail">SE0009554454</span>
-                </td>
-
-                <td>
-                    16.54 %
-                </td>
-
-                <td>
-                    <span class="increase">+7.40 pp</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                
-                <td data-sort-value="2026-10-08">
-                    2026-10-08
-                </td>
-            
-            </tr>
-            
-
-            <tr>
-                <td class="observation-issuer">
                     <strong>Instalco AB</strong>
                     <span class="subtle observation-detail">SE0009664253</span>
                 </td>
@@ -3403,82 +3729,6 @@
 
             <tr>
                 <td class="observation-issuer">
-                    <strong>Cibus Real Estate AB (publ)</strong>
-                    <span class="subtle observation-detail">SE0010832204</span>
-                </td>
-
-                <td>
-                    9.85 %
-                </td>
-
-                <td>
-                    <span class="increase">+6.33 pp</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                
-                <td data-sort-value="2026-10-08">
-                    2026-10-08
-                </td>
-            
-            </tr>
-            
-
-            <tr>
-                <td class="observation-issuer">
-                    <strong>Embracer Group AB</strong>
-                    <span class="subtle observation-detail">SE0013121589</span>
-                </td>
-
-                <td>
-                    8.67 %
-                </td>
-
-                <td>
-                    <span class="increase">+7.58 pp</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                
-                <td data-sort-value="2026-10-08">
-                    2026-10-08
-                </td>
-            
-            </tr>
-            
-
-            <tr>
-                <td class="observation-issuer">
                     <strong>Yubico AB</strong>
                     <span class="subtle observation-detail">SE0015657788</span>
                 </td>
@@ -3565,44 +3815,6 @@
 
                 <td>
                     <span class="increase">+1.66 pp</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                <td>
-                    <span title="Kursutfall saknas eller perioden har ännu inte hunnit mogna.">—</span>
-                </td>
-
-                
-                <td data-sort-value="2026-10-08">
-                    2026-10-08
-                </td>
-            
-            </tr>
-            
-
-            <tr>
-                <td class="observation-issuer">
-                    <strong>Dynavox Group AB</strong>
-                    <span class="subtle observation-detail">SE0017105620</span>
-                </td>
-
-                <td>
-                    9.08 %
-                </td>
-
-                <td>
-                    <span class="increase">+5.79 pp</span>
                 </td>
 
                 <td>
@@ -7399,14 +7611,14 @@
     </section>
 
 
-    <footer>
+    <footer class="footer">
 
         <span>
-            Blankdiss
+            <a href="../">← Treageweb</a>
         </span>
 
         <span>
-            Genererad 2026-10-10 22:14:11
+            Webb byggd 2026-10-11 22:20:06 · <a href="./data.json">Sparat webbunderlag</a>
         </span>
 
     </footer>

@@ -9,7 +9,7 @@
     <title>Blankdiss – Dataanalys</title>
     <link
         rel="stylesheet"
-        href="./style.css?v=4"
+        href="./style.css?v=treage-ui-1"
     >
     <script
         src="./site.js?v=1"
@@ -18,12 +18,13 @@
 </head>
 
 <body>
+<a class="skip-link" href="#main">Till innehållet</a>
 
 <header class="hero">
     <div class="container">
 
         <div class="brand">
-            📉 BLANKDISS
+            Blankdiss<span class="brand-note">BLANKNING &amp; EVIDENS</span>
         </div>
 
         <h1>
@@ -48,7 +49,7 @@
                 class="tab"
                 href="./koplage.html"
             >
-                Köpläge
+                Köp &amp; sälj
             </a>
 
             <a
@@ -66,7 +67,7 @@
             </a>
 
             <a
-                class="tab active"
+                class="tab active" aria-current="page"
                 href="./dataanalys.html"
             >
                 Dataanalys
@@ -77,7 +78,43 @@
     </div>
 </header>
 
-<main class="container">
+<main id="main" class="container main-content">
+    <section class="panel">
+        <div class="section-header">
+            <span class="eyebrow">KÖP OCH SÄLJ/UNDVIK</span>
+            <h2>Senaste uppföljning per fryst kandidat</h2>
+            <p>Träffandel avser kandidatens mål: uppgång för köphypoteser och kursfall för sälj/undvik-hypoteser.
+                Baslinjen är första signalens urval; kombinationen använder kandidatens samtliga signaler.
+                Antalen gäller observationer med kända kursutfall. Saknade utfall visas som —.</p>
+            <p>Fönstren omfattar 5, 20 och 60 kalenderdagar, begränsade av respektive utvärderingsregler.
+                De överlappar och får inte summeras som oberoende bekräftelser.
+                Kursmålets horisont mäts i handelsdagar. Skillnad och lift visas när metoden rapporterar dem.</p>
+        </div>
+        <div class="table-wrapper"><table>
+            <thead><tr><th>Kandidat</th><th>Uppföljningsfönster</th><th>Baslinje: mogna</th>
+                <th>Baslinje: träffandel</th><th>Kombination: mogna</th><th>Kombination: träffandel</th>
+                <th>Skillnad mot baslinje</th><th>Lift</th></tr></thead>
+            <tbody><tr><td class="research-identity"><strong>Ger hög 60-dagars momentum kombinerat med positiv förändring i short interest en förändrad sannolikhet för framtida positiv prisrörelse över 20 dagar?
+</strong><span class="subtle">Köphypotes · v1</span></td>
+                <td>5d<span class="subtle">2026-10-04–2026-10-08</span></td>
+                <td>52</td><td>0.0 %</td>
+                <td>1</td><td>0.0 %</td>
+                <td>—</td><td>—</td></tr>
+<tr><td class="research-identity"><strong>Ger hög 60-dagars momentum kombinerat med positiv förändring i short interest en förändrad sannolikhet för framtida positiv prisrörelse över 20 dagar?
+</strong><span class="subtle">Köphypotes · v1</span></td>
+                <td>20d<span class="subtle">2026-09-19–2026-10-08</span></td>
+                <td>209</td><td>0.0 %</td>
+                <td>12</td><td>0.0 %</td>
+                <td>—</td><td>—</td></tr>
+<tr><td class="research-identity"><strong>Ger hög 60-dagars momentum kombinerat med positiv förändring i short interest en förändrad sannolikhet för framtida positiv prisrörelse över 20 dagar?
+</strong><span class="subtle">Köphypotes · v1</span></td>
+                <td>60d<span class="subtle">2026-08-10–2026-10-08</span></td>
+                <td>662</td><td>25.2 %</td>
+                <td>38</td><td>31.6 %</td>
+                <td>—</td><td>—</td></tr></tbody>
+        </table></div>
+    </section>
+
 
     <section class="panel">
 
@@ -1639,12 +1676,12 @@
                     </strong>
                 </td>
                 <td>
-                    2026-10-10
+                    2026-10-11
                 </td>
                 <td>
-                    —
+                    candidate_momentum_si_001
                     <span class="subtle">
-                        v—
+                        v1
                     </span>
                 </td>
                 <td>
@@ -1661,7 +1698,7 @@
                 </td>
                 <td>
                     <span class="run-id">
-                        20261010T145626Z
+                        20261011T201711Z
                     </span>
                 </td>
             </tr>
@@ -1677,9 +1714,9 @@
                     2026-10-10
                 </td>
                 <td>
-                    —
+                    candidate_momentum_si_001
                     <span class="subtle">
-                        v—
+                        v1
                     </span>
                 </td>
                 <td>
@@ -1733,49 +1770,49 @@
             <span class="eyebrow">FRYSTA HÄNDELSEKANDIDATER</span>
             <h2>Historiska resultat och uppföljning efter frysning</h2>
             <p>Kalibrering och upptäckt visar de sparade historiska resultaten. Efter frysning följs nya observerade händelser
-                med samma regler. Dessa resultat är beskrivande och aktiverar ingen köpsignal.</p>
+                med samma regler. Dessa resultat är beskrivande och aktiverar ingen köp- eller säljsignal.</p>
         </div>
         <div class="table-wrapper">
             <table class="research-table">
                 <thead><tr><th>Kandidat</th><th>Period</th><th>Händelser</th><th>Mogna</th><th>Kontrollmatchade</th>
                     <th>Oberoende</th><th>Riktat medel efter kostnad</th><th>Mot kontroll efter kostnad</th><th>Andel i riktningen</th></tr></thead>
-                <tbody><tr><td class="research-identity"><strong>Sona Asset Management (UK) LLP × Scandic Hotels Group AB</strong><span class="subtle">SE0007640156 · Ökad blankning · 5 handelssessioner · uppgång</span><span class="subtle" title="e60f20f7719e9a5cbad3682b8092b4cf2edc0755eca6732d7a67b3d3a20c99dd">short_holder_events_v1 · v1 · e60f20f7719e</span></td>
+                <tbody><tr><td class="research-identity"><strong>Sona Asset Management (UK) LLP × Scandic Hotels Group AB</strong><span class="subtle">SE0007640156 · Ökad blankning · 5 handelssessioner · Köphypotes</span><span class="subtle" title="e60f20f7719e9a5cbad3682b8092b4cf2edc0755eca6732d7a67b3d3a20c99dd">short_holder_events_v1 · v1 · e60f20f7719e</span></td>
                 <td>Historisk kalibrering<span class="subtle">2022-05-25–2023-12-31 · 30 bps kostnad</span></td>
                 <td>21</td><td>19</td>
                 <td>19</td><td>6</td>
                 <td>0.8 %</td>
                 <td>1.0 %</td>
                 <td>66.7 %</td></tr>
-<tr><td class="research-identity"><strong>Sona Asset Management (UK) LLP × Scandic Hotels Group AB</strong><span class="subtle">SE0007640156 · Ökad blankning · 5 handelssessioner · uppgång</span><span class="subtle" title="e60f20f7719e9a5cbad3682b8092b4cf2edc0755eca6732d7a67b3d3a20c99dd">short_holder_events_v1 · v1 · e60f20f7719e</span></td>
+<tr><td class="research-identity"><strong>Sona Asset Management (UK) LLP × Scandic Hotels Group AB</strong><span class="subtle">SE0007640156 · Ökad blankning · 5 handelssessioner · Köphypotes</span><span class="subtle" title="e60f20f7719e9a5cbad3682b8092b4cf2edc0755eca6732d7a67b3d3a20c99dd">short_holder_events_v1 · v1 · e60f20f7719e</span></td>
                 <td>Historisk upptäckt<span class="subtle">2024-01-01–2025-12-19 · 30 bps kostnad</span></td>
                 <td>12</td><td>12</td>
                 <td>12</td><td>5</td>
                 <td>2.2 %</td>
                 <td>2.6 %</td>
                 <td>80.0 %</td></tr>
-<tr><td class="research-identity"><strong>Sona Asset Management (UK) LLP × Scandic Hotels Group AB</strong><span class="subtle">SE0007640156 · Ökad blankning · 5 handelssessioner · uppgång</span><span class="subtle" title="e60f20f7719e9a5cbad3682b8092b4cf2edc0755eca6732d7a67b3d3a20c99dd">short_holder_events_v1 · v1 · e60f20f7719e</span></td>
-                <td>Efter frysning<span class="subtle">Samlar underlag (minst 5 oberoende händelser) · ej validerad · data till 2026-10-10</span></td>
+<tr><td class="research-identity"><strong>Sona Asset Management (UK) LLP × Scandic Hotels Group AB</strong><span class="subtle">SE0007640156 · Ökad blankning · 5 handelssessioner · Köphypotes</span><span class="subtle" title="e60f20f7719e9a5cbad3682b8092b4cf2edc0755eca6732d7a67b3d3a20c99dd">short_holder_events_v1 · v1 · e60f20f7719e</span></td>
+                <td>Efter frysning<span class="subtle">Samlar underlag (minst 5 oberoende händelser) · ej validerad · data till 2026-10-11</span></td>
                 <td>0</td><td>0</td>
                 <td>0</td><td>0</td>
                 <td>—</td>
                 <td>—</td>
                 <td>—</td></tr>
-<tr><td class="research-identity"><strong>ALCUR FONDER AB × JM AB</strong><span class="subtle">SE0000806994 · Minskad blankning · 5 handelssessioner · uppgång</span><span class="subtle" title="d1b33b1e204d6bf4d4d95280ff5b1631db151a9bca0b118d8634240ee9d0feb4">short_holder_events_v1 · v1 · d1b33b1e204d</span></td>
+<tr><td class="research-identity"><strong>ALCUR FONDER AB × JM AB</strong><span class="subtle">SE0000806994 · Minskad blankning · 5 handelssessioner · Köphypotes</span><span class="subtle" title="d1b33b1e204d6bf4d4d95280ff5b1631db151a9bca0b118d8634240ee9d0feb4">short_holder_events_v1 · v1 · d1b33b1e204d</span></td>
                 <td>Historisk kalibrering<span class="subtle">2022-05-25–2023-12-31 · 30 bps kostnad</span></td>
                 <td>36</td><td>36</td>
                 <td>36</td><td>19</td>
                 <td>1.7 %</td>
                 <td>3.5 %</td>
                 <td>68.4 %</td></tr>
-<tr><td class="research-identity"><strong>ALCUR FONDER AB × JM AB</strong><span class="subtle">SE0000806994 · Minskad blankning · 5 handelssessioner · uppgång</span><span class="subtle" title="d1b33b1e204d6bf4d4d95280ff5b1631db151a9bca0b118d8634240ee9d0feb4">short_holder_events_v1 · v1 · d1b33b1e204d</span></td>
+<tr><td class="research-identity"><strong>ALCUR FONDER AB × JM AB</strong><span class="subtle">SE0000806994 · Minskad blankning · 5 handelssessioner · Köphypotes</span><span class="subtle" title="d1b33b1e204d6bf4d4d95280ff5b1631db151a9bca0b118d8634240ee9d0feb4">short_holder_events_v1 · v1 · d1b33b1e204d</span></td>
                 <td>Historisk upptäckt<span class="subtle">2024-01-01–2025-12-19 · 30 bps kostnad</span></td>
                 <td>67</td><td>67</td>
                 <td>18</td><td>10</td>
                 <td>0.9 %</td>
                 <td>2.8 %</td>
                 <td>70.0 %</td></tr>
-<tr><td class="research-identity"><strong>ALCUR FONDER AB × JM AB</strong><span class="subtle">SE0000806994 · Minskad blankning · 5 handelssessioner · uppgång</span><span class="subtle" title="d1b33b1e204d6bf4d4d95280ff5b1631db151a9bca0b118d8634240ee9d0feb4">short_holder_events_v1 · v1 · d1b33b1e204d</span></td>
-                <td>Efter frysning<span class="subtle">Samlar underlag (minst 5 oberoende händelser) · ej validerad · data till 2026-10-10</span></td>
+<tr><td class="research-identity"><strong>ALCUR FONDER AB × JM AB</strong><span class="subtle">SE0000806994 · Minskad blankning · 5 handelssessioner · Köphypotes</span><span class="subtle" title="d1b33b1e204d6bf4d4d95280ff5b1631db151a9bca0b118d8634240ee9d0feb4">short_holder_events_v1 · v1 · d1b33b1e204d</span></td>
+                <td>Efter frysning<span class="subtle">Samlar underlag (minst 5 oberoende händelser) · ej validerad · data till 2026-10-11</span></td>
                 <td>0</td><td>0</td>
                 <td>0</td><td>0</td>
                 <td>—</td>
@@ -1788,7 +1825,7 @@
             Kursriktningen anger vilket utfall som studeras; nedåtriktade utfall är inte uppmätt vinst från en blankningsstrategi.</p>
         <p class="table-note">Historiska positionsdatum är retrospektiva proxyer och arkivprisernas justeringsgrund är okänd.
             Tidigare öppnade historiska testperioder används inte som ny bekräftelse.</p>
-        <p class="table-note">Dataunderlag sparat: 2026-10-10 22:11 · <a href="./bedomning.html#frysningar">Visa frystider och status</a></p>
+        <p class="table-note">Dataunderlag sparat: 2026-10-11 22:17 · <a href="./bedomning.html#frysningar">Visa frystider och status</a></p>
     </section>
 
     <section class="explanation">
@@ -1916,14 +1953,14 @@
     </section>
 
 
-    <footer>
+    <footer class="footer">
 
         <span>
-            Blankdiss
+            <a href="../">← Treageweb</a>
         </span>
 
         <span>
-            Genererad 2026-10-10 22:14:11
+            Webb byggd 2026-10-11 22:20:06 · <a href="./data.json">Sparat webbunderlag</a>
         </span>
 
     </footer>

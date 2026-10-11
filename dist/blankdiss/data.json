@@ -5,7 +5,7 @@
     "jurisdiction_basis": "current_verified_legal_jurisdiction_not_historical_domicile",
     "fingerprint": "4a6ac52a899cd04ed9c62e0ab4c10c09f39e32c287ac4d5c0ef3641f7c03a79f"
   },
-  "generated_at": "2026-10-10 22:14:11",
+  "generated_at": "2026-10-11 22:20:06",
   "timezone": "Europe/Stockholm",
   "event_count": 684,
   "analysis_event_count": 2143,
@@ -2210201,8 +2210201,8 @@
   },
   "evaluations": [
     {
-      "run_id": "20261010T145626Z-dddcbc18cea98b4e",
-      "created_at_utc": "2026-10-10T14:56:26.160651+00:00",
+      "run_id": "20261011T201711Z-0faef8bca8f42c98",
+      "created_at_utc": "2026-10-11T20:17:11.015475+00:00",
       "candidate": {
         "candidate_id": "candidate_momentum_si_001",
         "candidate_version": 1,
@@ -2210909,7 +2210909,7 @@
           }
         }
       ],
-      "_source_path": "data/processed/ml/research/evaluation/20261010T145626Z-dddcbc18cea98b4e/evaluation.json"
+      "_source_path": "data/processed/ml/research/evaluation/20261011T201711Z-0faef8bca8f42c98/evaluation.json"
     },
     {
       "run_id": "20261010T094430Z-65130910a4b5021a",
@@ -2211631,9 +2211631,67 @@
         "version": 1,
         "label": "Ger hög 60-dagars momentum kombinerat med positiv förändring i short interest en förändrad sannolikhet för framtida positiv prisrörelse över 20 dagar?\n",
         "frozen_at": "2026-07-15T00:00:00Z",
+        "evaluated_at": "2026-10-11T20:17:11.015475+00:00",
+        "status": "legacy_evaluation_available",
+        "source": "ml/research/candidates/specs/momentum_si_001/candidate_momentum_si_001.yaml",
+        "intent": "buy",
+        "target": "positive_20d",
+        "data_date": "2026-10-08",
+        "followup_windows": [
+          {
+            "window": "5d",
+            "period": {
+              "start": "2026-10-04",
+              "end": "2026-10-08"
+            },
+            "baseline_n": 52,
+            "baseline_rate": 0.0,
+            "combined_n": 1,
+            "combined_rate": 0.0,
+            "difference": null,
+            "lift": null
+          },
+          {
+            "window": "20d",
+            "period": {
+              "start": "2026-09-19",
+              "end": "2026-10-08"
+            },
+            "baseline_n": 209,
+            "baseline_rate": 0.0,
+            "combined_n": 12,
+            "combined_rate": 0.0,
+            "difference": null,
+            "lift": null
+          },
+          {
+            "window": "60d",
+            "period": {
+              "start": "2026-08-10",
+              "end": "2026-10-08"
+            },
+            "baseline_n": 662,
+            "baseline_rate": 0.25226586102719034,
+            "combined_n": 38,
+            "combined_rate": 0.3157894736842105,
+            "difference": null,
+            "lift": null
+          }
+        ]
+      },
+      {
+        "engine": "legacy_candidate",
+        "id": "candidate_momentum_si_sell_001",
+        "version": 1,
+        "label": "Ger de 20 procent lägsta 5-dagars momentumobservationerna tillsammans med de 2,5 procent högsta blankningsförändringarna förhöjd risk för minst 10 procents kursfall över 5 handelsdagar?",
+        "frozen_at": "2026-10-11T08:06:15+00:00",
         "evaluated_at": null,
         "status": "legacy_definition_only",
-        "source": "ml/research/candidates/specs/momentum_si_001/candidate_momentum_si_001.yaml"
+        "source": "ml/research/candidates/specs/momentum_si_sell_001/candidate_momentum_si_sell_001.yaml",
+        "intent": "sell_avoid",
+        "target": "down_10pct_5d",
+        "data_date": null,
+        "followup_windows": []
       },
       {
         "engine": "legacy_risk",
@@ -2211643,12 +2211701,15 @@
         "frozen_at": null,
         "evaluated_at": null,
         "status": "legacy_definition_only",
-        "source": "ml/research/frozen/hypothesis.yml"
+        "source": "ml/research/frozen/hypothesis.yml",
+        "intent": "sell_avoid",
+        "target": "down_10pct_5d"
       },
       {
         "engine": "holder_event",
         "id": "e60f20f7719e9a5cbad3682b8092b4cf2edc0755eca6732d7a67b3d3a20c99dd",
         "campaign": "6292d8450ef49e37db3fc92efdea574049529e067fd929429b4f66ff87c6f86c",
+        "intent": "buy",
         "version": 1,
         "plan_id": "short_holder_events_v1",
         "actor_name": "Sona Asset Management (UK) LLP",
@@ -2211662,8 +2211723,8 @@
           "side": "INCREASE"
         },
         "frozen_at": "2026-10-09T10:18:46.020472+00:00",
-        "evaluated_at": "2026-10-10",
-        "data_date": "2026-10-10",
+        "evaluated_at": "2026-10-11",
+        "data_date": "2026-10-11",
         "status": "insufficient_data",
         "prospective": {
           "event_rows": 0,
@@ -2211710,6 +2211771,7 @@
         "engine": "holder_event",
         "id": "d1b33b1e204d6bf4d4d95280ff5b1631db151a9bca0b118d8634240ee9d0feb4",
         "campaign": "6292d8450ef49e37db3fc92efdea574049529e067fd929429b4f66ff87c6f86c",
+        "intent": "buy",
         "version": 1,
         "plan_id": "short_holder_events_v1",
         "actor_name": "ALCUR FONDER AB",
@@ -2211723,8 +2211785,8 @@
           "side": "DECREASE"
         },
         "frozen_at": "2026-10-09T10:18:46.019985+00:00",
-        "evaluated_at": "2026-10-10",
-        "data_date": "2026-10-10",
+        "evaluated_at": "2026-10-11",
+        "data_date": "2026-10-11",
         "status": "insufficient_data",
         "prospective": {
           "event_rows": 0,
@@ -2211780,30 +2211842,30 @@
         "test_count": 8682,
         "interesting_tracks": 3,
         "candidate_count": 2,
-        "data_date": "2026-10-10"
+        "data_date": "2026-10-11"
       }
     ],
     "policy": "separate_rules_dates_and_engines_no_pooled_independent_evidence"
   },
   "evaluation_payload": {
     "run_count": 2,
-    "candidate": "Okänd kandidat",
+    "candidate": "candidate_momentum_si_001",
     "latest_feature_date": "2026-10-08",
     "total_observations": 148650,
     "matured_observations": null,
     "latest": {
-      "candidate": "—",
-      "version": "—",
+      "candidate": "candidate_momentum_si_001",
+      "version": "1",
       "feature_date": "2026-10-08",
-      "created_at": "2026-10-10T14:56:26.160651+00:00",
-      "run_id": "20261010T145626Z-dddcbc18cea98b4e",
+      "created_at": "2026-10-11T20:17:11.015475+00:00",
+      "run_id": "20261011T201711Z-0faef8bca8f42c98",
       "feature_rows": "148650",
       "fingerprint": "f7c8cd6d80754d68c51d7979a0c8b8d9704ed53b36d8350ecf5a875bab88d66f"
     },
     "history": [
       {
-        "run_id": "20261010T145626Z-dddcbc18cea98b4e",
-        "created_at_utc": "2026-10-10T14:56:26.160651+00:00",
+        "run_id": "20261011T201711Z-0faef8bca8f42c98",
+        "created_at_utc": "2026-10-11T20:17:11.015475+00:00",
         "candidate": {
           "candidate_id": "candidate_momentum_si_001",
           "candidate_version": 1,
@@ -2212510,7 +2212572,7 @@
             }
           }
         ],
-        "_source_path": "data/processed/ml/research/evaluation/20261010T145626Z-dddcbc18cea98b4e/evaluation.json"
+        "_source_path": "data/processed/ml/research/evaluation/20261011T201711Z-0faef8bca8f42c98/evaluation.json"
       },
       {
         "run_id": "20261010T094430Z-65130910a4b5021a",
@@ -2213226,8 +2213288,8 @@
     ]
   },
   "input_source": {
-    "data_captured_at": "2026-10-10T20:11:12.921641+00:00",
-    "workflow_run_id": "38081889953",
-    "research_captured_at": "2026-10-10T20:12:32.367317+00:00"
+    "data_captured_at": "2026-10-11T20:17:23.273810+00:00",
+    "workflow_run_id": "38170993185",
+    "research_captured_at": "2026-10-11T20:18:30.115162+00:00"
   }
 }
