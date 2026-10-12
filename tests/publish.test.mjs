@@ -34,7 +34,7 @@ function worker() {
   const context = vm.createContext({
     self: { registration: { scope: 'https://example.org/Treageweb/' }, addEventListener: (name, fn) => { events[name] = fn; } },
     URL, Response, TextEncoder, TextDecoder, Uint8Array, atob, crypto: webcrypto,
-    fetch: async url => new Response(await readFile(path.join(output, new URL(url).pathname.split('/').at(-1)))),
+    fetch: async url => new Response(await readFile(path.join(output, new URL(url).pathname.replace(/^\/Treageweb\//, '')))),
   });
   vm.runInContext(workerText, context);
   return {
@@ -66,6 +66,10 @@ test('public output contains no source data or password; direct data URL is abse
   }
   await check(output);
   await assert.rejects(readFile(path.join(output, 'blankdiss/data.json')));
+  const manifest = JSON.parse(await readFile(path.join(output, (await readdir(output)).find(name => name.startsWith('manifest-'))), 'utf8'));
+  assert.equal(manifest.version, 1);
+  assert.ok(manifest.files['blankdiss/data.json']);
+  assert.equal((await readFile(path.join(output, manifest.files['blankdiss/data.json'].path))).length, Buffer.byteLength('{"privateValue":123456789}') + 16);
   assert.match(await readFile(path.join(output, 'blankdiss/index.html'), 'utf8'), /\.\.\/gate.js/);
   assert.match(await readFile(path.join(output, '404.html'), 'utf8'), /\/Treageweb\/gate.js/);
 });
@@ -104,15 +108,15 @@ test('build fails closed without a secret or with empty input', async () => {
   assert.notEqual(build(password, empty).status, 0);
 });
 test('tampered encrypted payload cannot unlock', async () => {
-  const payloadPath = path.join(output, (await readdir(output)).find(name => name.startsWith('payload-')));
-  const original = await readFile(payloadPath, 'utf8');
+  const manifestPath = path.join(output, (await readdir(output)).find(name => name.startsWith('manifest-')));
+  const original = await readFile(manifestPath, 'utf8');
   try {
-    const payload = JSON.parse(original);
-    const ciphertext = Buffer.from(payload.ciphertext, 'base64'); ciphertext[0] ^= 1;
-    payload.ciphertext = ciphertext.toString('base64');
-    await writeFile(payloadPath, JSON.stringify(payload));
+    const manifest = JSON.parse(original);
+    const ciphertext = Buffer.from(manifest.verifier.ciphertext, 'base64'); ciphertext[0] ^= 1;
+    manifest.verifier.ciphertext = ciphertext.toString('base64');
+    await writeFile(manifestPath, JSON.stringify(manifest));
     assert.equal(await worker().unlock(password), false);
-  } finally { await writeFile(payloadPath, original); }
+  } finally { await writeFile(manifestPath, original); }
 });
 test('cleanup commits and pushes all dist deletions, preserves other files, and is idempotent', async () => {
   const remote = path.join(temp, 'remote.git'), checkout = path.join(temp, 'cleanup');
