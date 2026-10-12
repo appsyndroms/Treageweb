@@ -89,7 +89,7 @@ await writeFile(path.join(output, '404.html'), gate.replace('__ROOT__', basePath
 for (const file of Object.keys(files).filter(name => name.endsWith('.html'))) {
   await mkdir(path.dirname(path.join(output, file)), { recursive: true });
   const root = '../'.repeat(file.split('/').length - 1) || './';
-  await writeFile(path.join(output, file), gate.replace('__ROOT__', root));
+  await writeFile(path.join(output, file), gate.replace('__ROOT__', root).replace('__BUILD_VERSION__', buildVersion));
 }
 await writeFile(path.join(output, manifestName), manifest);
 const gateScript = (await readFile(new URL('../web/gate.js', import.meta.url), 'utf8')).replace('__BUILD_VERSION__', buildVersion);

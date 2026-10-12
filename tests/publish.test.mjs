@@ -73,7 +73,7 @@ test('public output contains no source data or password; direct data URL is abse
   assert.ok((await readFile(path.join(output, 'gate.js'), 'utf8')).includes(`sw.js?v=${version}`));
   assert.ok(!(await readFile(path.join(output, 'gate.html'), 'utf8')).includes('__BUILD_VERSION__'));
   assert.equal((await readFile(path.join(output, manifest.files['blankdiss/data.json'].path))).length, Buffer.byteLength('{"privateValue":123456789}') + 16);
-  assert.match(await readFile(path.join(output, 'blankdiss/index.html'), 'utf8'), /\.\.\/gate.js/);
+  assert.ok((await readFile(path.join(output, 'blankdiss/index.html'), 'utf8')).includes(`../gate.js?v=${version}`));
   assert.match(await readFile(path.join(output, '404.html'), 'utf8'), /\/Treageweb\/gate.js/);
 });
 test('locked data denied; wrong password cannot decrypt', async () => {
