@@ -5,6 +5,9 @@ on:
     - cron: "0 21 * * *"
       timezone: "Europe/Stockholm"
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["dist/**"]
 
 permissions:
   contents: read
@@ -16,7 +19,34 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  readiness:
+    name: Kontrollera att alla projekt har levererat
+    runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.ready.outputs.ready }}
+      sha: ${{ steps.snapshot.outputs.sha }}
+    steps:
+      - name: Checkout latest Treageweb
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Check delivery readiness
+        id: ready
+        run: node scripts/readiness.mjs
+
+      - name: Record publication snapshot
+        id: snapshot
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
   publish:
+    needs: readiness
+    if: ${{ needs.readiness.outputs.ready == 'true' }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -25,7 +55,7 @@ jobs:
       - name: Checkout Treageweb
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ needs.readiness.outputs.sha }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -57,8 +87,8 @@ jobs:
 
   cleanup:
     name: Töm dist efter publiceringsförsöket
-    needs: publish
-    if: ${{ always() }}
+    needs: [readiness, publish]
+    if: ${{ always() && needs.readiness.outputs.ready == 'true' && needs.publish.result != 'skipped' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write

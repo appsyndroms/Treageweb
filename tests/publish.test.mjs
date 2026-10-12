@@ -188,7 +188,8 @@ test('cleanup commits and pushes all dist deletions, preserves other files, and 
   await writeFile(path.join(checkout, 'README.md'), 'preserve');
   git(['add', '.'], checkout); git(['commit', '-m', 'fixture'], checkout); git(['push', 'origin', 'main'], checkout);
   const workflow = await readFile(path.join(repo, '.github/workflows/publish-pages.yml'), 'utf8');
-  assert.match(workflow, /needs: publish\n    if: \$\{\{ always\(\) \}\}/);
+  assert.match(workflow, /needs: \[readiness, publish\]/);
+  assert.ok(workflow.includes("always() && needs.readiness.outputs.ready == 'true' && needs.publish.result != 'skipped'"));
   const script = workflow.split('      - name: Remove staged websites and push cleanup\n        run: |\n')[1]
     .split('\n').map(line => line.replace(/^          /, '')).join('\n');
   for (let i = 0; i < 2; i++) {
