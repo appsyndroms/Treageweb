@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Treage analyserar samband mellan resultat från Blankdiss, Reports och Insider.">
+  <title>Treage – Hem</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Till innehållet</a>
+  <header class="hero">
+    <div class="container">
+      <details class="project-switcher">
+        <summary>Välj projekt</summary>
+        <nav aria-label="Projektmeny">
+          <a href="../treage/" aria-current="page">Treage</a>
+          <a href="../blankdiss/">Blankdiss</a>
+          <a href="../reports/">Reports</a>
+          <a href="../insider/">Insider</a>
+        </nav>
+      </details>
+      <div class="brand">Treage<span class="brand-note">TVÄRKÄLLSANALYS</span></div>
+      <h1>Samband mellan marknadens informationskällor</h1>
+      <p class="lead">Treage tar emot tidsstämplade resultat från Blankdiss, Reports och Insider och undersöker om kombinationerna ger stöd för köp- eller säljsignaler.</p>
+      <nav class="tabs" aria-label="Huvudnavigation">
+        <a class="tab active" aria-current="page" href="./index.html">Hem</a>
+        <a class="tab" href="./koplage.html">Köp &amp; sälj</a>
+        <a class="tab" href="./events.html">Händelser</a>
+      <a class="tab" href="./sparbarhet.html">Bevakning</a>
+        <a class="tab" href="./bedomning.html">Bedömning</a>
+        <a class="tab" href="./dataanalys.html">Dataanalys</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container main-content">
+    <section class="cards" aria-label="Treages status">
+      <article class="card"><span class="label">Källor</span><strong>3</strong><p>Blankdiss, Reports och Insider</p></article>
+      <article class="card"><span class="label">Aktiva signaler</span><strong>0</strong><p>Inga sammanvägda regler är validerade</p></article>
+      <article class="card"><span class="label">Arbetssätt</span><strong>Point-in-time</strong><p>Varje observation knyts till när den blev känd</p></article>
+      <article class="card"><span class="label">Status</span><strong>Research</strong><p>Resultat följs innan signaler aktiveras</p></article>
+    </section>
+
+    <section class="panel">
+      <div class="section-header">
+        <span class="eyebrow">UPPDRAG</span>
+        <h2>En gemensam analys av tre källor</h2>
+        <p>Treage ansvarar för tvärkällsanalys och sammanvägning. Källprojekten ansvarar för sina egna data, mått och analyser.</p>
+      </div>
+      <div class="status-grid">
+        <article class="status-item"><span>Blankdiss</span><strong>Blankningsförändringar</strong></article>
+        <article class="status-item"><span>Reports</span><strong>Rapporter och konsensus</strong></article>
+        <article class="status-item"><span>Insider</span><strong>Insynstransaktioner</strong></article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header">
+        <span class="eyebrow">SIGNALSTATUS</span>
+        <h2>Ingen validerad sammanvägd signal publiceras ännu</h2>
+        <p>Historiska samband och experiment räcker inte i sig för att aktivera en regel. En signal ska gå att följa tillbaka till källresultat, instrument, tidpunkt och validering.</p>
+      </div>
+      <p><a href="./koplage.html">Se köp- och säljsignaler</a> · <a href="./bedomning.html">Läs om bedömning och validering</a></p>
+    </section>
+
+    <section class="panel">
+      <div class="section-header">
+        <span class="eyebrow">SENASTE TVÄRKÄLLSANALYS · 11 OKTOBER 2026</span>
+        <h2>Vad visar underlaget hittills?</h2>
+        <p>Den senaste sammanställningen omfattar retrospektiva data från 2022–2026. Den beskriver samband men bevisar inte att informationen går att använda för framtida affärer.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><span class="label">Blankningsnivå ↔ insiderköp</span><strong>ρ = 0,082</strong><p>Svagt positivt samband över 6&nbsp;446 månatliga instrumentobservationer.</p></article>
+        <article class="card"><span class="label">Blankningsförändring ↔ insiderköp</span><strong>ρ = 0,001</strong><p>Nära noll i samma retrospektiva jämförelse.</p></article>
+        <article class="card"><span class="label">Historisk rapportkonsensus</span><strong>0 / 3&nbsp;520</strong><p>Ingen rapporthändelse har användbar konsensus observerad före publicering.</p></article>
+      </div>
+      <p>Urvalen, rapportluckan och tidsbegränsningarna förklaras under <a href="./events.html">Händelser</a> och <a href="./dataanalys.html">Dataanalys</a>.</p>
+    </section>
+  </main>
+  <footer class="container footer"><a href="../">← Till Treageweb</a><span>Tvärkällsanalys av Blankdiss, Reports och Insider</span></footer>
+</body>
+</html>
