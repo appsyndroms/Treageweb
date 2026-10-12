@@ -9,6 +9,7 @@ import { webcrypto } from 'node:crypto';
 
 const repo = path.resolve(import.meta.dirname, '..');
 const password = 'integration-test-only-åäö';
+const username = 'integration-test-user';
 let temp, input, output, workerText;
 before(async () => {
   temp = await mkdtemp(path.join(tmpdir(), 'treageweb-test-'));
@@ -26,7 +27,7 @@ before(async () => {
 after(async () => { await rm(temp, { recursive: true, force: true }); });
 function build(secret = password, source = input) {
   return spawnSync(process.execPath, ['scripts/build.mjs', source, output], {
-    cwd: repo, env: { ...process.env, TREAGEWEB_PASSWORD: secret, SITE_BASE_PATH: '/Treageweb' }, encoding: 'utf8',
+    cwd: repo, env: { ...process.env, TREAGEWEB_USER: username, TREAGEWEB_PASSWORD: secret, SITE_BASE_PATH: '/Treageweb' }, encoding: 'utf8',
   });
 }
 function worker(sessionStore = new Map()) {
@@ -75,9 +76,9 @@ function worker(sessionStore = new Map()) {
   });
   vm.runInContext(workerText, context);
   return {
-    async unlock(secret) {
+    async unlock(user, secret) {
       let pending, answer;
-      events.message({ data: { type: 'unlock', password: secret }, ports: [{ postMessage: value => { answer = value; } }], waitUntil: promise => { pending = promise; } });
+      events.message({ data: { type: 'unlock', username: user, password: secret }, ports: [{ postMessage: value => { answer = value; } }], waitUntil: promise => { pending = promise; } });
       await pending; return answer.ok;
     },
     async lock() {
@@ -102,6 +103,7 @@ test('public output contains no source data or password; direct data URL is abse
         assert.ok(!text.includes('PRIVATE_REPORT_MARKER'));
         assert.ok(!text.includes('123456789'));
         assert.ok(!text.includes(password));
+        assert.ok(!text.includes(username));
       }
     }
   }
@@ -120,13 +122,13 @@ test('public output contains no source data or password; direct data URL is abse
 test('locked data denied; wrong password cannot decrypt', async () => {
   const sw = worker();
   assert.equal((await sw.request('blankdiss/data.json', 'cors')).status, 401);
-  assert.equal(await sw.unlock('wrong-password'), false);
+  assert.equal(await sw.unlock(username, 'wrong-password'), false);
   assert.equal((await sw.request('blankdiss/data.json', 'cors')).status, 401);
   assert.match(await (await sw.request('blankdiss/')).text(), /Lösenord/);
 });
 test('correct password unlocks HTML, query-string data, CSS and project links', async () => {
   const sw = worker();
-  assert.equal(await sw.unlock(password), true);
+  assert.equal(await sw.unlock(username, password), true);
   assert.match(await (await sw.request('blankdiss/')).text(), /PRIVATE_REPORT_MARKER/);
   const data = await sw.request('blankdiss/data.json?v=3', 'cors');
   assert.equal(data.headers.get('Content-Type'), 'application/json');
@@ -143,7 +145,7 @@ test('unlock survives worker restart without storing the password; lock clears t
   const sessionStore = new Map();
   const sw = worker(sessionStore);
   assert.equal((await sw.request('blankdiss/data.json', 'cors')).status, 401);
-  assert.equal(await sw.unlock(password), true);
+  assert.equal(await sw.unlock(username, password), true);
   const savedSession = sessionStore.get('active');
   assert.ok(savedSession.key);
   assert.equal(savedSession.version, (await readdir(output)).find(name => name.startsWith('manifest-')));
@@ -168,7 +170,7 @@ test('tampered encrypted payload cannot unlock', async () => {
     const ciphertext = Buffer.from(manifest.verifier.ciphertext, 'base64'); ciphertext[0] ^= 1;
     manifest.verifier.ciphertext = ciphertext.toString('base64');
     await writeFile(manifestPath, JSON.stringify(manifest));
-    assert.equal(await worker().unlock(password), false);
+    assert.equal(await worker().unlock(username, password), false);
   } finally { await writeFile(manifestPath, original); }
 });
 test('cleanup commits and pushes all dist deletions, preserves other files, and is idempotent', async () => {

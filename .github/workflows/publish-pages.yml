@@ -41,6 +41,7 @@ jobs:
 
       - name: Build encrypted website
         env:
+          TREAGEWEB_USER: ${{ secrets.TREAGEWEB_USER }}
           TREAGEWEB_PASSWORD: ${{ secrets.TREAGEWEB_PASSWORD }}
           SITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}
         run: node scripts/build.mjs

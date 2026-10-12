@@ -68,7 +68,8 @@ self.addEventListener('message', event => {
       const response = await fetch(new URL(manifestName, root), { cache: 'no-store' });
       if (!response.ok) throw new Error('Manifest unavailable');
       const manifest = await response.json();
-      const material = await crypto.subtle.importKey('raw', new TextEncoder().encode(event.data.password), 'PBKDF2', false, ['deriveKey']);
+      const credential = `${event.data.username}\0${event.data.password}`;
+      const material = await crypto.subtle.importKey('raw', new TextEncoder().encode(credential), 'PBKDF2', false, ['deriveKey']);
       const candidateKey = await crypto.subtle.deriveKey({ name: 'PBKDF2', salt: bytes(manifest.salt), iterations: manifest.iterations, hash: 'SHA-256' }, material, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
       await crypto.subtle.decrypt({ name: 'AES-GCM', iv: bytes(manifest.verifier.iv) }, candidateKey, bytes(manifest.verifier.ciphertext));
       await saveSession({ version: manifestName, files: manifest.files, key: candidateKey });

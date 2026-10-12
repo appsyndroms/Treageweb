@@ -1,6 +1,7 @@
 const root = new URL('./', document.currentScript.src);
 const status = document.querySelector('#status');
 const form = document.querySelector('form');
+const username = document.querySelector('#username');
 const input = document.querySelector('#password');
 const button = form.querySelector('button');
 const registration = (async () => {
@@ -27,10 +28,11 @@ form.addEventListener('submit', async event => {
       const channel = new MessageChannel();
       const timer = setTimeout(() => reject(new Error('Upplåsningen tog för lång tid. Försök igen.')), 60000);
       channel.port1.onmessage = event => { clearTimeout(timer); resolve(event.data); };
-      reg.active.postMessage({ type: 'unlock', password: input.value }, [channel.port2]);
+      reg.active.postMessage({ type: 'unlock', username: username.value, password: input.value }, [channel.port2]);
+      username.value = '';
       input.value = '';
     });
-    if (!result.ok) throw new Error('Kunde inte låsa upp. Kontrollera lösenordet och försök igen.');
+    if (!result.ok) throw new Error('Kunde inte låsa upp. Kontrollera användarnamn och lösenord.');
     if (!navigator.serviceWorker.controller) await new Promise(resolve => navigator.serviceWorker.addEventListener('controllerchange', resolve, { once: true }));
     location.reload();
   } catch (error) { status.textContent = error.message; }
