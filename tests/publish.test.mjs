@@ -29,11 +29,48 @@ function build(secret = password, source = input) {
     cwd: repo, env: { ...process.env, TREAGEWEB_PASSWORD: secret, SITE_BASE_PATH: '/Treageweb' }, encoding: 'utf8',
   });
 }
-function worker() {
+function worker(sessionStore = new Map()) {
   const events = {};
+  const indexedDB = {
+    open() {
+      const request = {};
+      queueMicrotask(() => {
+        const db = {
+          createObjectStore() {},
+          transaction(_name, mode) {
+            const transaction = {
+              objectStore() {
+                return {
+                  get(name) {
+                    const result = {};
+                    queueMicrotask(() => { result.result = sessionStore.get(name); result.onsuccess?.(); });
+                    return result;
+                  },
+                  put(value, name) {
+                    sessionStore.set(name, value);
+                    queueMicrotask(() => transaction.oncomplete?.());
+                  },
+                  delete(name) {
+                    sessionStore.delete(name);
+                    queueMicrotask(() => transaction.oncomplete?.());
+                  },
+                };
+              },
+            };
+            return transaction;
+          },
+          close() {},
+        };
+        request.result = db;
+        request.onupgradeneeded?.();
+        request.onsuccess?.();
+      });
+      return request;
+    },
+  };
   const context = vm.createContext({
     self: { registration: { scope: 'https://example.org/Treageweb/' }, addEventListener: (name, fn) => { events[name] = fn; } },
-    URL, Response, TextEncoder, TextDecoder, Uint8Array, atob, crypto: webcrypto,
+    URL, Response, TextEncoder, TextDecoder, Uint8Array, atob, crypto: webcrypto, indexedDB,
     fetch: async url => new Response(await readFile(path.join(output, new URL(url).pathname.replace(/^\/Treageweb\//, '')))),
   });
   vm.runInContext(workerText, context);
@@ -43,7 +80,11 @@ function worker() {
       events.message({ data: { type: 'unlock', password: secret }, ports: [{ postMessage: value => { answer = value; } }], waitUntil: promise => { pending = promise; } });
       await pending; return answer.ok;
     },
-    lock() { events.message({ data: { type: 'lock' } }); },
+    async lock() {
+      let pending;
+      events.message({ data: { type: 'lock' }, waitUntil: promise => { pending = promise; } });
+      await pending;
+    },
     request(file, mode = 'navigate') {
       let response;
       events.fetch({ request: { url: 'https://example.org/Treageweb/' + file, mode }, respondWith: value => { response = value; } });
@@ -98,12 +139,21 @@ test('correct password unlocks HTML, query-string data, CSS and project links', 
   assert.equal((await sw.request('missing.json', 'cors')).status, 404);
   assert.equal((await sw.request('toString', 'cors')).status, 404);
 });
-test('locking and worker restart deny protected files again', async () => {
-  const sw = worker();
-  assert.equal(await sw.unlock(password), true);
-  sw.lock();
+test('unlock survives worker restart without storing the password; lock clears the session', async () => {
+  const sessionStore = new Map();
+  const sw = worker(sessionStore);
   assert.equal((await sw.request('blankdiss/data.json', 'cors')).status, 401);
-  assert.equal((await worker().request('blankdiss/data.json', 'cors')).status, 401);
+  assert.equal(await sw.unlock(password), true);
+  const savedSession = sessionStore.get('active');
+  assert.ok(savedSession.key);
+  assert.equal(savedSession.version, (await readdir(output)).find(name => name.startsWith('manifest-')));
+  assert.equal(JSON.stringify(savedSession).includes(password), false);
+  const restartedWorker = worker(sessionStore);
+  const page = await restartedWorker.request('blankdiss/');
+  assert.match(await page.text(), /PRIVATE_REPORT_MARKER/);
+  await restartedWorker.lock();
+  assert.equal(sessionStore.has('active'), false);
+  assert.equal((await worker(sessionStore).request('blankdiss/data.json', 'cors')).status, 401);
 });
 test('build fails closed without a secret or with empty input', async () => {
   assert.notEqual(build('').status, 0);
