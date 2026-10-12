@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Treage – Köp &amp; sälj</title><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Till innehållet</a>
+  <header class="hero"><div class="container">
+    <div class="brand">Treage<span class="brand-note">TVÄRKÄLLSANALYS</span></div>
+    <h1>Köp &amp; sälj</h1>
+    <p class="lead">Sammanvägda signaler och deras uppföljning på data som kom efter att reglerna frystes.</p>
+    <nav class="tabs" aria-label="Huvudnavigation">
+      <a class="tab" href="./index.html">Hem</a><a class="tab active" aria-current="page" href="./koplage.html">Köp &amp; sälj</a>
+      <a class="tab" href="./events.html">Händelser</a><a class="tab" href="./sparbarhet.html">Spårbarhet</a><a class="tab" href="./bedomning.html">Bedömning</a><a class="tab" href="./dataanalys.html">Dataanalys</a>
+    </nav>
+  </div></header>
+  <main id="main" class="container main-content">
+    <section class="cards" aria-label="Signalstatus">
+      <article class="card"><span class="label">Köpsignaler</span><strong>0 aktiva</strong><p>Ingen regel är validerad och aktiverad.</p></article>
+      <article class="card"><span class="label">Säljsignaler</span><strong>0 aktiva</strong><p>Nedåtrisk redovisas separat från blankningsrekommendationer.</p></article>
+      <article class="card"><span class="label">Uppföljning</span><strong>Prospektiv</strong><p>Nya observationer följs efter frysning.</p></article>
+      <article class="card"><span class="label">Beslut</span><strong>Avvaktar</strong><p>Aktiveras först efter validering.</p></article>
+    </section>
+    <section class="panel"><div class="section-header">
+      <span class="eyebrow">SAMMANVÄGDA REGLER</span><h2>Inga aktiva köp- eller säljsignaler</h2>
+      <p>Treage publicerar en signal först när en kombination av källresultat har en tydlig regel, tillräcklig täckning och prospektiv validering. Enskilda källors historiska resultat räknas inte som bekräftelse på Treages sammanvägning.</p>
+    </div>
+      <p>Poängsättning och historisk köp-/sälj-proxyklassning är implementerade. Det som återstår är prospektiv uppföljning av nya beslut, bedömning av kostnader och genomförbarhet samt godkänd validering före publicering.</p>
+      <p class="badge research">Skuggkod finns · aktiv signalpublicering är spärrad</p>
+    </section>
+    <section class="panel">
+      <div class="section-header">
+        <span class="eyebrow">DE SJU FRYSTA KANDIDATERNA · 20 DAGARS MARKNADSRELATIVT UTFALL</span>
+        <h2>Historisk proxytest av kandidatreglerna</h2>
+        <p>Kandidatens frysta poänggränser användes på senare rapporthändelser. Köp/sälj N är antal historiska händelser som hamnade över köpgränsen respektive under säljgränsen; tabellen visar sedan deras utfall.</p>
+      </div>
+      <div class="table-wrapper"><table>
+        <thead><tr><th>Källor</th><th>Test N</th><th>Köp N</th><th>Köp upp</th><th>Köp medel</th><th>Sälj N</th><th>Sälj ned</th><th>Sälj medel</th><th>Köp−sälj</th></tr></thead>
+        <tbody>
+          <tr><td>Blankdiss</td><td>848</td><td>184</td><td>48,37%</td><td>0,32%</td><td>150</td><td>53,33%</td><td>−0,09%</td><td>0,41%</td></tr>
+          <tr><td>Insider</td><td>1 331</td><td>73</td><td>42,47%</td><td>−3,39%</td><td>20</td><td>75,00%</td><td>−3,86%</td><td>0,47%</td></tr>
+          <tr><td>Reports</td><td>1 343</td><td>367</td><td>47,96%</td><td>0,28%</td><td>201</td><td>54,23%</td><td>−0,33%</td><td>0,61%</td></tr>
+          <tr><td>Blankdiss + Insider</td><td>839</td><td>182</td><td>46,15%</td><td>−0,49%</td><td>154</td><td>53,90%</td><td>−0,57%</td><td>0,08%</td></tr>
+          <tr><td>Blankdiss + Reports</td><td>847</td><td>212</td><td>44,34%</td><td>0,25%</td><td>130</td><td>56,92%</td><td>−1,44%</td><td>1,68%</td></tr>
+          <tr><td>Insider + Reports</td><td>1 330</td><td>348</td><td>47,70%</td><td>0,41%</td><td>217</td><td>56,22%</td><td>−0,83%</td><td>1,24%</td></tr>
+          <tr><td>Alla tre</td><td>838</td><td>212</td><td>44,81%</td><td>0,01%</td><td>127</td><td>58,27%</td><td>−1,88%</td><td>1,89%</td></tr>
+        </tbody>
+      </table></div>
+      <p>Kört 11 oktober 2026, testperiod 2025 och framåt. Det här visar att poängreglerna har klassat historiska rader som köp- eller säljproxyer; det är inte signaler som publicerades då. Tidsdelningen är efterhandsgranskad, historiken är retrospektiv och resultaten saknar kostnadsmodell. Reports använder tidigare kursutveckling eftersom historisk konsensus saknas.</p>
+    </section>
+    <section class="panel">
+      <div class="section-header"><span class="eyebrow">SKUGGUPPFÖLJNING · ALLA TRE HORISONTER</span><h2>5, 20 och 60 handelsdagar</h2>
+        <p>När ett nytt beslutstillfälle passerar kandidatens frysta regel följs samma position vid samtliga tre horisonter.</p>
+      </div>
+      <div class="status-grid">
+        <article class="status-item"><span>5 handelsdagar</span><strong>Kort sikt · inväntar data</strong></article>
+        <article class="status-item"><span>20 handelsdagar</span><strong>Primärt mål · inväntar data</strong></article>
+        <article class="status-item"><span>60 handelsdagar</span><strong>Längre sikt · inväntar data</strong></article>
+      </div>
+      <p>Det historiska rapportexperimentet ovan testade inte 60-dagarsutfall. I aktuell skuggning finns ännu 0 giltiga nya beslut och därför inga utfall för någon horisont. Se <a href="./bedomning.html">frysta kandidater och valideringsstatus</a>.</p>
+    </section>
+    <section class="panel"><div class="section-header">
+      <span class="eyebrow">SIGNALENS SPÅRBARHET</span><h2>Vad en framtida signal ska visa</h2>
+      <p>Instrument, riktning, beslutstid, bidragande källresultat, regelversion, datatäckning och uppföljning mot relevanta utfall.</p>
+    </div><p>Se <a href="./bedomning.html">Bedömning</a> för valideringskrav och <a href="./dataanalys.html">Dataanalys</a> för tidsstämpling och källdata.</p></section>
+  </main>
+  <footer class="container footer"><a href="../">← Till Treageweb</a><a href="./index.html">Treage · Hem</a></footer>
+</body>
+</html>
