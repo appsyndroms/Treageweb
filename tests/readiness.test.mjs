@@ -26,15 +26,17 @@ test('empty or partial delivery never permits publishing, even manually', async 
     });
   }
 });
-test('last delivery permits evening publishing; earlier push waits until 21:00 Stockholm', async () => {
+test('last delivery permits evening publishing; earlier push waits until 21:10 Stockholm', async () => {
   await withDeliveries(requiredProjects, async directory => {
     for (const [timestamp, ready] of [
       ['2026-10-12T18:45:00Z', false], // 20:45 summer time
-      ['2026-10-12T19:00:00Z', true],
+      ['2026-10-12T19:05:00Z', false], // 21:05 summer time
+      ['2026-10-12T19:10:00Z', true],
       ['2026-10-12T22:30:00Z', true], // delayed until after midnight
       ['2026-10-13T04:00:00Z', false],
       ['2026-12-12T19:45:00Z', false], // 20:45 winter time
-      ['2026-12-12T20:00:00Z', true],
+      ['2026-12-12T20:05:00Z', false], // 21:05 winter time
+      ['2026-12-12T20:10:00Z', true],
     ]) assert.equal((await publicationReadiness({ directory, event: 'push', now: new Date(timestamp) })).ready, ready, timestamp);
   });
 });

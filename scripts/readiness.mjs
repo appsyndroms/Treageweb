@@ -15,11 +15,13 @@ export async function publicationReadiness({ directory = 'dist', event = 'schedu
     }
   }
   if (missing.length) return { ready: false, reason: 'Inväntar leverans: ' + missing.join(', ') };
-  const hour = Number(new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Stockholm', hour: '2-digit', hourCycle: 'h23' }).format(now));
-  // Keep daytime deliveries staged until 21:00. Accept delayed night deliveries
+  const clock = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Stockholm', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(now);
+  const [hour, minute] = clock.split(':').map(Number);
+  const localMinutes = hour * 60 + minute;
+  // Keep daytime deliveries staged until 21:10. Accept delayed night deliveries
   // through 05:59; the scheduled check or an explicit manual run can run later.
-  if (event === 'push' && hour >= 6 && hour < 21) {
-    return { ready: false, reason: 'Alla projekt levererade; inväntar kvällspubliceringen 21:00.' };
+  if (event === 'push' && localMinutes >= 6 * 60 && localMinutes < 21 * 60 + 10) {
+    return { ready: false, reason: 'Alla projekt levererade; inväntar kvällspubliceringen 21:10.' };
   }
   return { ready: true, reason: 'Alla fyra projekt har levererat; publicering kan starta.' };
 }
