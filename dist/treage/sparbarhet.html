@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Följ historiska rapporthändelser per instrument tillbaka till data från Blankdiss, Reports och Insider.">
+  <title>Treage – Spårbarhet</title><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Till innehållet</a>
+  <header class="hero"><div class="container">
+    <div class="brand">Treage<span class="brand-note">TVÄRKÄLLSANALYS</span></div>
+    <h1>Spårbarhet</h1>
+    <p class="lead">Följ varje instrument och rapportbeslut tillbaka till matchade källrader, historiska regelutslag och kursutfall.</p>
+    <nav class="tabs" aria-label="Huvudnavigation">
+      <a class="tab" href="./index.html">Hem</a><a class="tab" href="./koplage.html">Köp &amp; sälj</a>
+      <a class="tab" href="./events.html">Händelser</a><a class="tab active" aria-current="page" href="./sparbarhet.html">Spårbarhet</a>
+      <a class="tab" href="./bedomning.html">Bedömning</a><a class="tab" href="./dataanalys.html">Dataanalys</a>
+    </nav>
+  </div></header>
+  <main id="main" class="container main-content">
+    <section class="panel"><div class="section-header">
+      <span class="eyebrow">INSTRUMENTLEDGER · HISTORISKT UNDERLAG</span>
+      <h2>Varje utslag har ett instrument</h2>
+      <p>En rad motsvarar en rapporthändelse för ett ISIN. De sju frysta Treage-kandidaterna räknas om på händelsen så att deras historiska köp-, sälj- eller neutrala utslag kan granskas per instrument. Det här är rapporthändelsebaserad historik; dagliga signaler mellan rapporter kräver en daglig beslutsrad per instrument.</p>
+    </div>
+      <div id="trace-status" class="status-grid" aria-live="polite"><article class="status-item"><span>Hämtar historiken</span><strong>Vänta…</strong></article></div>
+      <p class="table-note"><strong>Historiskt regeltest, inte aktiv signal.</strong> Källraderna är retrospektiva. Utslagen kan därför inte användas som bekräftade köp- eller säljsignaler. Blankdiss matchas till senaste observation före rapportens beslutsdatum, högst 30 dagar gammal; samma dag utesluts eftersom publiceringstid saknas. Insider matchas inom 4 dagar och kräver full täckning för 30-dagarsmåttet. Efterföljande kursutfall används bara för utvärdering.</p>
+    </section>
+    <section class="panel"><div class="section-header">
+      <span class="eyebrow">SÖK OCH FILTRERA</span><h2>Regelutslag per instrument och rapporthändelse</h2>
+      <p>Senaste besluten visas först. Bolagsnamnet visas tillsammans med ISIN. Öppna en rad för att se samtliga sju kandidater, deras poäng och källreferenser.</p>
+    </div>
+      <div class="trace-controls">
+        <label for="trace-search">Sök bolag, ISIN eller datum<input id="trace-search" type="search" placeholder="Exempel: Atlas Copco eller SE0000101032"></label>
+        <label for="trace-coverage">Källtäckning<select id="trace-coverage"><option value="all">Alla händelser</option><option value="both">Blankdiss + Insider</option><option value="blankdiss">Med Blankdiss</option><option value="insider">Med Insider</option><option value="report">Endast rapportdata</option></select></label>
+        <label for="trace-limit">Visa rader<select id="trace-limit"><option>50</option><option selected>100</option><option>250</option></select></label>
+      </div>
+      <p id="trace-count" class="table-note" aria-live="polite"></p>
+      <div class="table-wrapper"><table class="trace-table">
+        <thead><tr><th>Instrument / beslut</th><th>Historiskt utslag</th><th>Blankdiss</th><th>Insider</th><th>Reports / utfall</th><th>Spårning</th></tr></thead>
+        <tbody id="trace-rows"><tr><td class="empty" colspan="6">Läser in…</td></tr></tbody>
+      </table></div>
+    </section>
+    <section class="panel"><div class="section-header">
+      <span class="eyebrow">TOLKNING</span><h2>Från historiskt utslag till möjlig signal</h2>
+      <p>Spårbarheten visar om källor kan kopplas till samma instrument och beslutstid, vilka mätvärden och rader som användes, kandidatens utslag och vad kursen sedan gjorde.</p>
+    </div>
+      <ul>
+        <li>En verklig Treage-signal måste ange ISIN, riktning, beslutstid, regelversion och de källrader som bar beslutet.</li>
+        <li>Konsensusfält kan saknas även när rapporthändelsen finns; då går den historiska konsensusöverraskningen inte att följa.</li>
+        <li>Frysta kandidater är inte validerade. Inga historiska eller retrospektiva regelutslag räknas som aktiva signaler.</li>
+        <li>Prospektiv publicering kräver punkt-i-tid-tidsstämplar och versionsmetadata från alla källor som ingår i regeln.</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="container footer"><a href="../">← Till Treageweb</a><a href="./index.html">Treage · Hem</a></footer>
+<script>
+(() => {
+  const status = document.querySelector('#trace-status');
+  const body = document.querySelector('#trace-rows');
+  const search = document.querySelector('#trace-search');
+  const coverage = document.querySelector('#trace-coverage');
+  const limit = document.querySelector('#trace-limit');
+  const count = document.querySelector('#trace-count');
+  let rows = []; let candidates = []; let datasetIds = {};
+  const fmt = value => value === null || value === undefined || value === '' ? 'saknas' :
+    typeof value === 'number' ? new Intl.NumberFormat('sv-SE', {maximumFractionDigits: 2}).format(value) : String(value);
+  const date = value => value ? value.slice(0, 10) : 'saknas';
+  const pct = value => value == null ? 'saknas' : `${fmt(value * 100)} %`;
+  const addCell = (tr, value, detail) => {
+    const node = document.createElement('td'); node.textContent = value;
+    if (detail) { const small = document.createElement('span'); small.className = 'subtle'; small.textContent = detail; node.append(small); }
+    tr.append(node);
+  };
+  const render = () => {
+    const query = search.value.trim().toLowerCase(); const mode = coverage.value;
+    const filtered = rows.filter(row => {
+      if (query && !`${row.instrument_name || ''} ${row.instrument_id} ${row.decision_at || ''} ${row.report?.event_at || ''}`.toLowerCase().includes(query)) return false;
+      if (mode === 'both' && !(row.blankdiss && row.insider)) return false;
+      if (mode === 'blankdiss' && !row.blankdiss) return false;
+      if (mode === 'insider' && !row.insider) return false;
+      if (mode === 'report' && (row.blankdiss || row.insider)) return false;
+      return true;
+    });
+    const shown = filtered.slice(0, Number(limit.value)); body.replaceChildren();
+    if (!shown.length) {
+      const tr = document.createElement('tr'); const td = document.createElement('td');
+      td.className = 'empty'; td.colSpan = 6; td.textContent = 'Inga händelser matchar sökningen.'; tr.append(td); body.append(tr);
+    }
+    for (const row of shown) {
+      const tr = document.createElement('tr');
+      addCell(tr, row.instrument_name || 'Bolagsnamn saknas', `${row.instrument_id} · beslut ${date(row.decision_at)}`);
+      const positionCounts = row.candidate_tests.reduce((acc, item) => { acc[item[1]] = (acc[item[1]] || 0) + 1; return acc; }, {});
+      addCell(tr, `${positionCounts.b || 0} köp · ${positionCounts.s || 0} sälj`, `${positionCounts.n || 0} neutrala · ${positionCounts.m || 0} utan underlag`);
+      addCell(tr, row.blankdiss ? `${fmt(row.blankdiss.features.short_interest_pct)} %` : 'saknas', row.blankdiss ? date(row.blankdiss.observation_at) : 'ingen match inom 30 dagar');
+      addCell(tr, row.insider ? `${fmt(row.insider.features.insider_net_buy_sek_30d)} kr` : 'saknas', row.insider ? date(row.insider.observation_at) : 'ingen komplett match inom 4 dagar');
+      const relative20 = row.outcomes?.relative_return_20d;
+      const reportDetails = `EPS-konsensusrevision: ${fmt(row.report?.features.consensus_eps_revision)} · vinstkonsensusrevision: ${fmt(row.report?.features.consensus_net_profit_revision)} · förhandskurs 20 d: ${pct(row.report?.features.prior_return_20d)} · utfall kurs 5 d: ${pct(row.outcomes?.forward_return_5d)} · relativ kurs 20 d: ${pct(relative20)}`;
+      addCell(tr, date(row.report?.event_at), reportDetails);
+      const refs = document.createElement('td'); const details = document.createElement('details'); const summary = document.createElement('summary'); summary.textContent = 'Kandidater & käll-ID'; details.append(summary);
+      for (const item of row.candidate_tests) {
+        const definition = candidates[item[0]]; const labels = {b: 'köp test', s: 'sälj test', n: 'ingen position', m: 'saknar underlag'};
+        const line = document.createElement('p'); line.className = 'trace-ref';
+        const title = document.createElement('strong'); title.textContent = `${definition.candidate_id}: ${labels[item[1]]}`;
+        const score = document.createElement('span'); score.textContent = ` · poäng ${item[2] == null ? 'saknas' : fmt(item[2])} (sälj < ${fmt(definition.sell_below)}, köp > ${fmt(definition.buy_above)})`;
+        line.append(title, score); details.append(line);
+      }
+      for (const [name, source] of [['Reports', row.report], ['Blankdiss', row.blankdiss], ['Insider', row.insider]]) {
+        const line = document.createElement('p'); line.className = 'trace-ref';
+        if (!source) line.textContent = `${name}: ingen match`;
+        else {
+          const title = document.createElement('strong'); title.textContent = `${name}: `;
+          const code = document.createElement('code'); code.textContent = `${datasetIds[name.toLowerCase()] || 'dataset saknas'} / ${source.record_id || 'rad-ID saknas'}`;
+          line.append(title, code);
+        }
+        details.append(line);
+      }
+      refs.append(details); tr.append(refs); body.append(tr);
+    }
+    count.textContent = `Visar ${shown.length} av ${filtered.length} matchande händelser.`;
+  };
+  fetch('./traceability.json').then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); }).then(data => {
+    rows = data.rows; candidates = data.candidates; datasetIds = data.source_dataset_ids; const c = data.coverage; status.replaceChildren();
+    for (const [label, value] of [['Aktiva signaler', data.active_signal_count], ['Rapporthändelser', c.report_events], ['Instrument', c.unique_instruments], ['Med Blankdiss', c.blankdiss], ['Med Insider', c.insider], ['Båda före rapport', c.both], ['Exportdatum', date(data.generated_at)]]) {
+      const article = document.createElement('article'); article.className = 'status-item';
+      const span = document.createElement('span'); span.textContent = label;
+      const strong = document.createElement('strong'); strong.textContent = typeof value === 'number' ? new Intl.NumberFormat('sv-SE').format(value) : String(value);
+      article.append(span, strong); status.append(article);
+    }
+    render();
+  }).catch(error => {
+    status.textContent = `Källregistret kunde inte läsas (${error.message}).`;
+    body.replaceChildren(); const tr = document.createElement('tr'); const td = document.createElement('td'); td.className = 'empty'; td.colSpan = 6; td.textContent = 'Spårbarhetsdata är inte tillgänglig.'; tr.append(td); body.append(tr);
+  });
+  search.addEventListener('input', render); coverage.addEventListener('change', render); limit.addEventListener('change', render);
+})();
+</script>
+</body>
+</html>
