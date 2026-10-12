@@ -12,7 +12,8 @@ from pathlib import Path, PurePosixPath
 ROOT = Path(__file__).resolve().parents[1]
 PROJECTS = {
     "blankdiss": ("appsyndroms/Blankdiss", "blankdiss.yml", "blankdiss-web"),
-    "insider": ("appsyndroms/Insider", "insider.yml", "insider-web"),
+    # Daily data runs and manual web-only runs both produce this artifact.
+    "insider": ("appsyndroms/Insider", None, "insider-web"),
     "treage": ("appsyndroms/Treage", "build-web.yml", "treage-web"),
     "reports": ("appsyndroms/Reports", None, "reports-web"),
 }
