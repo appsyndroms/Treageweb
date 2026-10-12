@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "producer": "treage",
+  "batch_date": "2026-10-12",
+  "data": {
+    "version": 1,
+    "producer": "treage",
+    "batch_date": "2026-10-12",
+    "status": "complete",
+    "session": "evening",
+    "repository": "appsyndroms/Treage",
+    "run_id": "38311877644",
+    "run_attempt": 1,
+    "run_created_at": "2026-10-12T21:38:21Z",
+    "completed_at": "2026-10-12T21:44:58.535612+00:00",
+    "revision": "3aa34a8d4912e35f28476810e9d7ea85b5280758",
+    "sources": {
+      "blankdiss": {
+        "version": 1,
+        "producer": "blankdiss",
+        "batch_date": "2026-10-12",
+        "status": "complete",
+        "session": "evening",
+        "repository": "appsyndroms/Blankdiss",
+        "run_id": "38309568601",
+        "run_attempt": 1,
+        "run_created_at": "2026-10-12T21:16:16Z",
+        "completed_at": "2026-10-12T21:34:46.951067+00:00",
+        "revision": "6736987be207a6d7adb607ff4cb6665e7abb1964"
+      },
+      "reports": {
+        "version": 1,
+        "producer": "reports",
+        "batch_date": "2026-10-12",
+        "status": "complete",
+        "session": "evening",
+        "repository": "appsyndroms/Reports",
+        "run_id": "38309568617",
+        "run_attempt": 1,
+        "run_created_at": "2026-10-12T21:16:16Z",
+        "completed_at": "2026-10-12T21:21:15.807490+00:00",
+        "revision": "57c27d1b08a197f52dce7adad1bd3c4c17d201a8"
+      },
+      "insider": {
+        "version": 1,
+        "producer": "insider",
+        "batch_date": "2026-10-12",
+        "status": "complete",
+        "session": "evening",
+        "repository": "appsyndroms/Insider",
+        "run_id": "38309568695",
+        "run_attempt": 1,
+        "run_created_at": "2026-10-12T21:16:16Z",
+        "completed_at": "2026-10-12T21:23:43.922260+00:00",
+        "revision": "159d272209848cb5bae1914df416f3f53f516c67"
+      }
+    }
+  },
+  "web_run_id": "38311877644",
+  "web_run_attempt": 1,
+  "files": {
+    "bedomning.html": "d92a89ce120b84d8da8beeabbfcdfe231a7a9186f00feea0d4061e6f0c607f55",
+    "dataanalys.html": "29e051c3be3f4452cd81593ed62cb982895c98fcfd173144a1fd3a92ac5ee297",
+    "events.html": "8cc028f2af9e119358e537f1aa91e45f68e60879c3ccda72471a04ed69206bbd",
+    "index.html": "43d714182c8dd2e4e1b159729ee7d82406ceeb6c31509575b5c59f1488ef89ba",
+    "instrument_names.json": "c7fee22f8fe78bf15ab429b7514b2fc9bfe459a74c8f93bc7bf126801661a89d",
+    "koplage.html": "95a0e178f3afa4a461c007619054c71453a37eacfcf655780ba279bb5f3b6776",
+    "ml_research_latest.json": "dd4e4fac7380c46ad2e3112b5f3cca91e0bc85ce46d42b2d7dfe1c3a85619c45",
+    "prospective_status.json": "8201397201dfaaeae092d7fdc10bb314d9056552862a9f0ae9d36b600fa06e72",
+    "signal_status.json": "6ac8aa175dfdc902df4ee5575bfdae30c85e16bca6d87c4d7812e31c1eaecc10",
+    "sparbarhet.html": "d27ca84e4fd0c6eafc76d38b7949efbae8c902667ccbd29059f67c6775bcde25",
+    "style.css": "4f46a00c71ccd0d5d6dd4eef55e69a23fb45bc882d809a4ae1470b9b28ad1f61",
+    "traceability.json": "21d04a7fcef8d98cd32ca5a360c8df5f1ca8aeeacc37566e727ae13b5beb1639"
+  }
+}
