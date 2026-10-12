@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Treage – Bedömning</title><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Till innehållet</a>
+  <header class="hero"><div class="container">
+    <div class="brand">Treage<span class="brand-note">TVÄRKÄLLSANALYS</span></div>
+    <h1>Bedömning</h1>
+    <p class="lead">Hur experiment, samband och sammanvägda regler bedöms innan de kan påverka en signal.</p>
+    <nav class="tabs" aria-label="Huvudnavigation">
+      <a class="tab" href="./index.html">Hem</a><a class="tab" href="./koplage.html">Köp &amp; sälj</a>
+      <a class="tab" href="./events.html">Händelser</a><a class="tab" href="./sparbarhet.html">Spårbarhet</a><a class="tab active" aria-current="page" href="./bedomning.html">Bedömning</a><a class="tab" href="./dataanalys.html">Dataanalys</a>
+    </nav>
+  </div></header>
+  <main id="main" class="container main-content">
+    <section class="panel"><div class="section-header">
+      <span class="eyebrow">VALIDERING</span><h2>Från samband till möjlig signal</h2>
+      <p>Ett historiskt samband är en hypotes. En sammanvägd regel behöver klara tester på data som inte användes för att skapa den och sedan följas prospektivt.</p>
+    </div>
+      <ol>
+        <li>Kontrollera instrumentidentitet, tidsstämplar och källtäckning.</li>
+        <li>Jämför kombinationer av en, två och tre källor mot relevanta utfall.</li>
+        <li>Frys regler och beslutstid innan nya observationer kommer in.</li>
+        <li>Följ köp- och säljsidan separat och redovisa osäkerhet.</li>
+        <li>Aktivera en regel först när den är stabil och prospektivt validerad.</li>
+      </ol>
+    </section>
+    <section class="panel"><div class="section-header">
+      <span class="eyebrow">NUVARANDE STATUS</span><h2>Ingen regel är aktiverad</h2>
+      <p>Experimentresultat är undersökningsunderlag, inte en handelsrekommendation. Fynd med för få observationer eller bristande täckning ska markeras som osäkra.</p>
+    </div>
+      <div class="status-grid">
+        <article class="status-item"><span>Frysta kandidater</span><strong>7 · ej validerade</strong></article>
+        <article class="status-item"><span>Prospektiva observationer</span><strong>0 giltiga efter frysning</strong></article>
+        <article class="status-item"><span>Aktiveringsbara regler</span><strong>0</strong></article>
+      </div>
+      <p>Senaste skuggkörningen godkände källornas kontrakt och tidsmodell, men hittade 0 nya beslutstillfällen efter frysningen. De första 639 skuggobservationerna kom från data som redan fanns före frysningen och har sorterats bort från valideringen.</p>
+    </section>
+    <section class="panel">
+      <div class="section-header"><span class="eyebrow">FRYST KANDIDATFAMILJ 004 · 11 OKTOBER 2026</span><h2>Här är de sju kandidaterna</h2>
+        <p>Alla enskilda källor, källpar och kombinationen av alla tre frystes som en jämförelsefamilj. Ingen valdes ut från efterföljande utfall.</p>
+      </div>
+      <div class="table-wrapper"><table>
+        <thead><tr><th>Kandidat</th><th>Källor och ingående mått</th><th>Discovery N</th><th>Sälj om poäng &lt;</th><th>Köp om poäng &gt;</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><code>004-001-BLANKDISS</code></td><td>Blankdiss · blankningsnivå (%), lägre ger högre poäng</td><td>1 022</td><td>0,199</td><td>0,794</td><td>Ej validerad</td></tr>
+          <tr><td><code>004-001-INSIDER</code></td><td>Insider · nettoköp senaste 30 dagar, högre ger högre poäng</td><td>1 828</td><td>0,482</td><td>0,482</td><td>Ej validerad</td></tr>
+          <tr><td><code>004-001-REPORTS</code></td><td>Reports · kursutveckling före rapport, 20 dagar</td><td>2 128</td><td>0,200</td><td>0,800</td><td>Ej validerad</td></tr>
+          <tr><td><code>004-001-BLANKDISS-INSIDER</code></td><td>Blankdiss + Insider</td><td>1 020</td><td>0,346</td><td>0,649</td><td>Ej validerad</td></tr>
+          <tr><td><code>004-001-BLANKDISS-REPORTS</code></td><td>Blankdiss + Reports</td><td>1 022</td><td>0,329</td><td>0,701</td><td>Ej validerad</td></tr>
+          <tr><td><code>004-001-INSIDER-REPORTS</code></td><td>Insider + Reports</td><td>1 827</td><td>0,359</td><td>0,659</td><td>Ej validerad</td></tr>
+          <tr><td><code>004-001-BLANKDISS-INSIDER-REPORTS</code></td><td>Blankdiss + Insider + Reports</td><td>1 020</td><td>0,383</td><td>0,637</td><td>Ej validerad</td></tr>
+        </tbody>
+      </table></div>
+      <p>Poängen är normaliserade rankpoäng från 0 till 1. Mellan sälj- och köpgränsen tas ingen position. Kombinationspoängen väger ingående källor lika. Insiders frysta gräns ligger på samma värde för köp och sälj, vilket lämnar ett ovanligt gränsfall utan neutral zon.</p>
+      <p>Exakta rankreferenser och frysta definitioner finns i <code>research/cross_source/candidates/004-core-levels/frozen_candidates.json</code>. Kandidaterna är <code>not_validated</code> och <code>activation_eligible=false</code>.</p>
+    </section>
+    <section class="panel">
+      <div class="section-header"><span class="eyebrow">PROSPEKTIV UPPFÖLJNING</span><h2>Tre utfallshorisonter: 5, 20 och 60 handelsdagar</h2>
+        <p>Samma frysta beslut följs vid kort, mellanlång och längre horisont. Horisonterna ändrar inte kandidatens poäng eller tröskel.</p>
+      </div>
+      <div class="table-wrapper"><table>
+        <thead><tr><th>Horisont</th><th>Vad den visar</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>5 handelsdagar</td><td>Kort uppföljning efter beslutet</td><td>Inväntar nya giltiga beslutstillfällen</td></tr>
+          <tr><td>20 handelsdagar</td><td>Kandidatfamiljens frysta primära utfallsmål är marknadsrelativ avkastning</td><td>Inväntar nya giltiga beslutstillfällen</td></tr>
+          <tr><td>60 handelsdagar</td><td>Längre uppföljning av samma beslut och position</td><td>Inväntar nya giltiga beslutstillfällen</td></tr>
+        </tbody>
+      </table></div>
+      <p>Senaste skuggkörningen har 0 giltiga nya beslut och 0 mogna utfall. De 639 äldre observationerna uteslöts eftersom de föregick frysningen.</p>
+    </section>
+    <section class="panel">
+      <div class="section-header"><span class="eyebrow">BEDÖMNINGSGRINDAR</span><h2>Vad som återstår före en signal</h2>
+        <p>Varje köp- och säljkandidat bedöms separat och måste klara samtliga steg.</p>
+      </div>
+      <div class="table-wrapper"><table>
+        <thead><tr><th>Grind</th><th>Status</th><th>Skäl</th></tr></thead>
+        <tbody>
+          <tr><td>Förhandsbestämd regel och fryst tröskel</td><td>Genomförd</td><td>Sju kandidatregler är frysta för skuggning.</td></tr>
+          <tr><td>Nya data efter frysning</td><td>Inväntar</td><td>Källornas kontraktsgrind passerade, men 0 nya beslutstillfällen har kommit in efter frysningen.</td></tr>
+          <tr><td>Utfall efter 5, 20 och 60 handelsdagar</td><td>Inväntar</td><td>0 giltiga beslut hittills; varje utfall beräknas när dess prisfönster mognat.</td></tr>
+          <tr><td>Kostnader och genomförbarhet</td><td>Ej bedömd</td><td>Historiska proxyresultat saknar komplett kostnads- och portföljmodell.</td></tr>
+          <tr><td>Aktivering</td><td>Spärrad</td><td>Ingen kandidat är validerad eller aktiveringsbar.</td></tr>
+        </tbody>
+      </table></div>
+      <p>Den senaste historiska jämförelsen är redan granskad i efterhand. Den kan användas för att formulera hypoteser, men inte räknas som en orörd valideringsperiod.</p>
+      <p><a href="./koplage.html">Se de historiska köp- och säljproxyerna</a> · <a href="./dataanalys.html">Läs om datatäckningen</a></p>
+    </section>
+    <section class="panel">
+      <div class="section-header"><span class="eyebrow">KÄLLPROJEKTENS SIGNALREGLER</span><h2>Vad är definierat och vad körs?</h2>
+        <p>Källorna äger sina egna regler. Treage använder deras resultat som underlag och äger endast den tvärkällsbaserade sammanvägningen.</p>
+      </div>
+      <div class="table-wrapper"><table>
+        <thead><tr><th>Projekt</th><th>Regel eller kandidat</th><th>Kodläge</th><th>Aktiv signal</th></tr></thead>
+        <tbody>
+          <tr><td>Treage</td><td>7 frysta poängregler: varje källa, alla tre par och alla tre tillsammans; låg poäng = säljproxy, hög = köpproxy.</td><td>Scoring och signalfri skuggklassning finns. Prospektiv körning har 0 nya beslut.</td><td>Nej · samtliga 7 ej validerade</td></tr>
+          <tr><td>Blankdiss</td><td>Ingen aktiv köp- eller säljregel. Nedåtriktad riskhypotes finns i research.</td><td>Signalstatus returnerar <code>not_validated</code>; 630 senaste poolade experiment är <code>NO_SIGNAL</code>.</td><td>Nej</td></tr>
+          <tr><td>Reports</td><td>5 frysta rapportreaktionskandidater per instrument, riktning och rapporttyp.</td><td>Forskningsuppföljning finns. Producenten av aktiva köp-/säljsignaler är inte implementerad.</td><td>Nej</td></tr>
+          <tr><td>Insider</td><td>Frysta person-/instrumentkandidater; köp och SÄLJ / UNDVIK har separata valideringsflöden.</td><td>Validering och publiceringskod finns. 5 kandidater inväntar första fasens 12 framtida affärshändelser; nuvarande aktiva listor är tomma.</td><td>Nej · köp och sälj</td></tr>
+        </tbody>
+      </table></div>
+      <p>Alltså: regler är frysta och poängsättningen körbar i Treages skuggkod, och Insider har implementerade validerings-/publiceringsflöden. Ingen av projekten publicerar för närvarande en validerad aktiv signal. Reports saknar ännu själva signalproducenten; Blankdiss saknar en validerad handelsregel.</p>
+    </section>
+  </main>
+  <footer class="container footer"><a href="../">← Till Treageweb</a><a href="./index.html">Treage · Hem</a></footer>
+</body>
+</html>
