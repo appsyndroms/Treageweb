@@ -69,6 +69,9 @@ test('public output contains no source data or password; direct data URL is abse
   const manifest = JSON.parse(await readFile(path.join(output, (await readdir(output)).find(name => name.startsWith('manifest-'))), 'utf8'));
   assert.equal(manifest.version, 1);
   assert.ok(manifest.files['blankdiss/data.json']);
+  const version = (await readdir(output)).find(name => name.startsWith('manifest-')).slice('manifest-'.length, -'.json'.length).slice(0, 16);
+  assert.ok((await readFile(path.join(output, 'gate.js'), 'utf8')).includes(`sw.js?v=${version}`));
+  assert.ok(!(await readFile(path.join(output, 'gate.html'), 'utf8')).includes('__BUILD_VERSION__'));
   assert.equal((await readFile(path.join(output, manifest.files['blankdiss/data.json'].path))).length, Buffer.byteLength('{"privateValue":123456789}') + 16);
   assert.match(await readFile(path.join(output, 'blankdiss/index.html'), 'utf8'), /\.\.\/gate.js/);
   assert.match(await readFile(path.join(output, '404.html'), 'utf8'), /\/Treageweb\/gate.js/);

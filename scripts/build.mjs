@@ -79,19 +79,21 @@ const manifest = JSON.stringify({
   verifier: { iv: verifier.iv, ciphertext: verifier.body.toString('base64') },
   files: manifestFiles,
 });
+const buildVersion = createHash('sha256').update(manifest).digest('hex').slice(0, 16);
 const manifestName = 'manifest-' + createHash('sha256').update(manifest).digest('hex') + '.json';
 const gate = await readFile(new URL('../web/gate.html', import.meta.url), 'utf8');
-const shell = gate.replace('__ROOT__', './');
+const shell = gate.replace('__ROOT__', './').replace('__BUILD_VERSION__', buildVersion);
 await writeFile(path.join(output, 'gate.html'), shell);
 const basePath = '/' + (process.env.SITE_BASE_PATH || '').replace(/^\/+|\/+$/g, '');
-await writeFile(path.join(output, '404.html'), gate.replace('__ROOT__', basePath.replace(/\/$/, '') + '/'));
+await writeFile(path.join(output, '404.html'), gate.replace('__ROOT__', basePath.replace(/\/$/, '') + '/').replace('__BUILD_VERSION__', buildVersion));
 for (const file of Object.keys(files).filter(name => name.endsWith('.html'))) {
   await mkdir(path.dirname(path.join(output, file)), { recursive: true });
   const root = '../'.repeat(file.split('/').length - 1) || './';
   await writeFile(path.join(output, file), gate.replace('__ROOT__', root));
 }
 await writeFile(path.join(output, manifestName), manifest);
-await writeFile(path.join(output, 'gate.js'), await readFile(new URL('../web/gate.js', import.meta.url)));
+const gateScript = (await readFile(new URL('../web/gate.js', import.meta.url), 'utf8')).replace('__BUILD_VERSION__', buildVersion);
+await writeFile(path.join(output, 'gate.js'), gateScript);
 const worker = (await readFile(new URL('../web/sw.js', import.meta.url), 'utf8')).replace('__MANIFEST__', manifestName);
 await writeFile(path.join(output, 'sw.js'), worker);
 await writeFile(path.join(output, '.nojekyll'), '');

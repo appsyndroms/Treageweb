@@ -5,8 +5,16 @@ const input = document.querySelector('#password');
 const button = form.querySelector('button');
 const registration = (async () => {
   if (!isSecureContext || !('serviceWorker' in navigator)) throw new Error('Webben kräver HTTPS och en webbläsare med stöd för service workers.');
-  await navigator.serviceWorker.register(new URL('sw.js', root), { scope: root.pathname });
-  return navigator.serviceWorker.ready;
+  const reg = await navigator.serviceWorker.register(new URL('sw.js?v=__BUILD_VERSION__', root), { scope: root.pathname });
+  const installing = reg.installing;
+  if (installing) await new Promise((resolve, reject) => {
+    installing.addEventListener('statechange', () => {
+      if (installing.state === 'activated') resolve();
+      else if (installing.state === 'redundant') reject(new Error('Kunde inte uppdatera webbens krypteringsdel. Ladda om sidan.'));
+    });
+  });
+  await navigator.serviceWorker.ready;
+  return reg;
 })();
 registration.catch(error => { status.textContent = error.message; button.disabled = true; });
 form.addEventListener('submit', async event => {
