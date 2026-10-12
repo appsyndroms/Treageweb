@@ -3,10 +3,10 @@
 Treageweb har Treage som välkomstsida och samlar länkar till Blankdiss,
 Reports och Insider.
 
-Varje projekt ansvarar för att bygga sitt innehåll. Treageweb samlar det
-färdiga innehållet och publicerar en gemensam webbplats.
+Varje projekt ansvarar för att bygga och leverera sin webb till Treageweb.
+Treageweb publicerar sedan en gemensam webbplats.
 
-Projektwebbar hämtas till `dist/<projektnamn>/`. Treage ligger under
+Projektwebbar levereras till `dist/<projektnamn>/`. Treage ligger under
 `dist/treage/`, och välkomstsidan länkar vidare till de tre underlagen.
 
 ## Utveckling
