@@ -1,8 +1,66 @@
-import { stat, appendFile } from 'node:fs/promises';
+import { stat, lstat, readFile, readdir, appendFile } from 'node:fs/promises';
+import { createReadStream } from 'node:fs';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const requiredProjects = ['blankdiss', 'reports', 'treage', 'insider'];
+const sourceProjects = ['blankdiss', 'reports', 'insider'];
+
+function localClock(now) {
+  return Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/Stockholm', year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+  }).formatToParts(now).filter(item => item.type !== 'literal').map(item => [item.type, Number(item.value)]));
+}
+
+export function reportDate(now) {
+  const local = localClock(now);
+  return new Date(Date.UTC(local.year, local.month - 1, local.day - (local.hour < 6 ? 1 : 0))).toISOString().slice(0, 10);
+}
+
+function validData(data, producer, expected) {
+  if (!data || data.version !== 1 || data.producer !== producer || data.status !== 'complete' ||
+      data.session !== 'evening' || data.batch_date !== expected ||
+      !/^[0-9a-f]{40}$/.test(data.revision || '') || !/^[1-9][0-9]*$/.test(String(data.run_id)) ||
+      !Number.isInteger(data.run_attempt) || data.run_attempt < 1) return false;
+  const created = new Date(data.run_created_at), completed = new Date(data.completed_at);
+  if (!Number.isFinite(created.getTime()) || !Number.isFinite(completed.getTime()) || completed < created) return false;
+  const hour = localClock(created).hour;
+  if ((hour >= 6 && hour < 18) || reportDate(created) !== expected) return false;
+  return producer !== 'treage' || sourceProjects.every(source => validData(data.sources?.[source], source, expected));
+}
+
+async function fileHashes(directory, prefix = '') {
+  const hashes = {};
+  for (const entry of await readdir(path.join(directory, prefix), { withFileTypes: true })) {
+    const relative = prefix ? prefix + '/' + entry.name : entry.name;
+    const filename = path.join(directory, relative);
+    if ((await lstat(filename)).isSymbolicLink()) throw new Error('Symbolisk länk i webbpaketet');
+    if (entry.isDirectory()) Object.assign(hashes, await fileHashes(directory, relative));
+    else if (entry.isFile() && relative !== 'evening.json') {
+      const hash = createHash('sha256');
+      for await (const chunk of createReadStream(filename)) hash.update(chunk);
+      hashes[relative] = hash.digest('hex');
+    } else if (!entry.isFile()) throw new Error('Ogiltig fil i webbpaketet');
+  }
+  return hashes;
+}
+
+async function readReceipt(directory, producer, expected) {
+  const receipt = JSON.parse(await readFile(path.join(directory, 'evening.json'), 'utf8'));
+  if (receipt.version !== 1 || receipt.producer !== producer || receipt.batch_date !== expected ||
+      !validData(receipt.data, producer, expected) || !receipt.files?.['index.html'] ||
+      !/^[1-9][0-9]*$/.test(String(receipt.web_run_id)) || !Number.isInteger(receipt.web_run_attempt)) {
+    throw new Error('Kvällens färdiga datakörning eller webbbygge saknar giltigt kvitto');
+  }
+  const actual = await fileHashes(directory);
+  if (Object.keys(actual).length !== Object.keys(receipt.files).length ||
+      Object.entries(actual).some(([name, hash]) => receipt.files[name] !== hash)) {
+    throw new Error('Webbfilerna matchar inte det verifierade bygget');
+  }
+  return receipt;
+}
 
 export async function publicationReadiness({ directory = 'dist', event = 'schedule', now = new Date() } = {}) {
   const missing = [];
@@ -15,20 +73,26 @@ export async function publicationReadiness({ directory = 'dist', event = 'schedu
     }
   }
   if (missing.length) return { ready: false, reason: 'Inväntar leverans: ' + missing.join(', ') };
-  const clock = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Stockholm', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(now);
-  const [hour, minute] = clock.split(':').map(Number);
-  const localMinutes = hour * 60 + minute;
-  // Keep daytime deliveries staged until 21:10. Accept delayed night deliveries
-  // through 05:59; the scheduled check or an explicit manual run can run later.
-  if (event === 'push' && localMinutes >= 6 * 60 && localMinutes < 21 * 60 + 10) {
+  const expected = reportDate(now), receipts = {};
+  for (const project of requiredProjects) {
+    try { receipts[project] = await readReceipt(path.join(directory, project), project, expected); }
+    catch (error) { return { ready: false, reason: `Inväntar verifierad leverans för ${expected}: ${project} (${error.message})` }; }
+  }
+  for (const source of sourceProjects) {
+    const used = receipts.treage.data.sources[source], delivered = receipts[source].data;
+    if (['run_id', 'run_attempt', 'revision', 'batch_date'].some(key => used[key] !== delivered[key])) {
+      return { ready: false, reason: `Treage och ${source} bygger på olika datakörningar; inväntar samma kvällsomgång.` };
+    }
+  }
+  const clock = localClock(now), minutes = clock.hour * 60 + clock.minute;
+  if (event === 'push' && minutes >= 6 * 60 && minutes < 21 * 60 + 10) {
     return { ready: false, reason: 'Alla projekt levererade; inväntar kvällspubliceringen 21:10.' };
   }
-  return { ready: true, reason: 'Alla fyra projekt har levererat; publicering kan starta.' };
+  return { ready: true, reason: `Alla fyra projekt har verifierade webbpaket för ${expected} från samma datakörningar.` };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const result = await publicationReadiness({ event: process.env.GITHUB_EVENT_NAME || 'schedule' });
   console.log(result.reason);
-  if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, `ready=${result.ready}\n`);
-  if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `${result.reason}\n`);
+  if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, 'ready=' + result.ready + '\n');
 }
