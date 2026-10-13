@@ -15,7 +15,18 @@
     document.body.append(button);
   }
   button.textContent = 'Logga ut';
-  button.style.cssText = 'position:fixed;right:1rem;bottom:1rem;z-index:1000;width:auto;padding:.5rem 1rem;border:1px solid #65758b;border-radius:.5rem;background:#172235;color:#fff;font:inherit;cursor:pointer;box-shadow:0 2px 8px #0004';
+  function mountLogout() {
+    const actions = document.querySelector('.site-menu-actions');
+    if (actions) {
+      actions.append(button);
+      button.className = 'site-menu-logout';
+      button.removeAttribute('style');
+    } else if (!button.closest('footer')) {
+      (document.querySelector('footer') || document.body).append(button);
+    }
+  }
+  mountLogout();
+  document.addEventListener('treage-menu-ready', mountLogout);
   button.addEventListener('click', async () => {
     button.disabled = true;
     button.textContent = 'Loggar ut…';
