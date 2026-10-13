@@ -34,7 +34,8 @@ form.addEventListener('submit', async event => {
     });
     if (!result.ok) throw new Error('Kunde inte låsa upp. Kontrollera användarnamn och lösenord.');
     if (!navigator.serviceWorker.controller) await new Promise(resolve => navigator.serviceWorker.addEventListener('controllerchange', resolve, { once: true }));
-    location.reload();
+    if (location.pathname === new URL('gate.html', root).pathname) location.replace(root.href);
+    else location.reload();
   } catch (error) { status.textContent = error.message; }
   finally { button.disabled = false; }
 });

@@ -70,7 +70,7 @@ function worker(sessionStore = new Map()) {
     },
   };
   const context = vm.createContext({
-    self: { registration: { scope: 'https://example.org/Treageweb/' }, addEventListener: (name, fn) => { events[name] = fn; } },
+    self: { clients: { matchAll: async () => [] }, registration: { scope: 'https://example.org/Treageweb/' }, addEventListener: (name, fn) => { events[name] = fn; } },
     URL, Response, TextEncoder, TextDecoder, Uint8Array, atob, crypto: webcrypto, indexedDB,
     fetch: async url => new Response(await readFile(path.join(output, new URL(url).pathname.replace(/^\/Treageweb\//, '')))),
   });
@@ -83,8 +83,9 @@ function worker(sessionStore = new Map()) {
     },
     async lock() {
       let pending;
-      events.message({ data: { type: 'lock' }, waitUntil: promise => { pending = promise; } });
-      await pending;
+      let acknowledged = false;
+      events.message({ data: { type: 'lock' }, ports: [{ postMessage: result => { acknowledged = result.ok; assert.equal(sessionStore.has('active'), false); } }], waitUntil: promise => { pending = promise; } });
+      await pending; assert.equal(acknowledged, true);
     },
     request(file, mode = 'navigate') {
       let response;
@@ -198,4 +199,43 @@ test('cleanup commits and pushes all dist deletions, preserves other files, and 
   }
   assert.equal(git(['ls-tree', '-r', '--name-only', 'main'], remote).trim(), 'README.md');
   assert.equal(await readFile(path.join(checkout, 'README.md'), 'utf8'), 'preserve');
+});
+
+test('locked deep links load the login script from the site root', async () => {
+  const sw = worker();
+  for (const route of ['reports/', 'treage/index.html', 'blankdiss/deep/route']) {
+    const response = await sw.request(route);
+    const html = await response.text();
+    const src = html.match(/<script src="([^"]+)"/)[1];
+    assert.equal(new URL(src, 'https://example.org/Treageweb/' + route).pathname, '/Treageweb/gate.js');
+    assert.equal(response.headers.get('Cache-Control'), 'no-store');
+  }
+});
+test('every decrypted project page includes shared logout and worker update controls', async () => {
+  const sw = worker();
+  assert.equal(await sw.unlock(username, password), true);
+  for (const route of ['blankdiss/index.html', 'insider/index.html', 'index.html']) {
+    const html = await (await sw.request(route)).text();
+    const src = html.match(/<script src="([^"]*session.js)"/)[1];
+    assert.equal(new URL(src, 'https://example.org/Treageweb/' + route).pathname, '/Treageweb/session.js');
+  }
+  const script = await readFile(path.join(output, 'session.js'), 'utf8');
+  assert.ok(!script.includes('__BUILD_VERSION__'));
+  assert.match(script, /Logga ut/);
+  // Session infrastructure stays accessible while the content is locked.
+  assert.equal(sw.request('session.js', 'cors'), undefined);
+});
+test('an expired or damaged encrypted page shows a usable login form', async () => {
+  const sw = worker();
+  assert.equal(await sw.unlock(username, password), true);
+  const file = path.join(output, 'encrypted/blankdiss/index.html.bin');
+  const original = await readFile(file);
+  try {
+    const broken = Buffer.from(original); broken[0] ^= 1;
+    await writeFile(file, broken);
+    const response = await sw.request('blankdiss/index.html');
+    assert.equal(response.status, 200);
+    assert.match(await response.text(), /https:\/\/example.org\/Treageweb\/gate.js/);
+    assert.equal((await sw.request('blankdiss/data.json', 'cors')).status, 401);
+  } finally { await writeFile(file, original); }
 });

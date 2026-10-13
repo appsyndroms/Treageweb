@@ -1,0 +1,30 @@
+{
+  "created_at": "2026-10-12T21:44:42.737306+00:00",
+  "status": "blocked_active_signal_publication",
+  "active_signals": 0,
+  "candidate_family_id": "004-core-level-source-subsets-v1",
+  "candidate_count": 7,
+  "candidate_failures": [
+    "004-001-BLANKDISS",
+    "004-001-INSIDER",
+    "004-001-REPORTS",
+    "004-001-BLANKDISS-INSIDER",
+    "004-001-BLANKDISS-REPORTS",
+    "004-001-INSIDER-REPORTS",
+    "004-001-BLANKDISS-INSIDER-REPORTS"
+  ],
+  "source_dataset_ids": {
+    "blankdiss": "cb6cf95e914e7771c76a9079b8349fe03a8c4d842f645676a29b436a2f0ba964",
+    "insider": "370c2f6b54e69b84e3cd9068220c7723fd1d5468ada6a17c1dc0708fc5330b80",
+    "reports": "71e1d4fbd052d835778f525fc499cfe70592beedbccd85488dbf3152ac63135a"
+  },
+  "source_rows": {
+    "blankdiss": 0,
+    "insider": 230,
+    "reports": 0
+  },
+  "failures": [
+    "7 frysta kandidater saknar prospektiv validering"
+  ],
+  "explanation": "Köp-/säljsignaler per instrument publiceras först när tidsriktiga data och frysta kandidater har klarat prospektiv validering."
+}

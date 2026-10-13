@@ -31,7 +31,7 @@ files['treageweb-style.css'] = {
 };
 const projects = ['treage', 'blankdiss', 'reports', 'insider'].filter(name => files[name + '/index.html']);
 if (!projects.length) throw new Error('dist saknar webbplatser med index.html; ingen tom webb publiceras.');
-for (const name of ['index.html', '404.html', 'sw.js', 'gate.html', 'gate.js']) {
+for (const name of ['index.html', '404.html', 'sw.js', 'gate.html', 'gate.js', 'session.js']) {
   if (files[name]) throw new Error('Reserverat filnamn i dist: ' + name);
 }
 const labels = { treage: 'Treage', blankdiss: 'Blankdiss', reports: 'Reports', insider: 'Insider' };
@@ -57,8 +57,16 @@ const signalCount = treageStatus.active_signals === 0 ? '0' : '—';
 const candidateCount = Number.isInteger(treageStatus.candidate_count) ? treageStatus.candidate_count : '—';
 const overview = `<section class="cards signal-overview" aria-label="Signalöversikt"><article class="card"><div class="eyebrow">Köpsignaler</div><div class="stat-value"><a class="signal-count buy" href="./treage/koplage.html">${signalCount}</a></div><p>Aktuella och validerade</p></article><article class="card"><div class="eyebrow">Säljsignaler</div><div class="stat-value"><a class="signal-count sell" href="./treage/saljlage.html">${signalCount}</a></div><p>Aktuella och validerade</p></article><article class="card"><div class="eyebrow">Frysta forskningskandidater</div><div class="stat-value"><a href="./treage/bedomning.html">${candidateCount}</a></div><p>Upp- och nedgångsspår under uppföljning</p></article><article class="card"><div class="eyebrow">Informationskällor</div><div class="stat-value">3</div><p>Blankdiss, Reports och Insider</p></article></section>`;
 const mainMenu = projects.includes('treage') ? '<nav class="tabs" aria-label="Huvudmeny"><a class="tab active" aria-current="page" href="./">Hem</a><a class="tab" href="./treage/koplage.html">Köpläge</a><a class="tab" href="./treage/saljlage.html">Säljläge</a><a class="tab" href="./treage/events.html">Händelser</a><a class="tab" href="./treage/bedomning.html">Bedömning</a><a class="tab" href="./treage/dataanalys.html">Dataanalys</a><a class="tab" href="./treage/sparbarhet.html">Bevakning</a></nav>' : '';
-const home = `<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Treage sammanväger analyser från Blankdiss, Reports och Insider."><title>Treage – samlad analys</title><link rel="stylesheet" href="./treageweb-style.css"></head><body><a class="skip-link" href="#main">Till innehållet</a><header class="hero"><div class="container"><div class="brand">Treage<span class="brand-note">TVÄRKÄLLSANALYS</span></div><h1>Samlad analys av marknadens informationskällor</h1><p class="lead">Treage väger samman tidsstämplade resultat från Blankdiss, Reports och Insider och undersöker möjliga köp- och säljsignaler.</p>${mainMenu}</div></header><main id="main" class="container main-content">${overview}<section class="panel"><div class="section-header"><span class="eyebrow">SIGNALSTATUS</span><h2>Signalläget</h2><p>Historiska samband och experiment är undersökningsunderlag. En signal kräver en tydlig regel, tillräcklig datatäckning och prospektiv validering.</p></div></section><nav class="project-menu" aria-label="Öppna Treage och dess källprojekt">${projectMenu}</nav></main><footer class="container footer"><span>Treage · Tvärkällsanalys</span><button id="logout" type="button">Lås webben</button></footer><script>document.getElementById('logout').onclick=()=>{navigator.serviceWorker.controller?.postMessage({type:'lock'});location.reload()}</script></body></html>`;
+const home = `<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Treage sammanväger analyser från Blankdiss, Reports och Insider."><title>Treage – samlad analys</title><link rel="stylesheet" href="./treageweb-style.css"></head><body><a class="skip-link" href="#main">Till innehållet</a><header class="hero"><div class="container"><div class="brand">Treage<span class="brand-note">TVÄRKÄLLSANALYS</span></div><h1>Samlad analys av marknadens informationskällor</h1><p class="lead">Treage väger samman tidsstämplade resultat från Blankdiss, Reports och Insider och undersöker möjliga köp- och säljsignaler.</p>${mainMenu}</div></header><main id="main" class="container main-content">${overview}<section class="panel"><div class="section-header"><span class="eyebrow">SIGNALSTATUS</span><h2>Signalläget</h2><p>Historiska samband och experiment är undersökningsunderlag. En signal kräver en tydlig regel, tillräcklig datatäckning och prospektiv validering.</p></div></section><nav class="project-menu" aria-label="Öppna Treage och dess källprojekt">${projectMenu}</nav></main><footer class="container footer"><span>Treage · Tvärkällsanalys</span><button id="logout" type="button">Lås webben</button></footer></body></html>`;
 files['index.html'] = { type: types['.html'], body: Buffer.from(home) };
+// Every encrypted HTML page gets the same session controls, including child sites.
+for (const [relative, file] of Object.entries(files)) {
+  if (!relative.endsWith('.html')) continue;
+  const root = '../'.repeat(relative.split('/').length - 1) || './';
+  const script = `<script src="${root}session.js" defer></script>`;
+  const html = file.body.toString('utf8');
+  file.body = Buffer.from(/<\/body>/i.test(html) ? html.replace(/<\/body>/i, script + '</body>') : html + script);
+}
 const salt = randomBytes(16), iterations = 600000;
 const key = pbkdf2Sync(`${username}\0${password}`, salt, iterations, 32, 'sha256');
 function encrypt(body) {
@@ -102,6 +110,8 @@ for (const file of Object.keys(files).filter(name => name.endsWith('.html'))) {
 await writeFile(path.join(output, manifestName), manifest);
 const gateScript = (await readFile(new URL('../web/gate.js', import.meta.url), 'utf8')).replace('__BUILD_VERSION__', buildVersion);
 await writeFile(path.join(output, 'gate.js'), gateScript);
+const sessionScript = (await readFile(new URL('../web/session.js', import.meta.url), 'utf8')).replace('__BUILD_VERSION__', buildVersion);
+await writeFile(path.join(output, 'session.js'), sessionScript);
 const worker = (await readFile(new URL('../web/sw.js', import.meta.url), 'utf8')).replace('__MANIFEST__', manifestName);
 await writeFile(path.join(output, 'sw.js'), worker);
 await writeFile(path.join(output, '.nojekyll'), '');

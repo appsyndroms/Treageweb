@@ -2,6 +2,7 @@ const manifestName = '__MANIFEST__';
 const root = new URL(self.registration.scope);
 let files = null;
 let key = null;
+let clearing = Promise.resolve();
 const bytes = value => Uint8Array.from(atob(value), char => char.charCodeAt(0));
 function openSessionDb() {
   return new Promise((resolve, reject) => {
@@ -46,6 +47,7 @@ async function clearSession() {
   } finally { db.close(); }
 }
 async function restoreSession() {
+  await clearing;
   if (files && key) return true;
   const session = await readSession();
   if (!session || session.version !== manifestName) return false;
@@ -59,7 +61,11 @@ self.addEventListener('message', event => {
   if (event.data?.type === 'lock') {
     files = null;
     key = null;
-    event.waitUntil(clearSession());
+    clearing = clearSession();
+    event.waitUntil(clearing.then(async () => {
+      event.ports?.[0]?.postMessage({ ok: true });
+      for (const client of await self.clients.matchAll()) client.postMessage({ type: 'locked' });
+    }));
     return;
   }
   if (event.data?.type !== 'unlock' || !event.ports[0]) return;
@@ -79,16 +85,22 @@ self.addEventListener('message', event => {
     } catch { event.ports[0].postMessage({ ok: false }); }
   })());
 });
+async function lockedPage() {
+  const response = await fetch(new URL('gate.html', root), { cache: 'no-store' });
+  // A returned page retains the requested URL, which may be several directories deep.
+  const html = (await response.text()).replace('src="./gate.js', `src="${new URL('gate.js', root).href}`);
+  return new Response(html, { status: response.status, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
+}
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   if (url.origin !== root.origin || !url.pathname.startsWith(root.pathname)) return;
   let relative;
   try { relative = decodeURIComponent(url.pathname.slice(root.pathname.length)); }
   catch { event.respondWith(new Response('Invalid URL', { status: 400 })); return; }
-  if (['sw.js', 'gate.js', 'gate.html', manifestName].includes(relative) || relative.startsWith('encrypted/')) return;
+  if (['sw.js', 'gate.js', 'gate.html', 'session.js', manifestName].includes(relative) || relative.startsWith('encrypted/')) return;
   event.respondWith((async () => {
     if (!await restoreSession()) {
-      if (event.request.mode === 'navigate') return fetch(new URL('gate.html', root), { cache: 'no-store' });
+      if (event.request.mode === 'navigate') return lockedPage();
       return new Response('Webben är låst.', { status: 401, headers: { 'Cache-Control': 'no-store' } });
     }
     if (relative.endsWith('/') || relative === '') relative += 'index.html';
@@ -107,6 +119,7 @@ self.addEventListener('fetch', event => {
       files = null;
       key = null;
       await clearSession();
+      if (event.request.mode === 'navigate') return lockedPage();
       return new Response('Kunde inte dekryptera filen. Lås upp webben igen.', { status: 401 });
     }
   })());

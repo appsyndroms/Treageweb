@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "status": "awaiting_first_verified_morning_run",
+  "batch_date": null,
+  "receipt_key": null,
+  "source_runs": {},
+  "source_dataset_ids": {},
+  "active_signals": 0,
+  "note": "Morgonflödet har ännu inte skrivit ett verifierat analyskvitto."
+}

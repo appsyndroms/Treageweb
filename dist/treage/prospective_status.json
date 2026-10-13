@@ -1,0 +1,82 @@
+{
+  "created_at": "2026-10-12T21:42:18.511890+00:00",
+  "frozen_at": "2026-10-11T12:55:19.980931+00:00",
+  "status": "captured_and_scored",
+  "exports": {
+    "blankdiss": {
+      "status": "ready",
+      "rows": 0,
+      "dataset_id": "2a7b66a7d575d64f11b4b5f8c5535674bf88c1c01c416292b8046ae579e8b444"
+    },
+    "reports": {
+      "status": "ready",
+      "rows": 0,
+      "dataset_id": "2969b340c1a330fc8eb31dafebab51a9afcca942d709f3f7eba44cf0614e5725"
+    },
+    "insider": {
+      "status": "ready",
+      "rows": 230,
+      "dataset_id": "cc41a5e3a3801483c8d34d5266371b6eca7182f7e5459475129fcea9d367a3df"
+    }
+  },
+  "capture": {
+    "captured_at": "2026-10-12T21:42:22.401965+00:00",
+    "frozen_at": "2026-10-11T12:55:19.980931+00:00",
+    "status": "captured",
+    "sources": [
+      {
+        "producer": "blankdiss",
+        "new_rows": 0,
+        "total_rows": 0,
+        "dataset_id": "cb6cf95e914e7771c76a9079b8349fe03a8c4d842f645676a29b436a2f0ba964"
+      },
+      {
+        "producer": "insider",
+        "new_rows": 0,
+        "total_rows": 230,
+        "dataset_id": "370c2f6b54e69b84e3cd9068220c7723fd1d5468ada6a17c1dc0708fc5330b80"
+      },
+      {
+        "producer": "reports",
+        "new_rows": 0,
+        "total_rows": 0,
+        "dataset_id": "71e1d4fbd052d835778f525fc499cfe70592beedbccd85488dbf3152ac63135a"
+      }
+    ],
+    "github_used": false
+  },
+  "shadow": {
+    "run_id": "local-shadow-adf3ba0c6023e81a",
+    "created_at": "2026-10-12T21:42:22.429479+00:00",
+    "status": "waiting_for_decision_events",
+    "candidate_family_id": "004-core-level-source-subsets-v1",
+    "source_dataset_ids": {
+      "blankdiss": "cb6cf95e914e7771c76a9079b8349fe03a8c4d842f645676a29b436a2f0ba964",
+      "insider": "370c2f6b54e69b84e3cd9068220c7723fd1d5468ada6a17c1dc0708fc5330b80",
+      "reports": "71e1d4fbd052d835778f525fc499cfe70592beedbccd85488dbf3152ac63135a"
+    },
+    "gates": {
+      "passed": true,
+      "failures": []
+    },
+    "candidate_count": 7,
+    "new_decision_events": 0,
+    "new_report_events": 0,
+    "candidate_observations_written": 0,
+    "github_used": false,
+    "invalid_observations_excluded": 639,
+    "outcome_followup": {
+      "observations": 1099,
+      "matured_outcomes_added": 0,
+      "invalid_observations_excluded": 639,
+      "outcomes_total": 0,
+      "price_rows": 279268,
+      "market_days": 1199,
+      "price_file": "source-projects/Reports/data/inputs/adjusted_prices.jsonl",
+      "market_file": "source-projects/Reports/data/inputs/market.jsonl"
+    }
+  },
+  "failures": [],
+  "active_signals": 0,
+  "note": "Shadowklassningar är ej validerade Treage-signaler; utfall följs separat över 5/20/60 handelsdagar."
+}
