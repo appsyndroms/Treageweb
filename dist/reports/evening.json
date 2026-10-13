@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "producer": "reports",
+  "batch_date": "2026-10-13",
+  "data": {
+    "version": 1,
+    "producer": "reports",
+    "batch_date": "2026-10-13",
+    "status": "complete",
+    "session": "evening",
+    "repository": "appsyndroms/Reports",
+    "run_id": "38468642423",
+    "run_attempt": 1,
+    "run_created_at": "2026-10-13T21:11:03Z",
+    "completed_at": "2026-10-13T21:18:50.261144+00:00",
+    "revision": "d675ef87d19bde1f9c98a18235818801f7cacc32"
+  },
+  "web_run_id": "38468642423",
+  "web_run_attempt": 1,
+  "files": {
+    "bedomning.html": "97c4c2223d6a828fdc653143df0a05b0289125eb66c4d865a6eb82fc41bcc408",
+    "data.json": "2714625f7b0b1098a0ed239a26d389a7269195771a4e3174c043a364115262c2",
+    "dataanalys.html": "61fa1a4993ab3a64051d45c95baf4ee4af1f4c877d4d64dbe1537e2bc35bbf3f",
+    "handelser.html": "485dbefd779ac3e5e88a308fd4033a089a82686ef892d2db4bda8e7fb50544ef",
+    "index.html": "385864719224ac7b5af1207f43f782aa6b09f24196e94fac699d846ba1656c69",
+    "kalender.html": "8734795b3cc5df2ce828f412c152bde68b3c88efa47dc9ac642df996283ba2b6",
+    "koplage.html": "9727293e15b152e2a0c21f8afd8ef532a0c59823a0d2c6038b40c584b5ddd7e1",
+    "saljlage.html": "7d8213c71c17cdfb93d5dd9ca290f749ccc7cef471e526f11dfb787fdc927923",
+    "site.js": "7b10aeaceeecc26bddfc3c165ba0fee657a0debf9e685f21e4fc032d56917f9b",
+    "style.css": "8065b37a6ef4ae5f734577e7e5ab57de8771711747fce230774872dabe5a5aa9"
+  },
+  "web_revision": "6fdc137d8a9c489b02bffdeff983b6d24bbd4908"
+}
