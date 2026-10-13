@@ -3,6 +3,7 @@ const root = new URL(self.registration.scope);
 let files = null;
 let key = null;
 let clearing = Promise.resolve();
+let sessionEpoch = 0;
 const bytes = value => Uint8Array.from(atob(value), char => char.charCodeAt(0));
 function openSessionDb() {
   return new Promise((resolve, reject) => {
@@ -49,7 +50,9 @@ async function clearSession() {
 async function restoreSession() {
   await clearing;
   if (files && key) return true;
+  const epoch = sessionEpoch;
   const session = await readSession();
+  if (epoch !== sessionEpoch) return false;
   if (!session || session.version !== manifestName) return false;
   files = session.files;
   key = session.key;
@@ -59,6 +62,7 @@ self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
 self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
 self.addEventListener('message', event => {
   if (event.data?.type === 'lock') {
+    sessionEpoch++;
     files = null;
     key = null;
     clearing = clearSession();

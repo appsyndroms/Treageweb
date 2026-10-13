@@ -30,7 +30,7 @@ function build(secret = password, source = input) {
     cwd: repo, env: { ...process.env, TREAGEWEB_USER: username, TREAGEWEB_PASSWORD: secret, SITE_BASE_PATH: '/Treageweb' }, encoding: 'utf8',
   });
 }
-function worker(sessionStore = new Map()) {
+function worker(sessionStore = new Map(), beforeRead = async () => {}) {
   const events = {};
   const indexedDB = {
     open() {
@@ -44,7 +44,8 @@ function worker(sessionStore = new Map()) {
                 return {
                   get(name) {
                     const result = {};
-                    queueMicrotask(() => { result.result = sessionStore.get(name); result.onsuccess?.(); });
+                    const value = sessionStore.get(name);
+                    queueMicrotask(async () => { await beforeRead(); result.result = value; result.onsuccess?.(); });
                     return result;
                   },
                   put(value, name) {
@@ -238,4 +239,19 @@ test('an expired or damaged encrypted page shows a usable login form', async () 
     assert.match(await response.text(), /https:\/\/example.org\/Treageweb\/gate.js/);
     assert.equal((await sw.request('blankdiss/data.json', 'cors')).status, 401);
   } finally { await writeFile(file, original); }
+});
+
+test('a session read already in flight cannot restore access after logout', async () => {
+  const saved = new Map();
+  assert.equal(await worker(saved).unlock(username, password), true);
+  let release, started;
+  const reading = new Promise(resolve => { started = resolve; });
+  const barrier = new Promise(resolve => { release = resolve; });
+  const sw = worker(saved, async () => { started(); await barrier; });
+  const response = sw.request('blankdiss/data.json', 'cors');
+  await reading;
+  await sw.lock();
+  release();
+  assert.equal((await response).status, 401);
+  assert.equal((await sw.request('blankdiss/data.json', 'cors')).status, 401);
 });
