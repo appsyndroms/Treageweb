@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "producer": "insider",
+  "batch_date": "2026-10-12",
+  "data": {
+    "version": 1,
+    "producer": "insider",
+    "batch_date": "2026-10-12",
+    "status": "complete",
+    "session": "evening",
+    "repository": "appsyndroms/Insider",
+    "run_id": "38309568695",
+    "run_attempt": 1,
+    "run_created_at": "2026-10-12T21:16:16Z",
+    "completed_at": "2026-10-12T21:23:43.922260+00:00",
+    "revision": "159d272209848cb5bae1914df416f3f53f516c67"
+  },
+  "web_run_id": "38351518367",
+  "web_run_attempt": 1,
+  "files": {
+    "bedomning.html": "6cde31b23b2cb76dcd0c7064e2b969050684343e2977cb4473a6937bca5be7f7",
+    "data.json": "171f739a9ff43cd64528c4983aa9a1b78584e389f616a2f8361417ab048d3c2f",
+    "dataanalys.html": "ed8803849e341119363796c7689b48ba667ea477d203ed79b7ea9257f4c3b075",
+    "handelser.html": "e7294008a0f4ccfd715f492395df1fb062ed15075f06159a13cabf74f551e745",
+    "index.html": "dbd05afb30efc6b2e241c7b7dbd70fd842c74652a5a54d8a34bad166d3ac974c",
+    "koplage.html": "9c46dd5bdc23268c0d32dc862799146091a43bc7b587773076bceea702e72193",
+    "saljlage.html": "113b9d5540f66d51d6b4687719f04bd2c187b519ecb2b6ff673cef2e4f490af8",
+    "site.js": "b3e5f4f1ff548c460e861950fc6387e241544455b07b95a16a9b556ad19a3097",
+    "style.css": "913f617ad209df4be550ba2b974bf0d61b1bd63395ec36df109bdc70b6e13551"
+  },
+  "web_revision": "1783d2e7051ab0ce5dd040df798317e91970b85f"
+}
