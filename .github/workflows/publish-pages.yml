@@ -5,6 +5,11 @@ on:
     - cron: "10 21 * * *"
       timezone: "Europe/Stockholm"
   workflow_dispatch:
+    inputs:
+      presentation_refresh:
+        description: Publicera uppdaterad webb med senaste kompletta kvällsunderlag
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths: ["dist/**"]
@@ -38,6 +43,8 @@ jobs:
 
       - name: Check delivery readiness
         id: ready
+        env:
+          PRESENTATION_REFRESH: ${{ github.event_name == 'workflow_dispatch' && inputs.presentation_refresh || false }}
         run: node scripts/readiness.mjs
 
       - name: Record publication snapshot

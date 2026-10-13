@@ -1,5 +1,4 @@
-/* Treage web UI 1.0 — identical local copy in Insider, Reports and Blankdiss.
-   Update all three copies together; no cross-project runtime dependency. */
+/* Shared project UI — identical local copy in Treage, Blankdiss, Reports and Insider. */
 :root {
     font-family:
         -apple-system,
@@ -354,6 +353,128 @@ tbody tr:hover {
     line-height: 1.5;
 }
 
+.trace-controls {
+    display: grid;
+    grid-template-columns: minmax(220px, 2fr) repeat(2, minmax(160px, 1fr));
+    gap: 16px;
+    margin: 24px 0 8px;
+}
+
+.trace-controls label {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.trace-controls input,
+.trace-controls select {
+    display: block;
+    width: 100%;
+    margin-top: 6px;
+    padding: 11px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface2);
+    color: var(--text);
+    font: inherit;
+}
+
+.watch-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 16px;
+    max-width: 980px;
+    margin: 20px 0 8px;
+}
+
+.watch-controls label {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.watch-controls select {
+    display: block;
+    width: 100%;
+    margin-top: 7px;
+    padding: 14px 44px 14px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface2);
+    color: var(--text);
+    font: inherit;
+}
+
+.watch-toggle {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    background: var(--surface2);
+    color: var(--text);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    .watch-controls { grid-template-columns: 1fr; }
+}
+
+.watch-toggle:disabled { opacity: 0.5; cursor: default; }
+.watch-toggle:hover:not(:disabled) { background: var(--surface); }
+
+.instrument-id {
+    margin-top: 6px;
+    color: var(--muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13px;
+}
+
+.watch-table { min-width: 1050px; }
+.watch-table td { vertical-align: top; }
+
+.history-details > summary {
+    display: inline-block;
+    margin: 2px 0 16px;
+    color: var(--accent);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.trace-table {
+    min-width: 1100px;
+}
+
+.trace-table td {
+    vertical-align: top;
+}
+
+.trace-table details {
+    min-width: 250px;
+    text-align: left;
+}
+
+.trace-table summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.trace-ref {
+    margin: 10px 0 0;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.trace-ref code {
+    display: block;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
 .subtle {
     color: var(--muted);
     font-size: 12px;
@@ -697,9 +818,49 @@ tbody tr:last-child td { border-bottom: 0; }
     .card strong, .stat-value { font-size: 24px; }
     h2, .assessment-intro h2 { font-size: 22px; }
     .footer, .main-content + .footer { margin: 28px 18px 0; padding: 22px 0 28px; }
+    .trace-controls { grid-template-columns: 1fr; }
 }
 @media (max-width: 420px) { .cards { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .tab { transition: none; } }
+
+/* Quick navigation between the four project sites in Treageweb. */
+.hero > .container { position: relative; }
+.project-switcher { position: absolute; z-index: 10; top: 0; right: 0; }
+.project-switcher > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 9px 13px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface2);
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 700;
+}
+.project-switcher > summary::-webkit-details-marker { display: none; }
+.project-switcher > summary::after { content: " ▾"; color: var(--accent); }
+.project-switcher[open] > nav {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    display: grid;
+    min-width: 180px;
+    padding: 6px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    box-shadow: 0 12px 28px rgb(0 0 0 / 28%);
+}
+.project-switcher nav a { padding: 9px 10px; border-radius: 5px; color: var(--text); text-decoration: none; }
+.project-switcher nav a:hover, .project-switcher nav a[aria-current="page"] { background: var(--surface2); color: var(--accent); }
+@media (max-width: 700px) { .hero > .container { padding-top: 50px; } }
+
+/* Shared signal overview. */
+.signal-overview { margin-bottom: 0; }
+.signal-count { display: inline-block; min-width: 1.5ch; }
+.card .stat-value a { text-decoration: none; }
+.card .stat-value a:hover { text-decoration: underline; }
+.signal-overview .card p { margin-bottom: 0; }
 
 .hero.welcome-hero { padding-bottom: 40px; }
 @media (max-width: 700px) { .hero.welcome-hero { padding-bottom: 32px; } }
@@ -715,3 +876,5 @@ tbody tr:last-child td { border-bottom: 0; }
 .project-card.featured .project-open { font-size: 19px; }
 .project-card.unavailable { opacity: .55; cursor: default; }
 @media (max-width: 700px) { .project-menu { grid-template-columns: 1fr; gap: 12px; margin-top: 64px; } .project-card.featured { min-height: 190px; padding: 22px; } }
+
+.project-menu { margin-top: 24px; }

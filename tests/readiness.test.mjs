@@ -94,3 +94,27 @@ test('morning runs cannot masquerade as a completed evening collection', async (
     assert.equal((await publicationReadiness({ directory, now: evening })).ready, false);
   });
 });
+
+test('an explicit presentation refresh reuses yesterday only with four new verified builds', async () => {
+  await withDeliveries(requiredProjects, async directory => {
+    const now = new Date('2026-10-13T09:00:00Z');
+    assert.equal((await publicationReadiness({directory, event: 'workflow_dispatch', now, presentationRefresh: true})).ready, false);
+    for (const project of requiredProjects) {
+      const file = path.join(directory, project, 'evening.json');
+      const receipt = JSON.parse(await readFile(file)); receipt.web_revision = 'b'.repeat(40);
+      await writeFile(file, JSON.stringify(receipt));
+    }
+    assert.equal((await publicationReadiness({directory, event: 'workflow_dispatch', now, presentationRefresh: true})).ready, true);
+    for (const event of ['push', 'schedule', 'workflow_dispatch']) {
+      assert.equal((await publicationReadiness({directory, event, now})).ready, false);
+    }
+    for (const event of ['push', 'schedule']) {
+      assert.equal((await publicationReadiness({directory, event, now, presentationRefresh: true})).ready, false);
+    }
+    assert.equal((await publicationReadiness({directory, event: 'workflow_dispatch', now: new Date('2026-10-14T09:00:00Z'), presentationRefresh: true})).ready, false);
+    const file = path.join(directory, 'insider', 'evening.json');
+    const receipt = JSON.parse(await readFile(file)); receipt.data.run_id = '999';
+    await writeFile(file, JSON.stringify(receipt));
+    assert.equal((await publicationReadiness({directory, event: 'workflow_dispatch', now, presentationRefresh: true})).ready, false);
+  });
+});

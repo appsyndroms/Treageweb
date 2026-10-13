@@ -62,7 +62,7 @@ async function readReceipt(directory, producer, expected) {
   return receipt;
 }
 
-export async function publicationReadiness({ directory = 'dist', event = 'schedule', now = new Date() } = {}) {
+export async function publicationReadiness({ directory = 'dist', event = 'schedule', now = new Date(), presentationRefresh = false } = {}) {
   const missing = [];
   for (const project of requiredProjects) {
     try {
@@ -73,10 +73,24 @@ export async function publicationReadiness({ directory = 'dist', event = 'schedu
     }
   }
   if (missing.length) return { ready: false, reason: 'Inväntar leverans: ' + missing.join(', ') };
-  const expected = reportDate(now), receipts = {};
+  let expected = reportDate(now);
+  const receipts = {};
+  if (presentationRefresh) {
+    if (event !== 'workflow_dispatch') return { ready: false, reason: 'Webbuppdatering kräver en uttrycklig manuell start.' };
+    const local = localClock(now);
+    const previous = new Date(Date.UTC(local.year, local.month - 1, local.day - 1)).toISOString().slice(0, 10);
+    try {
+      const candidate = JSON.parse(await readFile(path.join(directory, 'treage', 'evening.json'), 'utf8')).batch_date;
+      if (![expected, previous].includes(candidate)) return { ready: false, reason: 'Webbuppdateringen saknar ett aktuellt komplett kvällsunderlag.' };
+      expected = candidate;
+    } catch { return { ready: false, reason: 'Webbuppdateringen saknar ett verifierat kvällskvitto.' }; }
+  }
   for (const project of requiredProjects) {
     try { receipts[project] = await readReceipt(path.join(directory, project), project, expected); }
     catch (error) { return { ready: false, reason: `Inväntar verifierad leverans för ${expected}: ${project} (${error.message})` }; }
+  }
+  if (presentationRefresh && requiredProjects.some(project => !/^[0-9a-f]{40}$/.test(receipts[project].web_revision || ''))) {
+    return { ready: false, reason: 'Webbuppdateringen kräver nya byggen med spårbar presentationsversion för alla fyra projekt.' };
   }
   for (const source of sourceProjects) {
     const used = receipts.treage.data.sources[source], delivered = receipts[source].data;
@@ -92,7 +106,7 @@ export async function publicationReadiness({ directory = 'dist', event = 'schedu
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  const result = await publicationReadiness({ event: process.env.GITHUB_EVENT_NAME || 'schedule' });
+  const result = await publicationReadiness({ event: process.env.GITHUB_EVENT_NAME || 'schedule', presentationRefresh: process.env.PRESENTATION_REFRESH === 'true' });
   console.log(result.reason);
   if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, 'ready=' + result.ready + '\n');
 }
