@@ -20,9 +20,13 @@ export function reportDate(now) {
 }
 
 function validData(data, producer, expected) {
+  const local = data?.execution_environment === 'local';
+  const validRunId = local
+    ? /^local-[0-9]{8}T[0-9]{6}Z-[a-f0-9]{8}$/.test(String(data.run_id)) && /^[0-9a-f]{64}$/.test(data.working_tree_sha256 || '')
+    : /^[1-9][0-9]*$/.test(String(data?.run_id));
   if (!data || data.version !== 1 || data.producer !== producer || data.status !== 'complete' ||
       data.session !== 'evening' || data.batch_date !== expected ||
-      !/^[0-9a-f]{40}$/.test(data.revision || '') || !/^[1-9][0-9]*$/.test(String(data.run_id)) ||
+      !/^[0-9a-f]{40}$/.test(data.revision || '') || !validRunId ||
       !Number.isInteger(data.run_attempt) || data.run_attempt < 1) return false;
   const created = new Date(data.run_created_at), completed = new Date(data.completed_at);
   if (!Number.isFinite(created.getTime()) || !Number.isFinite(completed.getTime()) || completed < created) return false;
@@ -49,9 +53,13 @@ async function fileHashes(directory, prefix = '') {
 
 async function readReceipt(directory, producer, expected) {
   const receipt = JSON.parse(await readFile(path.join(directory, 'evening.json'), 'utf8'));
+  const local = receipt.execution_environment === 'local';
+  const validWebRunId = local
+    ? /^local-[0-9]{8}T[0-9]{6}Z-[a-f0-9]{8}$/.test(String(receipt.web_run_id)) && /^[0-9a-f]{64}$/.test(receipt.working_tree_sha256 || '')
+    : /^[1-9][0-9]*$/.test(String(receipt.web_run_id));
   if (receipt.version !== 1 || receipt.producer !== producer || receipt.batch_date !== expected ||
       !validData(receipt.data, producer, expected) || !receipt.files?.['index.html'] ||
-      !/^[1-9][0-9]*$/.test(String(receipt.web_run_id)) || !Number.isInteger(receipt.web_run_attempt)) {
+      !validWebRunId || !Number.isInteger(receipt.web_run_attempt)) {
     throw new Error('Kvällens färdiga datakörning eller webbbygge saknar giltigt kvitto');
   }
   const actual = await fileHashes(directory);

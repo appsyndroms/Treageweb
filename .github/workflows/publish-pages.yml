@@ -15,7 +15,7 @@ on:
   # push:
   # branches: [main]
   # paths: ["dist/**"]
-  # permissions:
+permissions:
   contents: read
   pages: write
   id-token: write
