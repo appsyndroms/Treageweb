@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "producer": "insider",
+  "batch_date": "2026-10-14",
+  "execution_environment": "local",
+  "data": {
+    "version": 1,
+    "producer": "insider",
+    "batch_date": "2026-10-14",
+    "status": "complete",
+    "session": "evening",
+    "execution_environment": "local",
+    "repository": "appsyndroms/Insider",
+    "run_id": "local-20261014T202100Z-f3b923c7",
+    "run_attempt": 1,
+    "run_created_at": "2026-10-14T20:21:00Z",
+    "completed_at": "2026-10-14T20:45:34.546506+00:00",
+    "revision": "3addcb646903bd1ef76be9e2d99c5a8369158054",
+    "working_tree_sha256": "eaeb633de74455ff872663cfcc7c7c1bbd2cea76f55d1d9430cb19ee451dc490",
+    "timing_basis": "Approximate local batch start from artifact and operator timestamps; not a GitHub Actions duration.",
+    "data": {
+      "time_model": "point_in_time",
+      "dataset_id": "dd7b1bf97fda44bf9335ecbe4d4d89bc30d1fdbac76d8d1a8ba1d8b8369702bd",
+      "rows": 698,
+      "source_export_dataset_id": "7b12820581c2a0b35e2e50a07f574bf40c74b56157ca9c5a88649170acfc1689"
+    }
+  },
+  "web_run_id": "local-20261014T202100Z-8609b4d3",
+  "web_run_attempt": 1,
+  "web_completed_at": "2026-10-14T20:45:34.732677+00:00",
+  "working_tree_sha256": "00e1a4345f76ae9ff73941e8847c1971f72f2eec354a8c0e6751775b84300b98",
+  "timing_basis": "Locally assembled web package from the completed local batch.",
+  "files": {
+    "bedomning.html": "67f17392ee96ecb9d13c8a11cbedb84a4eaa1a102b6e546019b20ee73cb920db",
+    "data/pages/bedomning.json": "642fcd827a59e975f3de21d56eedde1cac59262e0968b8c0bfca9030fb500581",
+    "data/pages/dataanalys.json": "32231bd6b52aacc0a24a709c2ea41776c21390edab5591fbbb52eb5ed474957d",
+    "data/pages/handelser.json": "8c0fdf86796490a9217d4777f613d20b99ac416670724a11706e8b29ff528733",
+    "data/pages/index.json": "1ee4cabf6b9018791e62bbf57f384ad8c5c3112e0eb7ba16bab21884ca273e3c",
+    "data/pages/koplage.json": "606f249b9c69655bc286da77ea06b79de57c3c9e6516f5c5b77d461db7f4d884",
+    "data.json": "d73a8fcf4391b73ac9df0e9712aeb6fdfeae5d3fad66b5c0b91f93b63c2f741e",
+    "dataanalys.html": "991468deb05e0bf38adbd401e772aedbb3221641e3bdf3617481fad696d38509",
+    "handelser.html": "3827df44dc54ac1c0cdb2fe66d69a10f7de7e7132705c52125f866181ec578c1",
+    "index.html": "c3b615d379f115b754b4c71614c2fc2b300a7f36c5a41bcf10975f729881b2f2",
+    "koplage.html": "e8d9ccc2e4794972e61c26edcf956341d7361c78a7d387d5bd4e9b1fed324bcb",
+    "lazy-data.js": "30584beed34e927042d1351a2aeb9dbb2a8918298d88150f695d2b088769ecea",
+    "site.js": "daa39cfb86c5403fe3164f748ca31177e65c1dc6338cb44a8f263b124ccb87a4",
+    "style.css": "db43c7568ff4f2cd894f2bd4007cfa519266f25d0f8b4e5d1c2a8945f99050c5"
+  }
+}
