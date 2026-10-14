@@ -1,0 +1,9 @@
+{
+  "signals": {
+    "created_at": null,
+    "excluded": 0,
+    "explanation": "Inväntar validerade signalregler och aktuellt signalunderlag.",
+    "signals": [],
+    "status": "unavailable"
+  }
+}
