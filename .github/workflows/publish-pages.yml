@@ -1,20 +1,21 @@
 name: Publicera Treageweb
 
 on:
-  schedule:
-    - cron: "10 21 * * *"
-      timezone: "Europe/Stockholm"
+  # Paused automatic trigger: schedule
+  # schedule:
+  # - cron: "10 21 * * *"
+  # timezone: "Europe/Stockholm"
   workflow_dispatch:
     inputs:
       presentation_refresh:
         description: Publicera uppdaterad webb med senaste kompletta kvällsunderlag
         type: boolean
         default: false
-  push:
-    branches: [main]
-    paths: ["dist/**"]
-
-permissions:
+  # Paused automatic trigger: push
+  # push:
+  # branches: [main]
+  # paths: ["dist/**"]
+  # permissions:
   contents: read
   pages: write
   id-token: write
