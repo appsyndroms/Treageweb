@@ -30,6 +30,13 @@
     link.textContent = card.querySelector('h2')?.textContent || card.textContent;
     return link;
   });
+  const treage = document.querySelector('.project-menu > a[href="./treage/index.html"]');
+  if (treage) {
+    const approved = document.createElement('a');
+    approved.href = new URL('godkanda.html', treage.href).href;
+    approved.textContent = 'Godkända förslag';
+    projects.push(approved);
+  }
   section('Projekt', projects);
   header.append(menu);
   if (switcher) switcher.hidden = true;
