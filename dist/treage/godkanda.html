@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Treages godkända och frysta experimentprotokoll.">
+  <title>Treage – Godkända experimentförslag</title><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Till innehållet</a>
+  <header class="hero"><div class="container">
+    <details class="project-switcher"><summary>Meny</summary><nav aria-label="Meny"><a href="../treage/" aria-current="page">Treage</a><a href="../blankdiss/">Blankdiss</a><a href="../reports/">Reports</a><a href="../insider/">Insider</a><a href="./godkanda.html" aria-current="page">Godkända förslag</a></nav></details>
+    <div class="brand">Treage<span class="brand-note">TVÄRKÄLLSANALYS</span></div>
+    <h1>Godkända experimentförslag</h1>
+    <p class="lead">Här visas Treages experimentförslag som har godkänts och frysts före prospektiv uppföljning.</p>
+    <nav class="tabs" aria-label="Huvudnavigation">
+      <a class="tab" href="./index.html">Hem</a><a class="tab" href="./koplage.html">Köp &amp; sälj</a>
+      <a class="tab" href="./events.html">Händelser</a><a class="tab" href="./sparbarhet.html">Bevakning</a>
+      <a class="tab" href="./bedomning.html">Bedömning</a>
+      <a class="tab" href="./dataanalys.html">Dataanalys</a>
+    </nav>
+  </div></header>
+  <main id="main" class="container main-content">
+    <section class="panel">
+      <div class="section-header">
+        <span class="eyebrow">FÖRHANDSREGISTRERADE PROTOKOLL</span>
+        <h2>Godkännande är start på skuggning</h2>
+        <p>Ett godkänt protokoll är fryst för sin angivna jämförelsefamilj. Det är inte en köp- eller säljsignal. Resultat och aktivering kräver en separat, färdig evaluator och prospektiv validering.</p>
+      </div>
+      <div id="approved-status" class="status-item" role="status" aria-live="polite">Hämtar Treages godkända protokoll…</div>
+      <div id="approved-list" class="approved-list"></div>
+    </section>
+    <section class="panel">
+      <div class="section-header"><span class="eyebrow">LIVSCYKEL</span><h2>Vad statusen innebär</h2>
+        <p>Listan omfattar bara Treages egna protokoll med status godkänt och fryst. Förslag som väntar på granskning eller komplettering visas inte här. Barnprojekten behåller sina egna köer.</p>
+      </div>
+      <ol>
+        <li>Förslaget granskas och får en motivering.</li>
+        <li>Godkänt protokoll fryses med hash och avgränsad jämförelsefamilj.</li>
+        <li>Prospektiv skuggning startar först när evaluatorn godtar exakt den frysta protokollhashen.</li>
+        <li>En aktiv signal kräver en separat signalgrind efter validering.</li>
+      </ol>
+    </section>
+  </main>
+  <footer class="container footer"><a href="../">← Till Treageweb</a><a href="./index.html">Treage · Hem</a></footer>
+  <script>
+    (() => {
+      const status = document.getElementById("approved-status");
+      const list = document.getElementById("approved-list");
+      const labels = { blankdiss: "Blankdiss", insider: "Insider", reports: "Reports" };
+      const add = (parent, tag, className, value) => {
+        const element = document.createElement(tag);
+        if (className) element.className = className;
+        element.textContent = value ?? "—";
+        parent.append(element);
+        return element;
+      };
+      const formatDate = (value) => {
+        if (!value) return "—";
+        const date = new Date(value);
+        return Number.isNaN(date.getTime()) ? value : new Intl.DateTimeFormat("sv-SE", { dateStyle: "medium", timeZone: "Europe/Stockholm" }).format(date);
+      };
+
+      fetch("./research_review_queue.json", { cache: "no-store" })
+        .then((response) => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json();
+        })
+        .then((queue) => {
+          const approved = (Array.isArray(queue.items) ? queue.items : [])
+            .filter((item) => item.status === "approved_frozen_pending_evaluator");
+          status.textContent = `${approved.length} godkända och frysta Treage-protokoll`;
+          if (!approved.length) {
+            add(list, "p", "empty-state", "Det finns ännu inga godkända experimentförslag i Treage.");
+            return;
+          }
+          for (const item of approved) {
+            const card = add(list, "article", "approved-card", "");
+            add(card, "span", "eyebrow", "GODKÄNT · FRYST FÖR PROSPEKTIV SKUGGNING");
+            add(card, "h3", "", item.title || item.proposal_id);
+            add(card, "p", "proposal-id", item.proposal_id);
+            const protocol = item.approved_protocol || {};
+            if (protocol.hypothesis) add(card, "p", "", protocol.hypothesis);
+            const meta = add(card, "dl", "proposal-meta", "");
+            const pairs = [
+              ["Godkänt", formatDate(item.approved_at)],
+              ["Källkombinationer", (protocol.source_subsets || []).map((group) => group.map((name) => labels[name] || name).join(" + ")).join("; ") || "—"],
+              ["Horisont", protocol.horizons_sessions?.length ? `${protocol.horizons_sessions.join(", ")} handelsdagar` : "—"],
+              ["Primärt utfall", protocol.primary_outcome || "—"],
+              ["Jämförelsefamilj", protocol.comparison_family || "—"],
+              ["Evaluator", "Inväntar verifiering av fryst protokollhash"],
+            ];
+            for (const [term, description] of pairs) {
+              add(meta, "dt", "", term);
+              add(meta, "dd", "", description);
+            }
+            add(card, "p", "hash-line", `Fryst protokoll SHA-256: ${item.frozen_protocol_sha256 || "saknas"}`);
+            add(card, "p", "signal-note", "Ingen aktiv köp- eller säljsignal skapas av detta godkännande.");
+          }
+        })
+        .catch(() => {
+          status.textContent = "Kunde inte läsa Treages godkända protokoll.";
+          add(list, "p", "empty-state", "Kontrollera att den senaste Treage-webbexporten innehåller research_review_queue.json.");
+        });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,436 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-27T17:50:13+00:00",
+  "batch_date": "2026-10-27",
+  "receipt_key": "9f27d5dc3ec5efc705635b224c152506a7f080388d7e5d333cbe25febdc41a9e",
+  "source_dataset_ids": {
+    "blankdiss": "178c1722133a61d578290de7b6cddce7f8422cc8611034d55226d0be4c34c104",
+    "reports": "5d6327437a2a406f3f1ed349dbb47ae3d0baf524c7771e0bdb6b90e28e29d798",
+    "insider": "5d3125133462362531d0b1f7829eebc26bc280d2cd1509ff8e5215d31ec5bd1f"
+  },
+  "source_data_dataset_ids": {
+    "blankdiss": "956a5cf13e458fe2a0872967dc1c8fd38a9ad51e27adc5a6c8bfab24bd4ace5f",
+    "reports": "47d76ea3ce67c22a533368fc0f85cce2b0c1822254463a1b02c4f38e56a9cc8e",
+    "insider": "87d07b5489e67a55d05d1e9806d3f1d5f64c75aca5098d04e8835393bc0ffe4e"
+  },
+  "source_time_models": {
+    "blankdiss": "retrospective",
+    "reports": "retrospective",
+    "insider": "point_in_time"
+  },
+  "sources": {
+    "blankdiss": {
+      "dataset_id": "178c1722133a61d578290de7b6cddce7f8422cc8611034d55226d0be4c34c104",
+      "source_dataset_id": "956a5cf13e458fe2a0872967dc1c8fd38a9ad51e27adc5a6c8bfab24bd4ace5f",
+      "time_model": "retrospective",
+      "delivery_status": "complete",
+      "limitations": [
+        "Instrumentregler ej validerade: buy=not_validated, sell_avoid=not_validated; inga fynd eller no_finding kan exporteras.",
+        "Leveransen är retrospektiv och inte behörig för punkt-i-tid-validering."
+      ],
+      "assessment_summary": {
+        "status": "completed_without_validated_findings",
+        "row_count": 242,
+        "result_counts": {
+          "finding": 0,
+          "no_finding": 0,
+          "not_evaluated": 242
+        }
+      },
+      "rows": 242,
+      "result_status": {
+        "finding": 0,
+        "no_finding": 0,
+        "not_evaluated": 242
+      },
+      "validation_status": {
+        "exploratory": 0,
+        "retrospective": 0,
+        "out_of_sample": 0,
+        "prospective": 0,
+        "validated": 0,
+        "not_validated": 242,
+        "unavailable": 0
+      },
+      "assessed": 0,
+      "unavailable": 242
+    },
+    "reports": {
+      "dataset_id": "5d6327437a2a406f3f1ed349dbb47ae3d0baf524c7771e0bdb6b90e28e29d798",
+      "source_dataset_id": "47d76ea3ce67c22a533368fc0f85cce2b0c1822254463a1b02c4f38e56a9cc8e",
+      "time_model": "retrospective",
+      "delivery_status": "complete",
+      "limitations": [
+        "Reports signal API status=blocked; reason_codes=no_point_in_time_validated_report_rule,no_active_signal_artifact; no negative results are inferred."
+      ],
+      "assessment_summary": {
+        "status": "completed_without_validated_findings",
+        "row_count": 199,
+        "result_counts": {
+          "finding": 0,
+          "no_finding": 0,
+          "not_evaluated": 199
+        }
+      },
+      "rows": 199,
+      "result_status": {
+        "finding": 0,
+        "no_finding": 0,
+        "not_evaluated": 199
+      },
+      "validation_status": {
+        "exploratory": 0,
+        "retrospective": 0,
+        "out_of_sample": 0,
+        "prospective": 0,
+        "validated": 0,
+        "not_validated": 0,
+        "unavailable": 199
+      },
+      "assessed": 0,
+      "unavailable": 199
+    },
+    "insider": {
+      "dataset_id": "5d3125133462362531d0b1f7829eebc26bc280d2cd1509ff8e5215d31ec5bd1f",
+      "source_dataset_id": "87d07b5489e67a55d05d1e9806d3f1d5f64c75aca5098d04e8835393bc0ffe4e",
+      "time_model": "point_in_time",
+      "delivery_status": "complete",
+      "limitations": [
+        "258 instrument saknar validerad regelbedömning; orsaker: no_validated_instrument_result.",
+        "Tidsriktiga Insider-indata finns, men ingen instrumentregel är validerad; raderna är inte signaler."
+      ],
+      "assessment_summary": {
+        "status": "completed_without_validated_findings",
+        "row_count": 258,
+        "result_counts": {
+          "finding": 0,
+          "no_finding": 0,
+          "not_evaluated": 258
+        }
+      },
+      "rows": 258,
+      "result_status": {
+        "finding": 0,
+        "no_finding": 0,
+        "not_evaluated": 258
+      },
+      "validation_status": {
+        "exploratory": 0,
+        "retrospective": 0,
+        "out_of_sample": 0,
+        "prospective": 0,
+        "validated": 0,
+        "not_validated": 258,
+        "unavailable": 0
+      },
+      "assessed": 0,
+      "unavailable": 258
+    }
+  },
+  "combinations": [
+    {
+      "sources": [
+        "blankdiss"
+      ],
+      "shared_instruments": 242,
+      "instruments_with_findings_from_every_source": 0,
+      "instruments_with_validated_results_from_every_source": 0
+    },
+    {
+      "sources": [
+        "reports"
+      ],
+      "shared_instruments": 199,
+      "instruments_with_findings_from_every_source": 0,
+      "instruments_with_validated_results_from_every_source": 0
+    },
+    {
+      "sources": [
+        "insider"
+      ],
+      "shared_instruments": 258,
+      "instruments_with_findings_from_every_source": 0,
+      "instruments_with_validated_results_from_every_source": 0
+    },
+    {
+      "sources": [
+        "blankdiss",
+        "reports"
+      ],
+      "shared_instruments": 188,
+      "instruments_with_findings_from_every_source": 0,
+      "instruments_with_validated_results_from_every_source": 0
+    },
+    {
+      "sources": [
+        "blankdiss",
+        "insider"
+      ],
+      "shared_instruments": 215,
+      "instruments_with_findings_from_every_source": 0,
+      "instruments_with_validated_results_from_every_source": 0
+    },
+    {
+      "sources": [
+        "reports",
+        "insider"
+      ],
+      "shared_instruments": 199,
+      "instruments_with_findings_from_every_source": 0,
+      "instruments_with_validated_results_from_every_source": 0
+    },
+    {
+      "sources": [
+        "blankdiss",
+        "reports",
+        "insider"
+      ],
+      "shared_instruments": 188,
+      "instruments_with_findings_from_every_source": 0,
+      "instruments_with_validated_results_from_every_source": 0
+    }
+  ],
+  "proposal_discovery": {
+    "status": "not_triggered_no_assessed_subset_findings",
+    "trigger": "At least one shared instrument has assessed source results and at least one source finding in the selected subset.",
+    "eligible_subsets": [],
+    "candidate_comparison_family": [
+      [
+        "blankdiss"
+      ],
+      [
+        "reports"
+      ],
+      [
+        "insider"
+      ],
+      [
+        "blankdiss",
+        "reports"
+      ],
+      [
+        "blankdiss",
+        "insider"
+      ],
+      [
+        "reports",
+        "insider"
+      ],
+      [
+        "blankdiss",
+        "reports",
+        "insider"
+      ]
+    ],
+    "uses_forward_outcomes": false,
+    "queue_result": {
+      "status": "not_triggered_no_assessed_subset_findings",
+      "created": false,
+      "eligible_subsets": []
+    }
+  },
+  "readiness_by_subset": [
+    {
+      "sources": [
+        "blankdiss"
+      ],
+      "time_models": {
+        "blankdiss": "retrospective"
+      },
+      "point_in_time_inputs_ready": false,
+      "shared_instruments": 242,
+      "validated_instrument_count": 0,
+      "outcome_panel_available": true,
+      "evaluation_blockers": [
+        "retrospective_inputs",
+        "no_validated_subset_results",
+        "no_matured_shadow_outcomes"
+      ],
+      "evaluation_status": "blocked_retrospective_inputs",
+      "outcome_blind_discovery_basis": "no_findings_in_current_delivery",
+      "proposal_generation_status": "not_triggered_no_assessed_subset_findings"
+    },
+    {
+      "sources": [
+        "reports"
+      ],
+      "time_models": {
+        "reports": "retrospective"
+      },
+      "point_in_time_inputs_ready": false,
+      "shared_instruments": 199,
+      "validated_instrument_count": 0,
+      "outcome_panel_available": true,
+      "evaluation_blockers": [
+        "retrospective_inputs",
+        "no_validated_subset_results",
+        "no_matured_shadow_outcomes"
+      ],
+      "evaluation_status": "blocked_retrospective_inputs",
+      "outcome_blind_discovery_basis": "no_findings_in_current_delivery",
+      "proposal_generation_status": "not_triggered_no_assessed_subset_findings"
+    },
+    {
+      "sources": [
+        "insider"
+      ],
+      "time_models": {
+        "insider": "point_in_time"
+      },
+      "point_in_time_inputs_ready": true,
+      "shared_instruments": 258,
+      "validated_instrument_count": 0,
+      "outcome_panel_available": true,
+      "evaluation_blockers": [
+        "no_validated_subset_results",
+        "no_matured_shadow_outcomes"
+      ],
+      "evaluation_status": "blocked_no_validated_subset_results",
+      "outcome_blind_discovery_basis": "no_findings_in_current_delivery",
+      "proposal_generation_status": "not_triggered_no_assessed_subset_findings"
+    },
+    {
+      "sources": [
+        "blankdiss",
+        "reports"
+      ],
+      "time_models": {
+        "blankdiss": "retrospective",
+        "reports": "retrospective"
+      },
+      "point_in_time_inputs_ready": false,
+      "shared_instruments": 188,
+      "validated_instrument_count": 0,
+      "outcome_panel_available": true,
+      "evaluation_blockers": [
+        "retrospective_inputs",
+        "no_validated_subset_results",
+        "no_matured_shadow_outcomes"
+      ],
+      "evaluation_status": "blocked_retrospective_inputs",
+      "outcome_blind_discovery_basis": "no_findings_in_current_delivery",
+      "proposal_generation_status": "not_triggered_no_assessed_subset_findings"
+    },
+    {
+      "sources": [
+        "blankdiss",
+        "insider"
+      ],
+      "time_models": {
+        "blankdiss": "retrospective",
+        "insider": "point_in_time"
+      },
+      "point_in_time_inputs_ready": false,
+      "shared_instruments": 215,
+      "validated_instrument_count": 0,
+      "outcome_panel_available": true,
+      "evaluation_blockers": [
+        "retrospective_inputs",
+        "no_validated_subset_results",
+        "no_matured_shadow_outcomes"
+      ],
+      "evaluation_status": "blocked_retrospective_inputs",
+      "outcome_blind_discovery_basis": "no_findings_in_current_delivery",
+      "proposal_generation_status": "not_triggered_no_assessed_subset_findings"
+    },
+    {
+      "sources": [
+        "reports",
+        "insider"
+      ],
+      "time_models": {
+        "reports": "retrospective",
+        "insider": "point_in_time"
+      },
+      "point_in_time_inputs_ready": false,
+      "shared_instruments": 199,
+      "validated_instrument_count": 0,
+      "outcome_panel_available": true,
+      "evaluation_blockers": [
+        "retrospective_inputs",
+        "no_validated_subset_results",
+        "no_matured_shadow_outcomes"
+      ],
+      "evaluation_status": "blocked_retrospective_inputs",
+      "outcome_blind_discovery_basis": "no_findings_in_current_delivery",
+      "proposal_generation_status": "not_triggered_no_assessed_subset_findings"
+    },
+    {
+      "sources": [
+        "blankdiss",
+        "reports",
+        "insider"
+      ],
+      "time_models": {
+        "blankdiss": "retrospective",
+        "reports": "retrospective",
+        "insider": "point_in_time"
+      },
+      "point_in_time_inputs_ready": false,
+      "shared_instruments": 188,
+      "validated_instrument_count": 0,
+      "outcome_panel_available": true,
+      "evaluation_blockers": [
+        "retrospective_inputs",
+        "no_validated_subset_results",
+        "no_matured_shadow_outcomes"
+      ],
+      "evaluation_status": "blocked_retrospective_inputs",
+      "outcome_blind_discovery_basis": "no_findings_in_current_delivery",
+      "proposal_generation_status": "not_triggered_no_assessed_subset_findings"
+    }
+  ],
+  "research": {
+    "status": "blocked_no_validated_subset_results",
+    "ml_status": "blocked_no_validated_subset_results",
+    "proposal_discovery": "not_triggered_no_assessed_subset_findings",
+    "point_in_time_sources": {
+      "blankdiss": "retrospective",
+      "reports": "retrospective",
+      "insider": "point_in_time"
+    },
+    "outcome_panel_available": true,
+    "active_signals": 0,
+    "reason": "Punkt-i-tid-underlag: 1/3 källor. Utfallspanel tillgänglig: ja; mogna skuggutfall: 0. Varje delmängd bedöms separat; ML och signaler förblir blockerade när dess egna valideringskrav saknas."
+  },
+  "limitations": [
+    "Shared-instrument counts describe package overlap, not time-aligned prediction quality.",
+    "Agreement between retrospective source findings is not a Treage signal.",
+    "Candidate generation uses source finding and coverage status only; it never reads forward outcomes."
+  ],
+  "signal_gate": {
+    "status": "blocked_active_signal_publication",
+    "active_signals": 0,
+    "batch_date": "2026-10-27",
+    "receipt_key": "9f27d5dc3ec5efc705635b224c152506a7f080388d7e5d333cbe25febdc41a9e",
+    "source_dataset_ids": {
+      "blankdiss": "178c1722133a61d578290de7b6cddce7f8422cc8611034d55226d0be4c34c104",
+      "reports": "5d6327437a2a406f3f1ed349dbb47ae3d0baf524c7771e0bdb6b90e28e29d798",
+      "insider": "5d3125133462362531d0b1f7829eebc26bc280d2cd1509ff8e5215d31ec5bd1f"
+    },
+    "blockers": [
+      "no_validated_point_in_time_source_results",
+      "no_matured_shadow_outcomes",
+      "treage_aggregation_rule_not_implemented"
+    ],
+    "explanation": "Källornas enskilda bedömningar blir inte automatiskt Treage-signaler. En fryst, validerad sammanvägningsregel krävs alltid."
+  },
+  "outcome_panel": {
+    "status": "ready",
+    "available": true,
+    "missing_inputs": [],
+    "price_rows": 108,
+    "market_rows": 6,
+    "ambiguous_price_dates_excluded": 0,
+    "ambiguous_market_days_excluded": 0,
+    "invalid_rows": {
+      "adjusted_prices": 0,
+      "market": 0
+    },
+    "parse_errors": {
+      "adjusted_prices": [],
+      "market": []
+    }
+  },
+  "matured_shadow_outcomes": 0
+}

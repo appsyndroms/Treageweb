@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "producer": "treage",
+  "batch_date": "2026-10-27",
+  "data": {
+    "version": 1,
+    "producer": "treage",
+    "batch_date": "2026-10-27",
+    "status": "complete",
+    "session": "local_snapshot",
+    "execution_environment": "local",
+    "repository": "appsyndroms/Treage",
+    "run_id": "local-20261027T175246Z-14bb1b85",
+    "run_id_kind": "local-deterministic",
+    "run_attempt": 1,
+    "run_created_at": "2026-10-27T17:52:45+00:00",
+    "completed_at": "2026-10-27T17:52:45+00:00",
+    "revision": "local-efe271ef6738fd7dbc2b454ffa1263d690e70a37",
+    "working_tree_sha256": "29daa7d5bd226c4d36a21ca6755d190e797f363b443eef8ad659535c98c7e2be",
+    "dataset_id": "9f27d5dc3ec5efc705635b224c152506a7f080388d7e5d333cbe25febdc41a9e",
+    "rows": 699,
+    "source_results": {
+      "blankdiss": {
+        "dataset_id": "178c1722133a61d578290de7b6cddce7f8422cc8611034d55226d0be4c34c104",
+        "source_dataset_id": "956a5cf13e458fe2a0872967dc1c8fd38a9ad51e27adc5a6c8bfab24bd4ace5f",
+        "batch_date": "2026-10-27",
+        "assessment_summary": {
+          "status": "completed_without_validated_findings",
+          "row_count": 242,
+          "result_counts": {
+            "finding": 0,
+            "no_finding": 0,
+            "not_evaluated": 242
+          }
+        },
+        "available_at": "2026-10-27T17:50:12.428316+00:00"
+      },
+      "reports": {
+        "dataset_id": "5d6327437a2a406f3f1ed349dbb47ae3d0baf524c7771e0bdb6b90e28e29d798",
+        "source_dataset_id": "47d76ea3ce67c22a533368fc0f85cce2b0c1822254463a1b02c4f38e56a9cc8e",
+        "batch_date": "2026-10-27",
+        "assessment_summary": {
+          "status": "completed_without_validated_findings",
+          "row_count": 199,
+          "result_counts": {
+            "finding": 0,
+            "no_finding": 0,
+            "not_evaluated": 199
+          }
+        },
+        "available_at": "2026-10-27T17:50:12.563510+00:00"
+      },
+      "insider": {
+        "dataset_id": "5d3125133462362531d0b1f7829eebc26bc280d2cd1509ff8e5215d31ec5bd1f",
+        "source_dataset_id": "87d07b5489e67a55d05d1e9806d3f1d5f64c75aca5098d04e8835393bc0ffe4e",
+        "batch_date": "2026-10-27",
+        "assessment_summary": {
+          "status": "completed_without_validated_findings",
+          "row_count": 258,
+          "result_counts": {
+            "finding": 0,
+            "no_finding": 0,
+            "not_evaluated": 258
+          }
+        },
+        "available_at": "2026-10-27T17:50:12.827375+00:00"
+      }
+    },
+    "timing_basis": "Local package build from the saved module outputs; not a GitHub Actions run.",
+    "sources": {
+      "blankdiss": {
+        "version": 1,
+        "producer": "blankdiss",
+        "batch_date": "2026-10-27",
+        "status": "complete",
+        "session": "local_snapshot",
+        "execution_environment": "local",
+        "repository": "appsyndroms/Blankdiss",
+        "run_id": "local-20261027T175245Z-71e597a9",
+        "run_id_kind": "local-deterministic",
+        "run_attempt": 1,
+        "run_created_at": "2026-10-27T17:52:45+00:00",
+        "completed_at": "2026-10-27T17:52:45+00:00",
+        "revision": "local-b5309a605e4a234bc6221e53b895199a7623f319",
+        "working_tree_sha256": "b25a98d162030ff14722994358b83c7c6a28abf6d5fcbd9e32784da03f64c822",
+        "dataset_id": "178c1722133a61d578290de7b6cddce7f8422cc8611034d55226d0be4c34c104",
+        "rows": 242,
+        "source_results": {
+          "source_dataset_id": "956a5cf13e458fe2a0872967dc1c8fd38a9ad51e27adc5a6c8bfab24bd4ace5f"
+        },
+        "timing_basis": "Local package build from the saved module outputs; not a GitHub Actions run.",
+        "source_delivery_status": "complete",
+        "assessment_summary": {
+          "status": "completed_without_validated_findings",
+          "row_count": 242,
+          "result_counts": {
+            "finding": 0,
+            "no_finding": 0,
+            "not_evaluated": 242
+          }
+        }
+      },
+      "reports": {
+        "version": 1,
+        "producer": "reports",
+        "batch_date": "2026-10-27",
+        "status": "complete",
+        "session": "local_snapshot",
+        "execution_environment": "local",
+        "repository": "appsyndroms/Reports",
+        "run_id": "local-20261027T175245Z-6b2599b4",
+        "run_id_kind": "local-deterministic",
+        "run_attempt": 1,
+        "run_created_at": "2026-10-27T17:52:45+00:00",
+        "completed_at": "2026-10-27T17:52:45+00:00",
+        "revision": "local-f3f7abe30ab77892714c173dd1d9d441992f6dbd",
+        "working_tree_sha256": "ff0642f7f03ce5b42b3e6f04174ae8d0344222d8da61c87852168d6c7e2e1986",
+        "dataset_id": "5d6327437a2a406f3f1ed349dbb47ae3d0baf524c7771e0bdb6b90e28e29d798",
+        "rows": 199,
+        "source_results": {
+          "source_dataset_id": "47d76ea3ce67c22a533368fc0f85cce2b0c1822254463a1b02c4f38e56a9cc8e"
+        },
+        "timing_basis": "Local package build from the saved module outputs; not a GitHub Actions run.",
+        "source_delivery_status": "complete",
+        "assessment_summary": {
+          "status": "completed_without_validated_findings",
+          "row_count": 199,
+          "result_counts": {
+            "finding": 0,
+            "no_finding": 0,
+            "not_evaluated": 199
+          }
+        }
+      },
+      "insider": {
+        "version": 1,
+        "producer": "insider",
+        "batch_date": "2026-10-27",
+        "status": "complete",
+        "session": "local_snapshot",
+        "execution_environment": "local",
+        "repository": "appsyndroms/Insider",
+        "run_id": "local-20261027T175245Z-b952a74b",
+        "run_id_kind": "local-deterministic",
+        "run_attempt": 1,
+        "run_created_at": "2026-10-27T17:52:45+00:00",
+        "completed_at": "2026-10-27T17:52:45+00:00",
+        "revision": "local-dd5207eac2ec983cd941ee58f7f30d3dcd5243f2",
+        "working_tree_sha256": "878f04090beb2e9b1aa3449642be6abedec0a60d262f586a907808d874857fdd",
+        "dataset_id": "5d3125133462362531d0b1f7829eebc26bc280d2cd1509ff8e5215d31ec5bd1f",
+        "rows": 258,
+        "source_results": {
+          "source_dataset_id": "87d07b5489e67a55d05d1e9806d3f1d5f64c75aca5098d04e8835393bc0ffe4e"
+        },
+        "timing_basis": "Local package build from the saved module outputs; not a GitHub Actions run.",
+        "source_delivery_status": "complete",
+        "assessment_summary": {
+          "status": "completed_without_validated_findings",
+          "row_count": 258,
+          "result_counts": {
+            "finding": 0,
+            "no_finding": 0,
+            "not_evaluated": 258
+          }
+        }
+      }
+    }
+  },
+  "web_run_id": "local-20261027T175246Z-6b4618d1",
+  "web_run_attempt": 1,
+  "execution_environment": "local",
+  "working_tree_sha256": "29daa7d5bd226c4d36a21ca6755d190e797f363b443eef8ad659535c98c7e2be",
+  "files": {
+    "bedomning.html": "55b659f1b4fdb6ae0a0d95b13f3e8515b0f40665dce53d267f4dc9c437780c10",
+    "consensus_coverage.json": "0385d49e78f9ce4020476bb38eaf2fd66d99da554372a9a7c41eaecb644afff4",
+    "data/instruments/0a159173dccbd13e4ec0dc31.json": "5c0926d4ee6f727edd382983fd0aa84cd65dc7b4f2508cae253a96fe9b01bf16",
+    "data/instruments/0efe414b0e66bdffd82b9110.json": "04775c30d14a2fd830714d561c6933b67ad69c1e9af5d875395f5329ca6df9c8",
+    "data/instruments/1888d2026fbacf698888be64.json": "72ab06b02b9ae0f3386e9fdc120c16df4ee638b8e31c693ce0335c93f0f884eb",
+    "data/instruments/264cfe269899dbb65eaea8fc.json": "72f4123e3aaa8177ddaa22716393db5fa222452534baf959afda95f620b271ee",
+    "data/instruments/2a4d2a2ba89926d6f2ccb4de.json": "7ad5869d9193ed7e65fd718b52cf75d0a32a402790ab8185eef382d9dde0ff6b",
+    "data/instruments/3159170ab2ae36c94468b1a6.json": "1776e2a6d7bbb7992bd8218765c22a89bf005f64654625e8e60b0040f731c3a9",
+    "data/instruments/34b5425c8954b2d714667cf0.json": "825451a50f9c81e6a485bfea81d8ee95dd22011b70c930db57171d8aa4f193c4",
+    "data/instruments/6615cb0b4a60d1909e707fe8.json": "8b9cdecd8414f55107aa53c4066998c3acb88a981a50c4db61c4665e9addb2d9",
+    "data/instruments/74dd151b1a2cfb61295823ca.json": "b94f907a5ab43e82c6175e39e3c8567a30bf6d5dd48f79ac15b07806e11575d3",
+    "data/instruments/7bb3f35176beb68695bde618.json": "16e0e36c191ac0052c628b6720ebf95f57408d27673d7872a67e761c8e6d90f4",
+    "data/instruments/856d645fd394187020669ff7.json": "7e4219d7b3af7ae077b3ad42ceaefcbadaa7442063ae2b0d1f544fc5d72212cc",
+    "data/instruments/85c680c493c28ddbdf152547.json": "618cf244263bdb06985674d0a05280ca77630b5e1dfb707f22174c0d8fdd3cd2",
+    "data/instruments/a4178a647c9233c8f7109617.json": "ad2603cfa7f2698a75962faad4d292bfd6ff085c1c2122c7a54eb820373aa0cb",
+    "data/instruments/afb62695e84366f55b40a27a.json": "3a0189eaad28bc050619c1548a61bde1111f3c28fd7d12cc68201b44de890adb",
+    "data/instruments/c273c515a3ac1b159546c794.json": "2de9dd89d5822107a1653f840c0a70887eb23f3235d7ba24d29746573031dd9e",
+    "data/instruments/d113192e240c59966adafa5d.json": "e38179bdc7678ef3003140548d9025651e05fa078d6631e8a758d252e204357f",
+    "data/instruments/d2bdb5479037473a2a0bd3da.json": "c896b503b25425d15a21094c7eb347c1e112c4f77e791a4fda6cff13c4f7c194",
+    "data/instruments/d3bb3f996aee4a8556526481.json": "456ad5a636c226c91e4e51043a5da78396ea54e581f5694ae5441f6c2e62fc4a",
+    "data/instruments/dad03bd1ebe599a95407b98d.json": "3db03a24ac7fd800c87e4200d05ef0371dc540a882a9a5a2bd3eadf61be4d898",
+    "data/instruments/dbc471ce18536dcc54d9e6cd.json": "66ffa8b68eecfe4e2e586fec8ba66d0acaed5be2ae44431d9fc06956e530fe4d",
+    "data/instruments/e0c8b657e78bc40715729a6c.json": "eb035900df04505f109cdfd4baa31eeec62f988395cd350c08433fa3ebfa7703",
+    "data/instruments/eb31f33ea12c80359c2c9665.json": "94ec4c0fa6fa78b776d0c626fb4cb8fba45eadefdeec23f79b718f98cea8d2cc",
+    "data/instruments/f6a6b3a9e01ad3cb5e3ece95.json": "da14d47102791346220cc5880edfc768b2ea90686eaf5807126d848fe35cc4ff",
+    "data/instruments/ffac6f1cd5d976b919d3efa5.json": "e522671fe9870a043df48d34230e2f64e67018349fd513ca6b2f4aa00818c64f",
+    "dataanalys.html": "0ed47461376f0bce03d11cd2bdf3b1a1274c858aad52e3634a3066e4bea2993f",
+    "events.html": "5334f1e59d714fad73370591ca69412b18761c77ce4c26d34c62b49369561a4a",
+    "godkanda.html": "e9e93cc0607b879055c996200fac0d96779e9c11d84f4ca262b52460bb12a981",
+    "index.html": "c59933251d47d74d3d973715e7d3732b8a04dcb2176c46b6b89925b2dc0ccced",
+    "instrument_names.json": "c7fee22f8fe78bf15ab429b7514b2fc9bfe459a74c8f93bc7bf126801661a89d",
+    "koplage.html": "4a01e050b2b8d056b0079e5a12165f51c99fa37ff489ea9dbac6155a06cb3b05",
+    "ml_research_latest.json": "cc75b70ce4eaea379b0ab21b9393b8c85057779d2839591b81b5e27a5f859e92",
+    "prospective_status.json": "e2227029e3355feb18e88282ff3e5501163d5432616f846f200a0e9a13c8995a",
+    "research_review_queue.json": "c2f7cda716b2b8bd4f7d9ec9fde7ce43e04dbb130f83cf801a6b0a524ac76c48",
+    "research_status.json": "7301331d16bd3fd359e837fdccfd857fc07708785eb36f2e82b60a9ebac3b18f",
+    "saljlage.html": "4758ec77ea55f4c868e47b4fa6349964186cf36076325c5a2c0afde5579b926d",
+    "signal_status.json": "342dd78f7603ee1661052200395e9834e5b4335c0f1a238542d16a0c1b3f67f0",
+    "site.js": "70a6ba9c0a348dd8b161e759f5470a826b7426ca35ce261c21c1dde0b74dd81d",
+    "source_results.json": "7f07f7a4559326248b07a1376ade7d0741e6c09ec2090a34a580bb83adaac3a9",
+    "sparbarhet.html": "6c9468e38f7c2b3191e5b25eee12246f39cf584d1e573bc0a763f5210bea7ac0",
+    "style.css": "4b0d3afd6615cbc955fd25abaf41753241bf068eeebd3fc9fbdd1d08387426ea",
+    "traceability.json": "687cd6edbf6c6e601d3fe317c547c0c9bda2a03ace9ccb958fdf210f8dcfda76"
+  }
+}

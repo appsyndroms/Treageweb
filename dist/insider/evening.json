@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "producer": "insider",
+  "batch_date": "2026-10-27",
+  "data": {
+    "version": 1,
+    "producer": "insider",
+    "batch_date": "2026-10-27",
+    "status": "complete",
+    "session": "local_snapshot",
+    "execution_environment": "local",
+    "repository": "appsyndroms/Insider",
+    "run_id": "local-20261027T175245Z-b952a74b",
+    "run_id_kind": "local-deterministic",
+    "run_attempt": 1,
+    "run_created_at": "2026-10-27T17:52:45+00:00",
+    "completed_at": "2026-10-27T17:52:45+00:00",
+    "revision": "local-dd5207eac2ec983cd941ee58f7f30d3dcd5243f2",
+    "working_tree_sha256": "878f04090beb2e9b1aa3449642be6abedec0a60d262f586a907808d874857fdd",
+    "dataset_id": "5d3125133462362531d0b1f7829eebc26bc280d2cd1509ff8e5215d31ec5bd1f",
+    "rows": 258,
+    "source_results": {
+      "source_dataset_id": "87d07b5489e67a55d05d1e9806d3f1d5f64c75aca5098d04e8835393bc0ffe4e"
+    },
+    "timing_basis": "Local package build from the saved module outputs; not a GitHub Actions run.",
+    "source_delivery_status": "complete",
+    "assessment_summary": {
+      "status": "completed_without_validated_findings",
+      "row_count": 258,
+      "result_counts": {
+        "finding": 0,
+        "no_finding": 0,
+        "not_evaluated": 258
+      }
+    }
+  },
+  "web_run_id": "local-20261027T175245Z-e392fef9",
+  "web_run_attempt": 1,
+  "execution_environment": "local",
+  "working_tree_sha256": "878f04090beb2e9b1aa3449642be6abedec0a60d262f586a907808d874857fdd",
+  "files": {
+    "bedomning.html": "bb7bf0c94cecb7cf776eaaa2669e0d5bc3f8a7ea142adcb3c4d245ecfebb4d02",
+    "data/pages/bedomning.json": "066f9cc78421fc6ecae45b4f62bb911b2f3a93798d60fc8fe26431b76ae06e8d",
+    "data/pages/dataanalys.json": "db5166bb9f3feb8aebfc2dae37257ecaa8c69e8c52eb89b6960424fc97048826",
+    "data/pages/handelser.json": "d2b7697b0cd65173ced560a60ed2b6690c9f0da776ff73129c4d29a2d63c85ca",
+    "data/pages/index.json": "02027f10094c6a45252a0ec0ec98376d87e017bc2cf70f79b955ffa15c576024",
+    "data/pages/koplage.json": "39a4754fc77dd9f498a12bfa07744d2b5d2ef9f87f72f6bdfc229f67e3fbb263",
+    "data/pages/saljlage.json": "39a4754fc77dd9f498a12bfa07744d2b5d2ef9f87f72f6bdfc229f67e3fbb263",
+    "data.json": "02bcfda89a9cb73746a623ba48d67f18224be99a9c82021f4524b5390161edce",
+    "dataanalys.html": "6b28d1483aa9ca5bafe09e66dcbeabcf121113a141a20fb70fa9afbe070f6a6d",
+    "handelser.html": "2c6c05ec9ec4d6c518ee4a9f692b932ae98f63d1c19cbac68206d0a84c71c5c3",
+    "index.html": "52850ae1edbb99a21b0dd2b49ad15c8883e88a787a9aa8f66cd4cc6c5c1cd03c",
+    "koplage.html": "881152fa703a4cce15a256018f1509c5ea0a15fa3c79e9d4bdf1f91d6606e05f",
+    "lazy-data.js": "30584beed34e927042d1351a2aeb9dbb2a8918298d88150f695d2b088769ecea",
+    "saljlage.html": "bd4f4c32a32de4b785d5130edf48ad6237bba6f0b83a4dd67dff95ea6aae9a7e",
+    "site.js": "7b10aeaceeecc26bddfc3c165ba0fee657a0debf9e685f21e4fc032d56917f9b",
+    "style.css": "8065b37a6ef4ae5f734577e7e5ab57de8771711747fce230774872dabe5a5aa9"
+  }
+}

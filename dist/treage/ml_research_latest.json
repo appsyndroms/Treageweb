@@ -1,0 +1,1178 @@
+{
+  "created_at": "2026-10-19T18:32:08.991302+00:00",
+  "status": "retrospective_ml_research_not_signal",
+  "signal_publication": {
+    "active_signals": 0,
+    "status": "blocked_until_point_in_time_validation",
+    "reason": "Alla källor levererades retrospektivt; träning och utvärdering är forskningsdiagnostik."
+  },
+  "protocol": "research/cross_source/experiments/006-ml-directional.json",
+  "protocol_sha256": "8dd43d162c38fd249eac103072a27e3ab5a12b9b743cb4aca5742c0e854d018b",
+  "source_dataset_ids": {
+    "blankdiss": "74d9b5523a5bb62d546db5928151e3d3b4171a53a1d8dd00e2b290097654c512",
+    "insider": "57ecf03eeb73f15556981fb23520a70d73a8715d39a6b4f31092ddd7d38f03bd",
+    "reports": "e7cde29d0096d1e1cda8e5aefa151923d2c8fa2a607d7a1db8fe19951873f1eb"
+  },
+  "source_time_models": {
+    "blankdiss": "retrospective",
+    "insider": "retrospective",
+    "reports": "retrospective"
+  },
+  "train_period": [
+    "2022-01-01",
+    "2024-09-30"
+  ],
+  "purge_period": [
+    "2024-10-01",
+    "2024-12-31"
+  ],
+  "evaluation_period": [
+    "2025-01-01",
+    "2026-10-16"
+  ],
+  "n_report_events": 3526,
+  "model": "l2_logistic_regression_fixed_gradient_descent",
+  "planned_models": 42,
+  "estimable_comparisons": 14,
+  "comparisons": [
+    {
+      "subset": "blankdiss",
+      "target": "forward_return_5d",
+      "status": "retrospective_temporal_ml_diagnostic_not_signal",
+      "n_train": 920,
+      "n_test": 850,
+      "features": [
+        "blankdiss.short_interest_pct",
+        "blankdiss.short_interest_delta_pp"
+      ],
+      "omitted_features": [],
+      "buy_probability_threshold": 0.55,
+      "sell_probability_threshold": 0.55,
+      "buy_proxy": {
+        "n": 11,
+        "mean_return": -0.02561444048424784,
+        "positive_fraction": 0.36363636363636365,
+        "negative_fraction": 0.6363636363636364
+      },
+      "sell_proxy": {
+        "n": 0,
+        "mean_return": null,
+        "positive_fraction": null,
+        "negative_fraction": null
+      },
+      "test_up_fraction": 0.4976470588235294,
+      "test_down_fraction": 0.4988235294117647,
+      "mean_buy_probability": 0.5435553558602222,
+      "mean_sell_probability": 0.4498022554653963,
+      "model_parameters": {
+        "buy": {
+          "intercept": 0.1698074492895788,
+          "coefficients": [
+            -0.03512864878774318,
+            0.04289953673078232
+          ],
+          "means": [
+            2.1326847826086945,
+            -0.010043478260869565
+          ],
+          "scales": [
+            2.8289283323077767,
+            0.21551505107550656
+          ]
+        },
+        "sell": {
+          "intercept": -0.19611114841521485,
+          "coefficients": [
+            0.04038112628905761,
+            -0.04422438574304435
+          ],
+          "means": [
+            2.1326847826086945,
+            -0.010043478260869565
+          ],
+          "scales": [
+            2.8289283323077767,
+            0.21551505107550656
+          ]
+        }
+      }
+    },
+    {
+      "subset": "blankdiss",
+      "target": "forward_return_20d",
+      "status": "retrospective_temporal_ml_diagnostic_not_signal",
+      "n_train": 920,
+      "n_test": 848,
+      "features": [
+        "blankdiss.short_interest_pct",
+        "blankdiss.short_interest_delta_pp"
+      ],
+      "omitted_features": [],
+      "buy_probability_threshold": 0.55,
+      "sell_probability_threshold": 0.55,
+      "buy_proxy": {
+        "n": 87,
+        "mean_return": -0.023491330057616788,
+        "positive_fraction": 0.4827586206896552,
+        "negative_fraction": 0.5172413793103449
+      },
+      "sell_proxy": {
+        "n": 0,
+        "mean_return": null,
+        "positive_fraction": null,
+        "negative_fraction": null
+      },
+      "test_up_fraction": 0.4858490566037736,
+      "test_down_fraction": 0.5094339622641509,
+      "mean_buy_probability": 0.5445106269789362,
+      "mean_sell_probability": 0.45327399269755353,
+      "model_parameters": {
+        "buy": {
+          "intercept": 0.17844693576929405,
+          "coefficients": [
+            0.02826714902045513,
+            0.06199357543126938
+          ],
+          "means": [
+            2.1326847826086945,
+            -0.010043478260869565
+          ],
+          "scales": [
+            2.8289283323077767,
+            0.21551505107550656
+          ]
+        },
+        "sell": {
+          "intercept": -0.1872047592104268,
+          "coefficients": [
+            -0.026459422020452244,
+            -0.06245323331838761
+          ],
+          "means": [
+            2.1326847826086945,
+            -0.010043478260869565
+          ],
+          "scales": [
+            2.8289283323077767,
+            0.21551505107550656
+          ]
+        }
+      }
+    },
+    {
+      "subset": "blankdiss",
+      "target": "forward_return_60d",
+      "status": "not_estimable_insufficient_labels",
+      "n_train": 0,
+      "n_test": 0,
+      "features": [
+        "blankdiss.short_interest_pct",
+        "blankdiss.short_interest_delta_pp"
+      ],
+      "omitted_features": []
+    },
+    {
+      "subset": "insider",
+      "target": "forward_return_5d",
+      "status": "retrospective_temporal_ml_diagnostic_not_signal",
+      "n_train": 1646,
+      "n_test": 1336,
+      "features": [
+        "insider.insider_net_buy_sek_30d",
+        "insider.insider_buy_count_30d",
+        "insider.insider_sell_count_30d"
+      ],
+      "omitted_features": [],
+      "buy_probability_threshold": 0.55,
+      "sell_probability_threshold": 0.55,
+      "buy_proxy": {
+        "n": 3,
+        "mean_return": -0.02944950017085779,
+        "positive_fraction": 0.3333333333333333,
+        "negative_fraction": 0.6666666666666666
+      },
+      "sell_proxy": {
+        "n": 2,
+        "mean_return": -0.17390222559177015,
+        "positive_fraction": 0.0,
+        "negative_fraction": 1.0
+      },
+      "test_up_fraction": 0.48353293413173654,
+      "test_down_fraction": 0.5127245508982036,
+      "mean_buy_probability": 0.5321310035449207,
+      "mean_sell_probability": 0.46238537740445973,
+      "model_parameters": {
+        "buy": {
+          "intercept": 0.12888488953448132,
+          "coefficients": [
+            -0.020188968830324904,
+            0.005824809695653036,
+            -0.026819154940942204
+          ],
+          "means": [
+            -2582245.651557541,
+            0.16221142162818955,
+            0.04981773997569866
+          ],
+          "scales": [
+            124830708.96030144,
+            0.9326302808946252,
+            0.457099355691147
+          ]
+        },
+        "sell": {
+          "intercept": -0.15092188829989267,
+          "coefficients": [
+            0.03395458242203451,
+            -0.0039059504748260774,
+            0.024885269921274208
+          ],
+          "means": [
+            -2582245.651557541,
+            0.16221142162818955,
+            0.04981773997569866
+          ],
+          "scales": [
+            124830708.96030144,
+            0.9326302808946252,
+            0.457099355691147
+          ]
+        }
+      }
+    },
+    {
+      "subset": "insider",
+      "target": "forward_return_20d",
+      "status": "retrospective_temporal_ml_diagnostic_not_signal",
+      "n_train": 1646,
+      "n_test": 1332,
+      "features": [
+        "insider.insider_net_buy_sek_30d",
+        "insider.insider_buy_count_30d",
+        "insider.insider_sell_count_30d"
+      ],
+      "omitted_features": [],
+      "buy_probability_threshold": 0.55,
+      "sell_probability_threshold": 0.55,
+      "buy_proxy": {
+        "n": 90,
+        "mean_return": -0.020667157835444566,
+        "positive_fraction": 0.4,
+        "negative_fraction": 0.5888888888888889
+      },
+      "sell_proxy": {
+        "n": 0,
+        "mean_return": null,
+        "positive_fraction": null,
+        "negative_fraction": null
+      },
+      "test_up_fraction": 0.466966966966967,
+      "test_down_fraction": 0.5277777777777778,
+      "mean_buy_probability": 0.545633048312105,
+      "mean_sell_probability": 0.4501216491334276,
+      "model_parameters": {
+        "buy": {
+          "intercept": 0.1828366438004628,
+          "coefficients": [
+            -0.03272362153066112,
+            0.02913237186889604,
+            0.025323169478381088
+          ],
+          "means": [
+            -2582245.651557541,
+            0.16221142162818955,
+            0.04981773997569866
+          ],
+          "scales": [
+            124830708.96030144,
+            0.9326302808946252,
+            0.457099355691147
+          ]
+        },
+        "sell": {
+          "intercept": -0.19997329642244882,
+          "coefficients": [
+            0.03223085056270588,
+            -0.026666144703154412,
+            -0.023897007646767242
+          ],
+          "means": [
+            -2582245.651557541,
+            0.16221142162818955,
+            0.04981773997569866
+          ],
+          "scales": [
+            124830708.96030144,
+            0.9326302808946252,
+            0.457099355691147
+          ]
+        }
+      }
+    },
+    {
+      "subset": "insider",
+      "target": "forward_return_60d",
+      "status": "not_estimable_insufficient_labels",
+      "n_train": 0,
+      "n_test": 0,
+      "features": [
+        "insider.insider_net_buy_sek_30d",
+        "insider.insider_buy_count_30d",
+        "insider.insider_sell_count_30d"
+      ],
+      "omitted_features": []
+    },
+    {
+      "subset": "reports",
+      "target": "forward_return_5d",
+      "status": "retrospective_temporal_ml_diagnostic_not_signal",
+      "n_train": 1946,
+      "n_test": 1348,
+      "features": [
+        "reports.prior_return_20d"
+      ],
+      "omitted_features": [
+        "reports.consensus_eps_revision: otillräcklig träningsdata",
+        "reports.consensus_net_profit_revision: otillräcklig träningsdata"
+      ],
+      "buy_probability_threshold": 0.55,
+      "sell_probability_threshold": 0.55,
+      "buy_proxy": {
+        "n": 0,
+        "mean_return": null,
+        "positive_fraction": null,
+        "negative_fraction": null
+      },
+      "sell_proxy": {
+        "n": 0,
+        "mean_return": null,
+        "positive_fraction": null,
+        "negative_fraction": null
+      },
+      "test_up_fraction": 0.4873887240356083,
+      "test_down_fraction": 0.5089020771513353,
+      "mean_buy_probability": 0.5073962043682725,
+      "mean_sell_probability": 0.4862084243584506,
+      "model_parameters": {
+        "buy": {
+          "intercept": 0.030808130096259937,
+          "coefficients": [
+            -0.011140051562271597
+          ],
+          "means": [
+            0.007657804371710933
+          ],
+          "scales": [
+            0.1676625011138537
+          ]
+        },
+        "sell": {
+          "intercept": -0.05546540035068634,
+          "coefficients": [
+            0.0026013480039427106
+          ],
+          "means": [
+            0.007657804371710933
+          ],
+          "scales": [
+            0.1676625011138537
+          ]
+        }
+      }
+    },
+    {
+      "subset": "reports",
+      "target": "forward_return_20d",
+      "status": "retrospective_temporal_ml_diagnostic_not_signal",
+      "n_train": 1946,
+      "n_test": 1344,
+      "features": [
+        "reports.prior_return_20d"
+      ],
+      "omitted_features": [
+        "reports.consensus_eps_revision: otillräcklig träningsdata",
+        "reports.consensus_net_profit_revision: otillräcklig träningsdata"
+      ],
+      "buy_probability_threshold": 0.55,
+      "sell_probability_threshold": 0.55,
+      "buy_proxy": {
+        "n": 0,
+        "mean_return": null,
+        "positive_fraction": null,
+        "negative_fraction": null
+      },
+      "sell_proxy": {
+        "n": 0,
+        "mean_return": null,
+        "positive_fraction": null,
+        "negative_fraction": null
+      },
+      "test_up_fraction": 0.47098214285714285,
+      "test_down_fraction": 0.5238095238095238,
+      "mean_buy_probability": 0.5095511683413433,
+      "mean_sell_probability": 0.4864534956674052,
+      "model_parameters": {
+        "buy": {
+          "intercept": 0.04106956217638604,
+          "coefficients": [
+            -0.025697516588195052
+          ],
+          "means": [
+            0.007657804371710933
+          ],
+          "scales": [
+            0.1676625011138537
+          ]
+        },
+        "sell": {
+          "intercept": -0.05750588887499842,
+          "coefficients": [
+            0.029686832832642236
+          ],
+          "means": [
+            0.007657804371710933
+          ],
+          "scales": [
+            0.1676625011138537
+          ]
+        }
+      }
+    },
+    {
+      "subset": "reports",
+      "target": "forward_return_60d",
+      "status": "not_estimable_insufficient_labels",
+      "n_train": 0,
+      "n_test": 0,
+      "features": [
+        "reports.prior_return_20d"
+      ],
+      "omitted_features": [
+        "reports.consensus_eps_revision: otillräcklig träningsdata",
+        "reports.consensus_net_profit_revision: otillräcklig träningsdata"
+      ]
+    },
+    {
+      "subset": "blankdiss+insider",
+      "target": "forward_return_5d",
+      "status": "retrospective_temporal_ml_diagnostic_not_signal",
+      "n_train": 918,
+      "n_test": 841,
+      "features": [
+        "blankdiss.short_interest_pct",
+        "blankdiss.short_interest_delta_pp",
+        "insider.insider_net_buy_sek_30d",
+        "insider.insider_buy_count_30d",
+        "insider.insider_sell_count_30d"
+      ],
+      "omitted_features": [],
+      "buy_probability_threshold": 0.55,
+      "sell_probability_threshold": 0.55,
+      "buy_proxy": {
+        "n": 22,
+        "mean_return": -0.0121884879403598,
+        "positive_fraction": 0.4090909090909091,
+        "negative_fraction": 0.5909090909090909
+      },
+      "sell_proxy": {
+        "n": 2,
+        "mean_return": -0.05848797857257293,
+        "positive_fraction": 0.5,
+        "negative_fraction": 0.5
+      },
+      "test_up_fraction": 0.4946492271105826,
+      "test_down_fraction": 0.5017835909631391,
+      "mean_buy_probability": 0.5448330832356946,
+      "mean_sell_probability": 0.4485051621653259,
+      "model_parameters": {
+        "buy": {
+          "intercept": 0.1746988941713421,
+          "coefficients": [
+            -0.03162041134332321,
+            0.04190209356190958,
+            -0.02567717902395084,
+            -0.0378341559215978,
+            0.027693409426442845
+          ],
+          "means": [
+            2.134357298474944,
+            -0.010065359477124183,
+            -3217119.6335344976,
+            0.13071895424836602,
+            0.049019607843137254
+          ],
+          "scales": [
+            2.831499862522749,
+            0.21574917878509325,
+            164295945.80128413,
+            0.8442511768150469,
+            0.5247617133753966
+          ]
+        },
+        "sell": {
+          "intercept": -0.20106862368444714,
+          "coefficients": [
+            0.03665564631743202,
+            -0.04308017477194816,
+            0.024912725820140386,
+            0.04066895988139306,
+            -0.025699659161463852
+          ],
+          "means": [
+            2.134357298474944,
+            -0.010065359477124183,
+            -3217119.6335344976,
+            0.13071895424836602,
+            0.049019607843137254
+          ],
+          "scales": [
+            2.831499862522749,
+            0.21574917878509325,
+            164295945.80128413,
+            0.8442511768150469,
+            0.5247617133753966
+          ]
+        }
+      }
+    },
+    {
+      "subset": "blankdiss+insider",
+      "target": "forward_return_20d",
+      "status": "retrospective_temporal_ml_diagnostic_not_signal",
+      "n_train": 918,
+      "n_test": 839,
+      "features": [
+        "blankdiss.short_interest_pct",
+        "blankdiss.short_interest_delta_pp",
+        "insider.insider_net_buy_sek_30d",
+        "insider.insider_buy_count_30d",
+        "insider.insider_sell_count_30d"
+      ],
+      "omitted_features": [],
+      "buy_probability_threshold": 0.55,
+      "sell_probability_threshold": 0.55,
+      "buy_proxy": {
+        "n": 84,
+        "mean_return": -0.02584902659607182,
+        "positive_fraction": 0.40476190476190477,
+        "negative_fraction": 0.5952380952380952
+      },
+      "sell_proxy": {
+        "n": 0,
+        "mean_return": null,
+        "positive_fraction": null,
+        "negative_fraction": null
+      },
+      "test_up_fraction": 0.4827175208581645,
+      "test_down_fraction": 0.5125148986889154,
+      "mean_buy_probability": 0.5456033226809123,
+      "mean_sell_probability": 0.45217359198896245,
+      "model_parameters": {
+        "buy": {
+          "intercept": 0.18471856119784705,
+          "coefficients": [
+            0.02672029274218788,
+            0.06514858351262431,
+            -0.032125213774867524,
+            0.025149052986465026,
+            0.10148963851764839
+          ],
+          "means": [
+            2.134357298474944,
+            -0.010065359477124183,
+            -3217119.6335344976,
+            0.13071895424836602,
+            0.049019607843137254
+          ],
+          "scales": [
+            2.831499862522749,
+            0.21574917878509325,
+            164295945.80128413,
+            0.8442511768150469,
+            0.5247617133753966
+          ]
+        },
+        "sell": {
+          "intercept": -0.1934849422758719,
+          "coefficients": [
+            -0.02498097180078035,
+            -0.06555496934256896,
+            0.03186804448438888,
+            -0.024213576814623775,
+            -0.10068276061877716
+          ],
+          "means": [
+            2.134357298474944,
+            -0.010065359477124183,
+            -3217119.6335344976,
+            0.13071895424836602,
+            0.049019607843137254
+          ],
+          "scales": [
+            2.831499862522749,
+            0.21574917878509325,
+            164295945.80128413,
+            0.8442511768150469,
+            0.5247617133753966
+          ]
+        }
+      }
+    },
+    {
+      "subset": "blankdiss+insider",
+      "target": "forward_return_60d",
+      "status": "not_estimable_insufficient_labels",
+      "n_train": 0,
+      "n_test": 0,
+      "features": [
+        "blankdiss.short_interest_pct",
+        "blankdiss.short_interest_delta_pp",
+        "insider.insider_net_buy_sek_30d",
+        "insider.insider_buy_count_30d",
+        "insider.insider_sell_count_30d"
+      ],
+      "omitted_features": []
+    },
+    {
+      "subset": "blankdiss+reports",
+      "target": "forward_return_5d",
+      "status": "retrospective_temporal_ml_diagnostic_not_signal",
+      "n_train": 920,
+      "n_test": 849,
+      "features": [
+        "blankdiss.short_interest_pct",
+        "blankdiss.short_interest_delta_pp",
+        "reports.prior_return_20d"
+      ],
+      "omitted_features": [
+        "reports.consensus_eps_revision: otillräcklig träningsdata",
+        "reports.consensus_net_profit_revision: otillräcklig träningsdata"
+      ],
+      "buy_probability_threshold": 0.55,
+      "sell_probability_threshold": 0.55,
+      "buy_proxy": {
+        "n": 123,
+        "mean_return": 0.021116000661568053,
+        "positive_fraction": 0.4796747967479675,
+        "negative_fraction": 0.5203252032520326
+      },
+      "sell_proxy": {
+        "n": 0,
+        "mean_return": null,
+        "positive_fraction": null,
+        "negative_fraction": null
+      },
+      "test_up_fraction": 0.49823321554770317,
+      "test_down_fraction": 0.49823321554770317,
+      "mean_buy_probability": 0.5429873405417995,
+      "mean_sell_probability": 0.44989828542936655,
+      "model_parameters": {
+        "buy": {
+          "intercept": 0.16982557860203198,
+          "coefficients": [
+            -0.035466958477863054,
+            0.042523984623453574,
+            -0.023183408351108
+          ],
+          "means": [
+            2.1326847826086945,
+            -0.010043478260869565,
+            0.019868481711683594
+          ],
+          "scales": [
+            2.8289283323077767,
+            0.21551505107550656,
+            0.13198124366712793
+          ]
+        },
+        "sell": {
+          "intercept": -0.19611201021183172,
+          "coefficients": [
+            0.04043750483436694,
+            -0.04416144227031924,
+            0.0038922049563329016
+          ],
+          "means": [
+            2.1326847826086945,
+            -0.010043478260869565,
+            0.019868481711683594
+          ],
+          "scales": [
+            2.8289283323077767,
+            0.21551505107550656,
+            0.13198124366712793
+          ]
+        }
+      }
+    },
+    {
+      "subset": "blankdiss+reports",
+      "target": "forward_return_20d",
+      "status": "retrospective_temporal_ml_diagnostic_not_signal",
+      "n_train": 920,
+      "n_test": 847,
+      "features": [
+        "blankdiss.short_interest_pct",
+        "blankdiss.short_interest_delta_pp",
+        "reports.prior_return_20d"
+      ],
+      "omitted_features": [
+        "reports.consensus_eps_revision: otillräcklig träningsdata",
+        "reports.consensus_net_profit_revision: otillräcklig träningsdata"
+      ],
+      "buy_probability_threshold": 0.55,
+      "sell_probability_threshold": 0.55,
+      "buy_proxy": {
+        "n": 235,
+        "mean_return": -0.006903608407408576,
+        "positive_fraction": 0.49361702127659574,
+        "negative_fraction": 0.5063829787234042
+      },
+      "sell_proxy": {
+        "n": 1,
+        "mean_return": 1.6449999809265137,
+        "positive_fraction": 1.0,
+        "negative_fraction": 0.0
+      },
+      "test_up_fraction": 0.48642266824085006,
+      "test_down_fraction": 0.5088547815820543,
+      "mean_buy_probability": 0.5428720906203972,
+      "mean_sell_probability": 0.4548831535207422,
+      "model_parameters": {
+        "buy": {
+          "intercept": 0.1785251065034986,
+          "coefficients": [
+            0.027338680534697433,
+            0.06099851714977055,
+            -0.06568459723156139
+          ],
+          "means": [
+            2.1326847826086945,
+            -0.010043478260869565,
+            0.019868481711683594
+          ],
+          "scales": [
+            2.8289283323077767,
+            0.21551505107550656,
+            0.13198124366712793
+          ]
+        },
+        "sell": {
+          "intercept": -0.18729086665044023,
+          "coefficients": [
+            -0.02554366366765531,
+            -0.06147285671594815,
+            0.06459537977568452
+          ],
+          "means": [
+            2.1326847826086945,
+            -0.010043478260869565,
+            0.019868481711683594
+          ],
+          "scales": [
+            2.8289283323077767,
+            0.21551505107550656,
+            0.13198124366712793
+          ]
+        }
+      }
+    },
+    {
+      "subset": "blankdiss+reports",
+      "target": "forward_return_60d",
+      "status": "not_estimable_insufficient_labels",
+      "n_train": 0,
+      "n_test": 0,
+      "features": [
+        "blankdiss.short_interest_pct",
+        "blankdiss.short_interest_delta_pp",
+        "reports.prior_return_20d"
+      ],
+      "omitted_features": [
+        "reports.consensus_eps_revision: otillräcklig träningsdata",
+        "reports.consensus_net_profit_revision: otillräcklig träningsdata"
+      ]
+    },
+    {
+      "subset": "insider+reports",
+      "target": "forward_return_5d",
+      "status": "retrospective_temporal_ml_diagnostic_not_signal",
+      "n_train": 1645,
+      "n_test": 1335,
+      "features": [
+        "insider.insider_net_buy_sek_30d",
+        "insider.insider_buy_count_30d",
+        "insider.insider_sell_count_30d",
+        "reports.prior_return_20d"
+      ],
+      "omitted_features": [
+        "reports.consensus_eps_revision: otillräcklig träningsdata",
+        "reports.consensus_net_profit_revision: otillräcklig träningsdata"
+      ],
+      "buy_probability_threshold": 0.55,
+      "sell_probability_threshold": 0.55,
+      "buy_proxy": {
+        "n": 37,
+        "mean_return": 0.05159234868693299,
+        "positive_fraction": 0.40540540540540543,
+        "negative_fraction": 0.5945945945945946
+      },
+      "sell_proxy": {
+        "n": 2,
+        "mean_return": -0.17390222559177015,
+        "positive_fraction": 0.0,
+        "negative_fraction": 1.0
+      },
+      "test_up_fraction": 0.48389513108614235,
+      "test_down_fraction": 0.5123595505617977,
+      "mean_buy_probability": 0.5316881666516416,
+      "mean_sell_probability": 0.4626263548249266,
+      "model_parameters": {
+        "buy": {
+          "intercept": 0.1301038484681366,
+          "coefficients": [
+            -0.019503516925570244,
+            0.004543018904361615,
+            -0.02574267118847153,
+            -0.05653085343943935
+          ],
+          "means": [
+            -2583815.405753017,
+            0.16231003039513678,
+            0.04984802431610942,
+            0.01780148558026332
+          ],
+          "scales": [
+            124868629.41956027,
+            0.9329051339699588,
+            0.4572366197577146,
+            0.17476281325511378
+          ]
+        },
+        "sell": {
+          "intercept": -0.15222071798310075,
+          "coefficients": [
+            0.03347922703269904,
+            -0.002880435423775635,
+            0.024081896075030845,
+            0.0428411613837423
+          ],
+          "means": [
+            -2583815.405753017,
+            0.16231003039513678,
+            0.04984802431610942,
+            0.01780148558026332
+          ],
+          "scales": [
+            124868629.41956027,
+            0.9329051339699588,
+            0.4572366197577146,
+            0.17476281325511378
+          ]
+        }
+      }
+    },
+    {
+      "subset": "insider+reports",
+      "target": "forward_return_20d",
+      "status": "retrospective_temporal_ml_diagnostic_not_signal",
+      "n_train": 1645,
+      "n_test": 1331,
+      "features": [
+        "insider.insider_net_buy_sek_30d",
+        "insider.insider_buy_count_30d",
+        "insider.insider_sell_count_30d",
+        "reports.prior_return_20d"
+      ],
+      "omitted_features": [
+        "reports.consensus_eps_revision: otillräcklig träningsdata",
+        "reports.consensus_net_profit_revision: otillräcklig träningsdata"
+      ],
+      "buy_probability_threshold": 0.55,
+      "sell_probability_threshold": 0.55,
+      "buy_proxy": {
+        "n": 367,
+        "mean_return": -0.008784974143157223,
+        "positive_fraction": 0.46321525885558584,
+        "negative_fraction": 0.5313351498637602
+      },
+      "sell_proxy": {
+        "n": 2,
+        "mean_return": 0.7718554479876465,
+        "positive_fraction": 0.5,
+        "negative_fraction": 0.5
+      },
+      "test_up_fraction": 0.4673178061607814,
+      "test_down_fraction": 0.5274229902329076,
+      "mean_buy_probability": 0.5448847324896696,
+      "mean_sell_probability": 0.45094179291416714,
+      "model_parameters": {
+        "buy": {
+          "intercept": 0.18402435046934562,
+          "coefficients": [
+            -0.03191104051312994,
+            0.02754389802647114,
+            0.026737027353427572,
+            -0.0762065963680958
+          ],
+          "means": [
+            -2583815.405753017,
+            0.16231003039513678,
+            0.04984802431610942,
+            0.01780148558026332
+          ],
+          "scales": [
+            124868629.41956027,
+            0.9329051339699588,
+            0.4572366197577146,
+            0.17476281325511378
+          ]
+        },
+        "sell": {
+          "intercept": -0.20116117136103445,
+          "coefficients": [
+            0.031367321228878295,
+            -0.024988743738607346,
+            -0.025423471424110774,
+            0.0811695589056369
+          ],
+          "means": [
+            -2583815.405753017,
+            0.16231003039513678,
+            0.04984802431610942,
+            0.01780148558026332
+          ],
+          "scales": [
+            124868629.41956027,
+            0.9329051339699588,
+            0.4572366197577146,
+            0.17476281325511378
+          ]
+        }
+      }
+    },
+    {
+      "subset": "insider+reports",
+      "target": "forward_return_60d",
+      "status": "not_estimable_insufficient_labels",
+      "n_train": 0,
+      "n_test": 0,
+      "features": [
+        "insider.insider_net_buy_sek_30d",
+        "insider.insider_buy_count_30d",
+        "insider.insider_sell_count_30d",
+        "reports.prior_return_20d"
+      ],
+      "omitted_features": [
+        "reports.consensus_eps_revision: otillräcklig träningsdata",
+        "reports.consensus_net_profit_revision: otillräcklig träningsdata"
+      ]
+    },
+    {
+      "subset": "blankdiss+insider+reports",
+      "target": "forward_return_5d",
+      "status": "retrospective_temporal_ml_diagnostic_not_signal",
+      "n_train": 918,
+      "n_test": 840,
+      "features": [
+        "blankdiss.short_interest_pct",
+        "blankdiss.short_interest_delta_pp",
+        "insider.insider_net_buy_sek_30d",
+        "insider.insider_buy_count_30d",
+        "insider.insider_sell_count_30d",
+        "reports.prior_return_20d"
+      ],
+      "omitted_features": [
+        "reports.consensus_eps_revision: otillräcklig träningsdata",
+        "reports.consensus_net_profit_revision: otillräcklig träningsdata"
+      ],
+      "buy_probability_threshold": 0.55,
+      "sell_probability_threshold": 0.55,
+      "buy_proxy": {
+        "n": 209,
+        "mean_return": 0.011488229834081083,
+        "positive_fraction": 0.5023923444976076,
+        "negative_fraction": 0.49760765550239233
+      },
+      "sell_proxy": {
+        "n": 2,
+        "mean_return": -0.05848797857257293,
+        "positive_fraction": 0.5,
+        "negative_fraction": 0.5
+      },
+      "test_up_fraction": 0.49523809523809526,
+      "test_down_fraction": 0.5011904761904762,
+      "mean_buy_probability": 0.5440922655740635,
+      "mean_sell_probability": 0.44872580728739925,
+      "model_parameters": {
+        "buy": {
+          "intercept": 0.17472080599895987,
+          "coefficients": [
+            -0.031877014733869176,
+            0.04142020446870968,
+            -0.024896997911951144,
+            -0.03909222475410581,
+            0.028741229902503405,
+            -0.027482639078986904
+          ],
+          "means": [
+            2.134357298474944,
+            -0.010065359477124183,
+            -3217119.6335344976,
+            0.13071895424836602,
+            0.049019607843137254,
+            0.02002745130722998
+          ],
+          "scales": [
+            2.831499862522749,
+            0.21574917878509325,
+            164295945.80128413,
+            0.8442511768150469,
+            0.5247617133753966,
+            0.1320217098347288
+          ]
+        },
+        "sell": {
+          "intercept": -0.20107121065950387,
+          "coefficients": [
+            0.03673134977056444,
+            -0.04293752573739232,
+            0.024682049368710515,
+            0.041040921865577284,
+            -0.02601119576225366,
+            0.008159216976088212
+          ],
+          "means": [
+            2.134357298474944,
+            -0.010065359477124183,
+            -3217119.6335344976,
+            0.13071895424836602,
+            0.049019607843137254,
+            0.02002745130722998
+          ],
+          "scales": [
+            2.831499862522749,
+            0.21574917878509325,
+            164295945.80128413,
+            0.8442511768150469,
+            0.5247617133753966,
+            0.1320217098347288
+          ]
+        }
+      }
+    },
+    {
+      "subset": "blankdiss+insider+reports",
+      "target": "forward_return_20d",
+      "status": "retrospective_temporal_ml_diagnostic_not_signal",
+      "n_train": 918,
+      "n_test": 838,
+      "features": [
+        "blankdiss.short_interest_pct",
+        "blankdiss.short_interest_delta_pp",
+        "insider.insider_net_buy_sek_30d",
+        "insider.insider_buy_count_30d",
+        "insider.insider_sell_count_30d",
+        "reports.prior_return_20d"
+      ],
+      "omitted_features": [
+        "reports.consensus_eps_revision: otillräcklig träningsdata",
+        "reports.consensus_net_profit_revision: otillräcklig träningsdata"
+      ],
+      "buy_probability_threshold": 0.55,
+      "sell_probability_threshold": 0.55,
+      "buy_proxy": {
+        "n": 215,
+        "mean_return": -0.0032622539463109754,
+        "positive_fraction": 0.5023255813953489,
+        "negative_fraction": 0.49767441860465117
+      },
+      "sell_proxy": {
+        "n": 1,
+        "mean_return": 1.6449999809265137,
+        "positive_fraction": 1.0,
+        "negative_fraction": 0.0
+      },
+      "test_up_fraction": 0.48329355608591884,
+      "test_down_fraction": 0.5119331742243437,
+      "mean_buy_probability": 0.5437010045672825,
+      "mean_sell_probability": 0.4540439573898333,
+      "model_parameters": {
+        "buy": {
+          "intercept": 0.18471366547599413,
+          "coefficients": [
+            0.026085005768832357,
+            0.06395462021658992,
+            -0.030140290214357743,
+            0.02217930284607032,
+            0.10235291249911717,
+            -0.06905048447175746
+          ],
+          "means": [
+            2.134357298474944,
+            -0.010065359477124183,
+            -3217119.6335344976,
+            0.13071895424836602,
+            0.049019607843137254,
+            0.02002745130722998
+          ],
+          "scales": [
+            2.831499862522749,
+            0.21574917878509325,
+            164295945.80128413,
+            0.8442511768150469,
+            0.5247617133753966,
+            0.1320217098347288
+          ]
+        },
+        "sell": {
+          "intercept": -0.19349106254712994,
+          "coefficients": [
+            -0.02435318610262835,
+            -0.06437808761414755,
+            0.029912726254942068,
+            -0.02128575533082725,
+            -0.10154381905602042,
+            0.06798106829571833
+          ],
+          "means": [
+            2.134357298474944,
+            -0.010065359477124183,
+            -3217119.6335344976,
+            0.13071895424836602,
+            0.049019607843137254,
+            0.02002745130722998
+          ],
+          "scales": [
+            2.831499862522749,
+            0.21574917878509325,
+            164295945.80128413,
+            0.8442511768150469,
+            0.5247617133753966,
+            0.1320217098347288
+          ]
+        }
+      }
+    },
+    {
+      "subset": "blankdiss+insider+reports",
+      "target": "forward_return_60d",
+      "status": "not_estimable_insufficient_labels",
+      "n_train": 0,
+      "n_test": 0,
+      "features": [
+        "blankdiss.short_interest_pct",
+        "blankdiss.short_interest_delta_pp",
+        "insider.insider_net_buy_sek_30d",
+        "insider.insider_buy_count_30d",
+        "insider.insider_sell_count_30d",
+        "reports.prior_return_20d"
+      ],
+      "omitted_features": [
+        "reports.consensus_eps_revision: otillräcklig träningsdata",
+        "reports.consensus_net_profit_revision: otillräcklig träningsdata"
+      ]
+    }
+  ],
+  "markdown": "# Tvärkällebaserad ML-forskning\n\nKörd 2026-10-19T18:32:08.991302+00:00. Status: retrospektiv forskningsdiagnostik, aldrig aktiv signal.\nModellerna tränas separat för varje fördeklarerad källmängd och horisont. Perioden 2024-10-01–2024-12-31 är spärrad mellan träning och utvärdering.\nKällorna är retrospektiva. Resultaten är därför inte punkt-i-tid-validerade och får inte tolkas som köp- eller säljsignaler.\n\n| Källor | Horisont | Träning | Test | Köp-proxy: N / medel / upp | Sälj-proxy: N / medel / ned | Status |\n|---|---:|---:|---:|---:|---:|---|\n| blankdiss | forward_return_5d | 920 | 850 | 11 / -2.6% / 36.4% | 0 / — / — | retrospective_temporal_ml_diagnostic_not_signal |\n| blankdiss | forward_return_20d | 920 | 848 | 87 / -2.3% / 48.3% | 0 / — / — | retrospective_temporal_ml_diagnostic_not_signal |\n| blankdiss | forward_return_60d | 0 | 0 | 0 / — / — | 0 / — / — | not_estimable_insufficient_labels |\n| insider | forward_return_5d | 1646 | 1336 | 3 / -2.9% / 33.3% | 2 / -17.4% / 100.0% | retrospective_temporal_ml_diagnostic_not_signal |\n| insider | forward_return_20d | 1646 | 1332 | 90 / -2.1% / 40.0% | 0 / — / — | retrospective_temporal_ml_diagnostic_not_signal |\n| insider | forward_return_60d | 0 | 0 | 0 / — / — | 0 / — / — | not_estimable_insufficient_labels |\n| reports | forward_return_5d | 1946 | 1348 | 0 / — / — | 0 / — / — | retrospective_temporal_ml_diagnostic_not_signal |\n| reports | forward_return_20d | 1946 | 1344 | 0 / — / — | 0 / — / — | retrospective_temporal_ml_diagnostic_not_signal |\n| reports | forward_return_60d | 0 | 0 | 0 / — / — | 0 / — / — | not_estimable_insufficient_labels |\n| blankdiss+insider | forward_return_5d | 918 | 841 | 22 / -1.2% / 40.9% | 2 / -5.8% / 50.0% | retrospective_temporal_ml_diagnostic_not_signal |\n| blankdiss+insider | forward_return_20d | 918 | 839 | 84 / -2.6% / 40.5% | 0 / — / — | retrospective_temporal_ml_diagnostic_not_signal |\n| blankdiss+insider | forward_return_60d | 0 | 0 | 0 / — / — | 0 / — / — | not_estimable_insufficient_labels |\n| blankdiss+reports | forward_return_5d | 920 | 849 | 123 / 2.1% / 48.0% | 0 / — / — | retrospective_temporal_ml_diagnostic_not_signal |\n| blankdiss+reports | forward_return_20d | 920 | 847 | 235 / -0.7% / 49.4% | 1 / 164.5% / 0.0% | retrospective_temporal_ml_diagnostic_not_signal |\n| blankdiss+reports | forward_return_60d | 0 | 0 | 0 / — / — | 0 / — / — | not_estimable_insufficient_labels |\n| insider+reports | forward_return_5d | 1645 | 1335 | 37 / 5.2% / 40.5% | 2 / -17.4% / 100.0% | retrospective_temporal_ml_diagnostic_not_signal |\n| insider+reports | forward_return_20d | 1645 | 1331 | 367 / -0.9% / 46.3% | 2 / 77.2% / 50.0% | retrospective_temporal_ml_diagnostic_not_signal |\n| insider+reports | forward_return_60d | 0 | 0 | 0 / — / — | 0 / — / — | not_estimable_insufficient_labels |\n| blankdiss+insider+reports | forward_return_5d | 918 | 840 | 209 / 1.1% / 50.2% | 2 / -5.8% / 50.0% | retrospective_temporal_ml_diagnostic_not_signal |\n| blankdiss+insider+reports | forward_return_20d | 918 | 838 | 215 / -0.3% / 50.2% | 1 / 164.5% / 0.0% | retrospective_temporal_ml_diagnostic_not_signal |\n| blankdiss+insider+reports | forward_return_60d | 0 | 0 | 0 / — / — | 0 / — / — | not_estimable_insufficient_labels |\n\nModellerna använder endast features som har tillräcklig täckning i träningsperioden; rapportkonsensus med otillräcklig historik redovisas som utelämnad. Sälj-proxy avser fortsatt rapporterad avkastning efter ett negativt modellutfall; blankningskostnad och faktisk exekvering ingår inte.\n"
+}

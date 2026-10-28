@@ -1,0 +1,97 @@
+{
+  "created_at": "2026-10-19T18:32:42.458235+00:00",
+  "frozen_at": "2026-10-11T12:55:19.980931+00:00",
+  "status": "captured_and_scored",
+  "exports": {
+    "blankdiss": {
+      "status": "ready",
+      "rows": 596,
+      "dataset_id": "74d9b5523a5bb62d546db5928151e3d3b4171a53a1d8dd00e2b290097654c512"
+    },
+    "reports": {
+      "status": "ready",
+      "rows": 6,
+      "dataset_id": "e7cde29d0096d1e1cda8e5aefa151923d2c8fa2a607d7a1db8fe19951873f1eb"
+    },
+    "insider": {
+      "status": "ready",
+      "rows": 1396,
+      "dataset_id": "2ed921bffd94db4d6e37671aa54a376b0c152a7d762f664672973e3c1db5a0f9"
+    }
+  },
+  "capture": {
+    "captured_at": "2026-10-19T18:32:51.688689+00:00",
+    "frozen_at": "2026-10-11T12:55:19.980931+00:00",
+    "status": "captured",
+    "sources": [
+      {
+        "producer": "blankdiss",
+        "new_rows": 0,
+        "total_rows": 645,
+        "dataset_id": "21cdd60910d49720349dff445aece072bcd5dc15afb903a1a0e97842f744b2d6"
+      },
+      {
+        "producer": "insider",
+        "new_rows": 537,
+        "total_rows": 2628,
+        "dataset_id": "b9bb721dc21e50ecf414998f3e4054f0262f8c4fe87dbd7bc913b19164dab212"
+      },
+      {
+        "producer": "reports",
+        "new_rows": 0,
+        "total_rows": 6,
+        "dataset_id": "2350238e15cfe5634b9d726fa7ac4a0a9baafd84d67ef313aa3bec1c147254e5"
+      },
+      {
+        "producer": "reports_consensus",
+        "new_rows": 0,
+        "total_rows": 0,
+        "dataset_id": "85dd93be04ca106360bc8a5b2c1473cda34879b9476be43e91789b79c4249387"
+      }
+    ],
+    "github_used": false
+  },
+  "shadow": {
+    "run_id": "local-shadow-a299b95cbbc24ec8",
+    "created_at": "2026-10-19T18:32:51.791207+00:00",
+    "status": "captured",
+    "candidate_family_id": "004-core-level-source-subsets-v1",
+    "source_dataset_ids": {
+      "blankdiss": "21cdd60910d49720349dff445aece072bcd5dc15afb903a1a0e97842f744b2d6",
+      "insider": "b9bb721dc21e50ecf414998f3e4054f0262f8c4fe87dbd7bc913b19164dab212",
+      "reports": "2350238e15cfe5634b9d726fa7ac4a0a9baafd84d67ef313aa3bec1c147254e5"
+    },
+    "gates": {
+      "passed": true,
+      "failures": []
+    },
+    "candidate_count": 7,
+    "new_decision_events": 466,
+    "new_report_events": 0,
+    "candidate_observations_written": 466,
+    "github_used": false,
+    "invalid_observations_excluded": 639,
+    "outcome_followup": {
+      "observations": 3952,
+      "matured_outcomes_added": 0,
+      "invalid_observations_excluded": 639,
+      "outcomes_total": 0,
+      "price_rows": 280437,
+      "market_days": 1204,
+      "price_file": "/Users/ronnieengstrand/Git/Treage/Reports/data/inputs/adjusted_prices.jsonl",
+      "market_file": "/Users/ronnieengstrand/Git/Treage/Reports/data/inputs/market.jsonl"
+    },
+    "lifecycle_receipts": [
+      ".local/research-review/receipts/Treage/004-001-BLANKDISS/local-shadow-a299b95cbbc24ec8.json",
+      ".local/research-review/receipts/Treage/004-001-INSIDER/local-shadow-a299b95cbbc24ec8.json",
+      ".local/research-review/receipts/Treage/004-001-REPORTS/local-shadow-a299b95cbbc24ec8.json",
+      ".local/research-review/receipts/Treage/004-001-BLANKDISS-INSIDER/local-shadow-a299b95cbbc24ec8.json",
+      ".local/research-review/receipts/Treage/004-001-BLANKDISS-REPORTS/local-shadow-a299b95cbbc24ec8.json",
+      ".local/research-review/receipts/Treage/004-001-INSIDER-REPORTS/local-shadow-a299b95cbbc24ec8.json",
+      ".local/research-review/receipts/Treage/004-001-BLANKDISS-INSIDER-REPORTS/local-shadow-a299b95cbbc24ec8.json"
+    ]
+  },
+  "failures": [],
+  "active_signals": 0,
+  "note": "Shadowklassningar är ej validerade Treage-signaler; utfall följs separat över 5/20/60 handelsdagar."
+}

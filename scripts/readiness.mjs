@@ -21,23 +21,32 @@ export function reportDate(now) {
 
 function validData(data, producer, expected) {
   const local = data?.execution_environment === 'local';
+  const localSnapshot = local && data?.session === 'local_snapshot';
   const validRunId = local
     ? /^local-[0-9]{8}T[0-9]{6}Z-[a-f0-9]{8}$/.test(String(data.run_id)) && /^[0-9a-f]{64}$/.test(data.working_tree_sha256 || '')
     : /^[1-9][0-9]*$/.test(String(data?.run_id));
+  const validRevision = localSnapshot
+    ? /^local-[0-9a-f]{40}$/.test(data.revision || '')
+    : /^[0-9a-f]{40}$/.test(data?.revision || '');
   if (!data || data.version !== 1 || data.producer !== producer || data.status !== 'complete' ||
-      data.session !== 'evening' || data.batch_date !== expected ||
-      !/^[0-9a-f]{40}$/.test(data.revision || '') || !validRunId ||
+      (!localSnapshot && data.session !== 'evening') || data.batch_date !== expected ||
+      !validRevision || !validRunId ||
       !Number.isInteger(data.run_attempt) || data.run_attempt < 1) return false;
   const created = new Date(data.run_created_at), completed = new Date(data.completed_at);
   if (!Number.isFinite(created.getTime()) || !Number.isFinite(completed.getTime()) || completed < created) return false;
-  const hour = localClock(created).hour;
-  if ((hour >= 6 && hour < 18) || reportDate(created) !== expected) return false;
+  if (!localSnapshot) {
+    const hour = localClock(created).hour;
+    if ((hour >= 6 && hour < 18) || reportDate(created) !== expected) return false;
+  }
   return producer !== 'treage' || sourceProjects.every(source => validData(data.sources?.[source], source, expected));
 }
 
 async function fileHashes(directory, prefix = '') {
   const hashes = {};
   for (const entry of await readdir(path.join(directory, prefix), { withFileTypes: true })) {
+    // Finder may create AppleDouble sidecars on the T9 volume. They are not
+    // delivered website assets and are excluded from the local receipts.
+    if (entry.name.startsWith('._')) continue;
     const relative = prefix ? prefix + '/' + entry.name : entry.name;
     const filename = path.join(directory, relative);
     if ((await lstat(filename)).isSymbolicLink()) throw new Error('Symbolisk länk i webbpaketet');

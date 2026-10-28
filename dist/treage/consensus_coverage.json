@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-19T18:32:51+00:00",
+  "report_event_count": 3531,
+  "counts": {
+    "missing_report_period": 1061,
+    "no_exact_issuer_period_archive_match": 2465,
+    "publisher_timestamp_before_report": 5,
+    "report_events": 3531,
+    "report_period_known": 2470
+  },
+  "period_match_blockers": {
+    "issuer_name_only_identity_unverified": 3,
+    "no_exact_normalized_issuer_name_in_mfn_archive": 2378,
+    "verified_issuer_history_but_no_period_match": 84
+  },
+  "period_match_blocker_labels": {
+    "issuer_name_only_identity_unverified": "Bara bolagsnamnet matchar; juridisk identitet är inte verifierad och namnmatchning används inte.",
+    "no_exact_normalized_issuer_name_in_mfn_archive": "Ingen exakt bolagsnamnsträff finns i det sparade MFN-arkivet.",
+    "verified_issuer_history_but_no_period_match": "Emittenten finns med verifierad identitet, men arkivets prognosperiod matchar inte rapportperioden."
+  },
+  "publisher_timestamped_candidate_rows": 35,
+  "publisher_timestamped_candidate_events": 5,
+  "pit_export_rows": 0,
+  "pit_export_events": 0,
+  "source_history_sha256": "babb865b92cfdd4866eda2be20910a4abacddd98a00d6bbb18d1503b1e23e298",
+  "report_events_sha256": "9a2ecd214ec386c58a2af62667c1031c12782d27f118642a3e8158dd7efc6bab",
+  "policy": "exact_LEI_entity_period_metric_basis_unit_mean; source_verified; observed_and_available_strictly_before_report; never_backdate",
+  "dataset_id": "85dd93be04ca106360bc8a5b2c1473cda34879b9476be43e91789b79c4249387"
+}

@@ -1,0 +1,17 @@
+{
+  "status": "blocked_active_signal_publication",
+  "active_signals": 0,
+  "batch_date": "2026-10-27",
+  "receipt_key": "9f27d5dc3ec5efc705635b224c152506a7f080388d7e5d333cbe25febdc41a9e",
+  "source_dataset_ids": {
+    "blankdiss": "178c1722133a61d578290de7b6cddce7f8422cc8611034d55226d0be4c34c104",
+    "reports": "5d6327437a2a406f3f1ed349dbb47ae3d0baf524c7771e0bdb6b90e28e29d798",
+    "insider": "5d3125133462362531d0b1f7829eebc26bc280d2cd1509ff8e5215d31ec5bd1f"
+  },
+  "blockers": [
+    "no_validated_point_in_time_source_results",
+    "no_matured_shadow_outcomes",
+    "treage_aggregation_rule_not_implemented"
+  ],
+  "explanation": "Källornas enskilda bedömningar blir inte automatiskt Treage-signaler. En fryst, validerad sammanvägningsregel krävs alltid."
+}

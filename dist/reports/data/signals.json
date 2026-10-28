@@ -1,0 +1,13 @@
+{
+  "signals": {
+    "created_at": "2026-10-27T17:48:45+00:00",
+    "excluded": 0,
+    "explanation": "Reports saknar en aktiverad, validerad punkt-i-tid-regel. Retrospektiva rapportreaktioner och frysta forskningskandidater är inte signaler.",
+    "reason_codes": [
+      "no_point_in_time_validated_report_rule",
+      "no_active_signal_artifact"
+    ],
+    "signals": [],
+    "status": "blocked"
+  }
+}

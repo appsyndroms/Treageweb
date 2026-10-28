@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "producer": "reports",
+  "batch_date": "2026-10-27",
+  "data": {
+    "version": 1,
+    "producer": "reports",
+    "batch_date": "2026-10-27",
+    "status": "complete",
+    "session": "local_snapshot",
+    "execution_environment": "local",
+    "repository": "appsyndroms/Reports",
+    "run_id": "local-20261027T175245Z-6b2599b4",
+    "run_id_kind": "local-deterministic",
+    "run_attempt": 1,
+    "run_created_at": "2026-10-27T17:52:45+00:00",
+    "completed_at": "2026-10-27T17:52:45+00:00",
+    "revision": "local-f3f7abe30ab77892714c173dd1d9d441992f6dbd",
+    "working_tree_sha256": "ff0642f7f03ce5b42b3e6f04174ae8d0344222d8da61c87852168d6c7e2e1986",
+    "dataset_id": "5d6327437a2a406f3f1ed349dbb47ae3d0baf524c7771e0bdb6b90e28e29d798",
+    "rows": 199,
+    "source_results": {
+      "source_dataset_id": "47d76ea3ce67c22a533368fc0f85cce2b0c1822254463a1b02c4f38e56a9cc8e"
+    },
+    "timing_basis": "Local package build from the saved module outputs; not a GitHub Actions run.",
+    "source_delivery_status": "complete",
+    "assessment_summary": {
+      "status": "completed_without_validated_findings",
+      "row_count": 199,
+      "result_counts": {
+        "finding": 0,
+        "no_finding": 0,
+        "not_evaluated": 199
+      }
+    }
+  },
+  "web_run_id": "local-20261027T175245Z-3443dfe0",
+  "web_run_attempt": 1,
+  "execution_environment": "local",
+  "working_tree_sha256": "ff0642f7f03ce5b42b3e6f04174ae8d0344222d8da61c87852168d6c7e2e1986",
+  "files": {
+    "bedomning.html": "8ad663c4780a9c93555a2d3746095affd0779742c9524e5392f9c8296b6cf12d",
+    "data/pages/bedomning.json": "7ab3686358614b1ce6faac6a6127e2b214b8988d39ca7a5c20e21b4792c86b32",
+    "data/pages/dataanalys.json": "fc7ec8d749b91fc0750c4376d4363f448b67c80eae13e62b8d1f436f2046f8fc",
+    "data/pages/handelser.json": "1787ea8778f58efa35ba904117d15a329c01049cd7b26fd609de5fcdad986c3e",
+    "data/pages/index.json": "0f01e3f89524c33c1fc82d23cfe1c6a5e220add96b9de031502d87a289bc645b",
+    "data/pages/kalender.json": "389ab5fbc29554f2b7457c56fc30152b94a001e2ef6b8ea0b198a663fc5b8a10",
+    "data/pages/koplage.json": "798be1ae687299b57307b8deb2c3389257508797d7e272cb3f6f622764933eb7",
+    "data/pages/saljlage.json": "d2b15ab19ca9b2058ea862cc7ead78c1e45ede64dbdde9c2a429abb82d1c4e72",
+    "data/signals.json": "3995ab8b1375465e6fe1ecea8babf54593a7eed070a0d5d2cd08528236083230",
+    "data.json": "81a7335dec79363a8cc07027492422ddaef536795f51a8f9451d3fa5664f8809",
+    "dataanalys.html": "ac613937aa97d87f578337ebe76003a9a36278071033d056516ac7eac7d2ae26",
+    "handelser.html": "c4cb1b1d76390b5eb0868ace9ccc26961bda03fb81b72ee455b781fc6e0f2255",
+    "index.html": "abe262bdced66549a4cbe8549b29bdb60492855b9b9bd7d88edc8911c76ab639",
+    "kalender.html": "2d2e460737b87b0abdeeb73dba02306d31039698f14d7bb164c64e4b81632755",
+    "koplage.html": "c80db9a6e45d238b6dd83a512bbf9d865f3a87d5848d5e5d0e2e8e1a8ac9cd38",
+    "lazy-data.js": "30584beed34e927042d1351a2aeb9dbb2a8918298d88150f695d2b088769ecea",
+    "saljlage.html": "ea49c18ba115d822e8931ef91d146d68037e3ef540fed6609678cbff194ebaa9",
+    "site.js": "195f2eb20e20b994475d31d62d43cfb2dfbfd94df53714bbebe874cc9ead9f69",
+    "style.css": "8065b37a6ef4ae5f734577e7e5ab57de8771711747fce230774872dabe5a5aa9"
+  }
+}
