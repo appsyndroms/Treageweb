@@ -30,10 +30,10 @@
       </div>
       <p id="source-result-summary" role="status">Läser senaste verifierade källresultat …</p>
       <div class="table-wrapper"><table>
-        <thead><tr><th>Källa</th><th>Leverans</th><th>Tidsmodell</th><th>Resultatstatus</th><th>Fynd</th><th>Ingen träff</th><th>Ej bedömt</th><th>Aktuell begränsning</th><th>Dataset-ID</th></tr></thead>
-        <tbody id="source-result-rows"><tr><td colspan="9">Hämtar källresultat …</td></tr></tbody>
+        <thead><tr><th>Källa</th><th>Leverans</th><th>Tidsmodell</th><th>Signalbedömning</th><th>Instrumentanalys (bedömd / partiell / saknas)</th><th>Fynd</th><th>Ingen träff</th><th>Ej bedömt</th><th>Aktuell begränsning</th><th>Dataset-ID</th></tr></thead>
+        <tbody id="source-result-rows"><tr><td colspan="10">Hämtar källresultat …</td></tr></tbody>
       </table></div>
-      <p>Sammanvägningen jämför endast fynd som respektive källa uttryckligen har validerat. Treage har ingen aktiverad kombinationsregel och visar därför inga aktiva köp- eller säljsignaler.</p>
+      <p>Signalbedömningen visar bara validerade instrumentregler. Instrumentanalysen visar separat om källan hade analysunderlag, även när den saknar validerad regel. Ett instrumentfel påverkar bara den raden; fel i paketets kvitto, hash eller kontrakt stoppar fortfarande mottagningen.</p>
     </section>
     <section class="panel">
       <div class="section-header"><span class="eyebrow">AKTUELLT ANALYSUNDERLAG · 15 OKTOBER 2026</span><h2>Historik och överlapp</h2>
@@ -80,15 +80,15 @@
     </section>
     <section class="panel" aria-labelledby="ml-title">
       <div class="section-header"><span class="eyebrow">HISTORISK FORSKNING</span><h2 id="ml-title">Tidigare tvärkällebaserad ML-diagnostik</h2>
-        <p>Tabellen visar tidigare retrospektiva experiment på Treages breda historiska observationsdata. De körs inte i den nya dagliga resultatkedjan. Beredskap bedöms per källkombination; en källa behöver inte invänta de andra. ML-utvärdering kräver tidsriktiga, validerade resultat för den valda kombinationen och ett moget utfallspanel.</p>
+        <p>Tabellen visar tidigare retrospektiva experiment på Treages breda historiska observationsdata. De körs inte i den nya dagliga resultatkedjan. Beredskap bedöms per källkombination; en källa behöver inte invänta de andra. Bedömda PIT-resultat kan samlas i skuggtest före validering. Utfall bedöms först när de mognat; aktiva köp- och säljsignaler kräver dessutom validerade källregler och en fryst Treage-regel.</p>
       </div>
       <p id="research-provenance" role="status">Hämtar kvittot för analysens källversioner …</p>
       <p id="research-combinations" role="status">Hämtar dagens kombinationstäckning …</p>
       <h3>Beredskap per källkombination</h3>
       <p>Varje rad bedöms självständigt. En saknad eller retrospektiv källa blockerar bara kombinationer som använder den. Signalutvärdering kräver också ett moget utfallspanel.</p>
       <div class="table-wrapper"><table>
-        <thead><tr><th>Källor</th><th>Tidsriktiga indata</th><th>Gemensamma instrument</th><th>Validerade resultat</th><th>Utvärderingsstatus</th><th>Förslagsgenerering</th></tr></thead>
-        <tbody id="subset-readiness"><tr><td colspan="6">Hämtar beredskap …</td></tr></tbody>
+        <thead><tr><th>Källor</th><th>Tidsriktiga indata</th><th>Gemensamma instrument</th><th>Bedömda PIT-instrument</th><th>Validerade resultat</th><th>Skuggteststatus</th><th>Förslagsgenerering</th></tr></thead>
+        <tbody id="subset-readiness"><tr><td colspan="7">Hämtar beredskap …</td></tr></tbody>
       </table></div>
       <p id="ml-summary" role="status">Hämtar senaste modellkörningen …</p>
       <div class="table-wrapper"><table>
@@ -96,15 +96,16 @@
         <tbody id="ml-results"><tr><td colspan="7">Hämtar resultat …</td></tr></tbody>
       </table></div>
       <p id="prospective-status" role="status">Hämtar tidigare prospektiv skuggstatus …</p>
+      <p id="subset-evaluation-status" role="status">Hämtar automatisk källfyndsutvärdering …</p>
       <p id="signal-gate" role="status">Hämtar senast sparade signalgrind …</p>
     </section>
     <section class="panel" aria-labelledby="review-queue-title">
-      <div class="section-header"><span class="eyebrow">MÄNSKLIG GRANSKNING</span><h2 id="review-queue-title">Nya experimentförslag</h2>
-        <p>ML-screeningen kan föreslå ett prospektivt experiment. Förslag är inte signaler; inget protokoll fryses och ingen prospektiv utfallsanalys startar utan mänskligt beslut.</p>
+      <div class="section-header"><span class="eyebrow">AUTOMATISK PROTOKOLLGRIND</span><h2 id="review-queue-title">Experimentförslag och skuggtest</h2>
+        <p>Treage registrerar och granskar fördeklarerade förslag i kod. Godkända enligt den versionshanterade policygrinden fryses automatiskt. Det ger aldrig i sig en köp- eller säljsignal.</p>
       </div>
       <p id="review-queue-summary" role="status">Hämtar granskningskön …</p>
       <ul id="review-queue-items"></ul>
-      <p><a href="https://github.com/appsyndroms/Treage/actions/workflows/treage-review.yml">Granska, avslå eller begär ändring i GitHub Actions</a></p>
+      <p>Förslag utan godkänd policy stannar blockerade med maskinläsbar orsak. Ingen manuell köåtgärd krävs för den automatiska källresultatfamiljen.</p>
     </section>
     <script>
       const pct = value => value == null ? '—' : `${(value * 100).toFixed(1)}%`;
@@ -124,8 +125,10 @@
             completed_without_validated_findings: 'Klar · inga validerade fynd' }[resultStatus];
           const deliveryComplete = item.delivery_status === 'complete' || Boolean(item.dataset_id);
           const limitation = (item.limitations || []).join(' · ') || 'Inga angivna';
+          const research = item.instrument_analysis_coverage || {};
+          const researchCoverage = `${research.assessed || 0} / ${research.partial || 0} / ${research.unavailable || 0}`;
           for (const value of [names[source] || source, deliveryComplete ? 'Komplett' : 'Ej klar',
-            item.time_model || 'retrospective', status, counts.finding, counts.no_finding,
+            item.time_model || 'retrospective', status, researchCoverage, counts.finding, counts.no_finding,
             counts.not_evaluated, limitation, item.dataset_id]) {
             const td = document.createElement('td'); td.textContent = value; tr.append(td);
           }
@@ -143,7 +146,11 @@
         const statusNames = {
           blocked_retrospective_inputs: 'Blockerad: retrospektiva indata',
           blocked_no_validated_subset_results: 'Blockerad: inga validerade resultat',
+          blocked_no_assessed_pit_source_results: 'Blockerad: inga bedömda PIT-resultat',
           blocked_missing_outcome_panel: 'Blockerad: utfallspanel saknas',
+          shadowing_waiting_for_outcome_panel: 'Skuggtest pågår · väntar på utfallspanel',
+          shadowing_waiting_for_mature_outcomes: 'Skuggtest pågår · väntar på mogna utfall',
+          shadowing_with_mature_outcomes: 'Skuggtest · mogna utfall finns',
           ready_for_subset_evaluation: 'Redo för delmängdsutvärdering'
         };
         const subsetBody = document.querySelector('#subset-readiness');
@@ -152,19 +159,23 @@
           const sourceLabel = row.sources.map(source => subsetNames[source] || source).join(' + ');
           const blockers = (row.evaluation_blockers || []).map(item => statusNames[`blocked_${item}`] || item);
           const cells = [sourceLabel, row.point_in_time_inputs_ready ? 'Ja' : 'Nej', row.shared_instruments,
-            row.validated_instrument_count, blockers.length ? blockers.join('; ') : (statusNames[row.evaluation_status] || row.evaluation_status),
+            row.assessed_pit_instrument_count ?? 0, row.validated_instrument_count,
+            blockers.length ? blockers.join('; ') : (statusNames[row.evaluation_status] || row.evaluation_status),
             row.proposal_generation_status === 'not_implemented_for_source_result_subsets' ? 'Inte implementerad' : row.proposal_generation_status];
           for (const value of cells) { const td = document.createElement('td'); td.textContent = value; tr.append(td); }
           return tr;
         }));
         if (!subsetRows.length) {
           const tr = document.createElement('tr'); const td = document.createElement('td');
-          td.colSpan = 6; td.textContent = 'Beredskap per källkombination saknas i kvittot.'; tr.append(td); subsetBody.replaceChildren(tr);
+          td.colSpan = 7; td.textContent = 'Beredskap per källkombination saknas i kvittot.'; tr.append(td); subsetBody.replaceChildren(tr);
         }
       }).catch(() => { document.querySelector('#research-provenance').textContent = 'Versionskvittot för den senaste analyserade source_result-batchen saknas.'; document.querySelector('#research-combinations').textContent = 'Dagens kombinationstäckning har inte byggts.'; });
       fetch('./research_review_queue.json').then(response => { if (!response.ok) throw new Error('Saknas'); return response.json(); }).then(data => {
         const items = data.items || [];
-        document.querySelector('#review-queue-summary').textContent = `${items.filter(item => item.status === 'pending_review').length} förslag väntar på granskning.`;
+        const frozen = items.filter(item => item.status === 'auto_frozen_shadowing').length;
+        const pending = items.filter(item => item.status === 'pending_review').length;
+        const blocked = items.filter(item => item.status === 'policy_blocked').length;
+        document.querySelector('#review-queue-summary').textContent = `${frozen} protokoll frysta automatiskt för skuggtest; ${pending} inväntar policykomplettering; ${blocked} blockerade av policy.`;
         const list = document.querySelector('#review-queue-items');
         list.replaceChildren(...items.map(item => {
           const li = document.createElement('li');
@@ -201,12 +212,19 @@
       fetch('./signal_status.json').then(response => { if (!response.ok) throw new Error('Saknas'); return response.json(); }).then(data => {
         document.querySelector('#signal-gate').textContent = `Aktiva Treage-signaler: ${data.active_signals}. Status: ${data.status}. ${data.explanation}${data.failures?.length ? ` Orsak: ${data.failures.join('; ')}.` : ''}`;
       }).catch(() => { document.querySelector('#signal-gate').textContent = 'Aktiva Treage-signaler: 0. Daglig valideringskontroll inväntar första körningen.'; });
-      fetch('./prospective_status.json').then(response => { if (!response.ok) throw new Error('Saknas'); return response.json(); }).then(data => {
-        const captured = data.capture?.sources?.reduce((sum, source) => sum + source.new_rows, 0) ?? 0;
-        const shadow = data.shadow || {};
-        const outcomes = shadow.outcome_followup || shadow.outcomes || {};
-        document.querySelector('#prospective-status').textContent = `Senaste prospektiva körning: ${new Date(data.created_at).toLocaleString('sv-SE')}. Status: ${data.status}. Nya PIT-rader: ${captured}. Nya beslutshändelser: ${shadow.new_decision_events ?? 0}. Nya 5/20/60-dagarsutfall: ${outcomes.matured_outcomes_added ?? 0}.${data.failures?.length ? ` Problem: ${data.failures.join('; ')}.` : ''}`;
-      }).catch(() => { document.querySelector('#prospective-status').textContent = 'Prospektiv skuggkörning inväntar första schemalagda körningen.'; });
+      fetch('./outcome_followup_latest.json', { cache: 'no-store' }).then(response => { if (!response.ok) throw new Error('Saknas'); return response.json(); }).then(data => {
+        const followup = data.followup || {};
+        const panel = followup.panel_health || {};
+        const horizons = followup.outcomes_by_horizon || {};
+        document.querySelector('#prospective-status').textContent = `Utfallsuppföljning ${data.batch_date}: ${followup.outcomes_total ?? 0} mogna utfallsrader totalt (5/20/60 dagar: ${horizons['5'] ?? 0}/${horizons['20'] ?? 0}/${horizons['60'] ?? 0}); ${followup.matured_outcomes_added ?? 0} nya i senaste kontrollen. Prisdata t.o.m. ${panel.latest_price_date ?? 'okänt datum'}; ${followup.price_rows ?? 0} verifierat mappade prisobservationer för ${panel.verified_isins ?? 0} instrument från ${panel.provider ?? 'okänd källa'} i ${panel.storage ?? 'okänd lagring'}. ${panel.mapping_excluded_isins ?? 0} instrument har kursdata men saknar verifierad mapping.`;
+      }).catch(() => { document.querySelector('#prospective-status').textContent = 'Utfallspanelens status saknas ännu; inga mogna utfall bekräftade.'; });
+      fetch('./experiment_evaluation.json', { cache: 'no-store' }).then(response => { if (!response.ok) throw new Error('Saknas'); return response.json(); }).then(data => {
+        const lock = data.analysis_lock || {};
+        const blockers = Object.entries(data.blockers_by_subset || {}).map(([subset, item]) =>
+          `${subset}: ${item.eligible_observations} eligible, ${Object.entries(item.blockers || {}).map(([reason, count]) => `${reason} ${count}`).join(', ') || 'inga spärrar'}`
+        ).join(' · ');
+        document.querySelector('#subset-evaluation-status').textContent = `Automatiskt protokoll ${data.proposal_id}: ${data.status}. PIT-observationer ${data.point_in_time_observation_count}; mogna utfallsrader ${data.matured_outcome_rows}. Analysgrind: ${lock.status}${lock.analysis_due_at ? `; tidigast ${lock.analysis_due_at}` : ''}. ${blockers}. Aktiva signaler: 0.`;
+      }).catch(() => { document.querySelector('#subset-evaluation-status').textContent = 'Automatisk evaluatorstatus saknas ännu; inga aktiva Treage-signaler.'; });
     </script>
   </main>
   <footer class="container footer"><a href="../">← Till Treageweb</a><a href="./index.html">Treage · Hem</a></footer>

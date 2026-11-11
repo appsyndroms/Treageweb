@@ -11,7 +11,7 @@
     <details class="project-switcher"><summary>Meny</summary><nav aria-label="Meny"><a href="../treage/" aria-current="page">Treage</a><a href="../blankdiss/">Blankdiss</a><a href="../reports/">Reports</a><a href="../insider/">Insider</a><a href="./godkanda.html" aria-current="page">Godkända förslag</a></nav></details>
     <div class="brand">Treage<span class="brand-note">TVÄRKÄLLSANALYS</span></div>
     <h1>Godkända experimentförslag</h1>
-    <p class="lead">Här visas Treages experimentförslag som har godkänts och frysts före prospektiv uppföljning.</p>
+    <p class="lead">Här visas Treages protokoll som den automatiska kodgrinden har godkänt och fryst före prospektiv skuggning.</p>
     <nav class="tabs" aria-label="Huvudnavigation">
       <a class="tab" href="./index.html">Hem</a><a class="tab" href="./koplage.html">Köp &amp; sälj</a>
       <a class="tab" href="./events.html">Händelser</a><a class="tab" href="./sparbarhet.html">Bevakning</a>
@@ -67,27 +67,27 @@
         })
         .then((queue) => {
           const approved = (Array.isArray(queue.items) ? queue.items : [])
-            .filter((item) => item.status === "approved_frozen_pending_evaluator");
-          status.textContent = `${approved.length} godkända och frysta Treage-protokoll`;
+            .filter((item) => ["approved_frozen_pending_evaluator", "auto_frozen_shadowing"].includes(item.status));
+          status.textContent = `${approved.length} automatiskt godkända och frysta Treage-protokoll`;
           if (!approved.length) {
-            add(list, "p", "empty-state", "Det finns ännu inga godkända experimentförslag i Treage.");
+            add(list, "p", "empty-state", "Det finns ännu inga protokoll som passerat Treages automatiska policygrind.");
             return;
           }
           for (const item of approved) {
             const card = add(list, "article", "approved-card", "");
-            add(card, "span", "eyebrow", "GODKÄNT · FRYST FÖR PROSPEKTIV SKUGGNING");
+            add(card, "span", "eyebrow", "AUTOMATISKT GODKÄNT · FRYST FÖR SKUGGTEST");
             add(card, "h3", "", item.title || item.proposal_id);
             add(card, "p", "proposal-id", item.proposal_id);
             const protocol = item.approved_protocol || {};
             if (protocol.hypothesis) add(card, "p", "", protocol.hypothesis);
             const meta = add(card, "dl", "proposal-meta", "");
             const pairs = [
-              ["Godkänt", formatDate(item.approved_at)],
+              ["Fryst automatiskt", formatDate(item.approved_at)],
               ["Källkombinationer", (protocol.source_subsets || []).map((group) => group.map((name) => labels[name] || name).join(" + ")).join("; ") || "—"],
               ["Horisont", protocol.horizons_sessions?.length ? `${protocol.horizons_sessions.join(", ")} handelsdagar` : "—"],
               ["Primärt utfall", protocol.primary_outcome || "—"],
               ["Jämförelsefamilj", protocol.comparison_family || "—"],
-              ["Evaluator", "Inväntar verifiering av fryst protokollhash"],
+              ["Evaluator", "Körs automatiskt; endast verifierade PIT-resultat och mogna utfall"],
             ];
             for (const [term, description] of pairs) {
               add(meta, "dt", "", term);
